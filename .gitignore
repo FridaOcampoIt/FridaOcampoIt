@@ -1,0 +1,7 @@
+*.lock
+TraceIT/NetCoreApiRest/bin
+TraceIT/NetCoreApiRest/obj
+*.user
+*.pubxml
+TraceIt/.vs
+*.suo

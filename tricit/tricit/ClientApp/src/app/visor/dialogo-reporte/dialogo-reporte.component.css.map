@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,cAAc,CAAC;EACX,UAAU,EAAE,KAAK;CAOpB;;AARD,AAGI,cAHU,CAGV,SAAS,EAHb,cAAc,CAGC,UAAU,CAAC;EAClB,UAAU,EAAE,OAAO;EACnB,QAAQ,EAAE,IAAI;CACjB;;AAIL,AAAA,KAAK,CAAC;EACF,SAAS,EAAE,IAAI;EACf,cAAc,EAAE,SAAS;CAC5B;;AAED,AAAA,WAAW,CAAC;EACR,UAAU,EAAE,KAAK;EACjB,QAAQ,EAAE,IAAI;CACjB",
-    "sources": [
-        "dialogo-reporte.component.scss"
-    ],
-    "names": [],
-    "file": "dialogo-reporte.component.css"
-}

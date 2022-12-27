@@ -1,12 +1,28 @@
 stages:
+    - build
+    - test
     - publish
 
+variables:
+    zipName: "traceitWS.zip"
+
 before_script:
-    - "cd tricit"
+    - "cd TraceIT"
+    - "dotnet restore"
+
+build:
+    stage: build
+    script:
+        - "dotnet build"
+
+test:
+    stage: test
+    script:
+        - "dotnet test"
 
 publish:
     stage: publish
     script:
          - "dotnet publish -f netcoreapp2.2 -c Release -r linux-x64"
-         - "cd tricit/bin/Release/netcoreapp2.2/linux-x64/publish/"
-         - "zip -r ~/deploys/traceItBO_linux.zip *"
+         - "cd NetCoreApiRest/bin/Release/netcoreapp2.2/linux-x64/publish/"
+         - "zip -r ~/deploys/traceItWS.zip *"
