@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,UAAU;EACN,WAAW,EAAE,cAAc;EAC3B,GAAG,EAAE,qCAAqC;;;AAG9C,UAAU;EACN,WAAW,EAAE,gBAAgB;EAC7B,GAAG,EAAE,sCAAsC;;;AAG/C,UAAU;EACN,WAAW,EAAE,oBAAoB;EACjC,GAAG,EAAE,0CAA0C;;;AAGnD,UAAU;EACN,WAAW,EAAE,iBAAiB;EAC9B,GAAG,EAAE,uCAAuC;;;AAGhD,AAAA,CAAC,CAAC;EACE,WAAW,EAAE,cAAc;EAC3B,SAAS,EAAE,IAAI;CAClB",
+    "sources": [
+        "dialogo-contrasena.component.scss"
+    ],
+    "names": [],
+    "file": "dialogo-contrasena.component.css"
+}

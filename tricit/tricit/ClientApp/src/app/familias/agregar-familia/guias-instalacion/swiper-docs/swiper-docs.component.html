@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-md-12 d-flex justify-content-between p-3">
+        <h3>PDFs</h3>
+        <button mat-icon-button color="primary" *ngIf="canPDF" (click)="AgregarPDF(1, 'Añadir PDF')" matTooltip="Añadir PDF"><i class="material-icons">add</i></button>
+    </div>
+    <div class="col-md-12">
+        <div class="container-fluid">
+
+            <swiper #slideDocs [config]="confiDocs" [index]="1">
+                <div class="swiper-slide" *ngFor="let pdf of response.linkFamilies.linkData">
+                    <mat-card class="mb-3 mt-2">
+                        <div class="img-container" (click)="abrirPDF(pdf.url)">
+                            <i class="card-image-icon far fa-file-alt"></i>
+                        </div>                        
+                        <mat-card-content>
+                            <p matTooltip="{{pdf.title}}">{{pdf.title}}</p>
+                        </mat-card-content>
+                        <mat-card-actions align="end">
+                            <button mat-icon-button color="primary" (click)="eliminarLinks(pdf.linkId, 1)" matTooltip="Eliminar"><mat-icon>delete</mat-icon></button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </swiper>
+
+            <a mat-mini-fab color="primary" class="carousel-control-prev ctl-carr" (click)="prevD()" role="button" data-slide="prev" *ngIf="response.linkFamilies['linkData'].length > 4">
+                <mat-icon>chevron_left</mat-icon>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a mat-mini-fab color="primary" class="carousel-control-next ctl-carr" (click)="nextD()" role="button" data-slide="next" *ngIf="response.linkFamilies['linkData'].length > 4">
+                <mat-icon>chevron_right</mat-icon>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</div>

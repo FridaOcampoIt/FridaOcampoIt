@@ -1,0 +1,103 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<div class="col-12">
+    <!--p>
+        <em>Escanea el QR de la etiqueta de empaque del producto o digita el nùmero de caja.</em>
+    </p-->
+</div>
+<mat-dialog-content class="mat-typography">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="form-group col-md-12 align-items-center">
+                <div class="w-100 mt-2 d-flex flex-column">
+                    contenido centrado
+                </div>
+            </div>
+            <div >
+                {{_data.name}}
+            </div>
+            
+            <div class="form-group col-md-3 col-sm-12">
+
+            </div>
+
+            <div class="form-group col-md-3 col-sm-12">
+
+            </div>
+
+            <div class="form-group col-md-3 col-sm-12">
+
+            </div>
+            
+            <div class="form-group col-md-3 col-sm-12">
+
+            </div>
+            
+            <div class="form-group col-md-3 col-sm-12">
+
+            </div>
+
+            <div class="form-group col-md-3 col-sm-12">
+
+            </div>
+
+            <div class="form-group col-md-3 d-flex align-items-center justify-content-between">
+                <mat-label>Tipo</mat-label>
+
+            </div>
+            
+            <div class="form-group col-md-12 d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Armar pedido</h1>
+            </div>
+
+            <div class="form-group col-md-12">
+                <p>Escanea cada una de las etiquetas de caja</p>
+            </div>
+
+        </div>
+
+        <mat-divider class="mt-3 mb-3"></mat-divider>
+
+        <div class="row">
+            <div class="col-md-12 col-lg-6">
+                <div class="row">
+                    <div class="form-group col-md-12 d-flex align-items-center justify-content-between">
+                        <h1 class="mb-0">Detalle del pedido </h1>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-md-12 col-lg-12 d-flex align-items-center justify-content-center">
+
+                <div class="row">
+                    <div class="form-group col-md-6  ">
+                        <h3 class="mb-0">Cajas(s)</h3>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                            <h3>Unidades</h3>   
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <h1>Nùmero</h1>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <h1>Nùmero</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <p>Lote: 7C8F5G6965</p>
+        </div>
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <mat-progress-bar mode="indeterminate" class="mb-3 mt-1" *ngIf="subiendo == true"></mat-progress-bar>
+    <button mat-raised-button color="primary" mat-dialog-close cdkFocusInitial [disabled]="subiendo == true ? 'disabled' : null">Cerrar</button>
+</mat-dialog-actions>
+

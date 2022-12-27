@@ -1,0 +1,88 @@
+<h1 mat-dialog-title>Detalle de contenido</h1>
+<mat-dialog-content class="mat-typography">
+  <div class="container-fluid mb-5">
+
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Tipo de vista</mat-label>
+          <mat-select placeholder="" name="direccion" [(ngModel)]="viewType" (ngModelChange)="obtenerDatos(1)">
+            <mat-option *ngFor="let vista of vistasList " [value]="vista.id">
+              {{vista.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-sm-6 col-md-8 col-lg-8">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Dirección</mat-label>
+          <input matInput placeholder="label" [(ngModel)]="direccion" readonly>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 mt-3 mb-3" *ngFor="let dato of datosList">
+
+        <mat-card class="h-100">
+          <mat-card-content>
+            <div class="row detalle-card ">
+
+              <div class="col-md-12 mb-3">
+
+                <div class="d-flex flex-column">
+                  <span class="lbl-titulo">Fecha de registro</span>
+                  <span class="lbl-fecha">{{dato.registerDate}}</span>
+                </div>
+
+              </div>
+
+              <div class="col-md-12 mb-3">
+                <div class="d-flex flex-column">
+                  <span class="lbl-titulo">Línea de producción</span>
+                  <span class="lbl-dato">{{dato.lineName}}</span>
+                </div>
+              </div>
+
+              <div class="col-md-12 mb-3">
+                <div class="d-flex flex-column">
+                  <span class="lbl-titulo">Operador</span>
+                  <span class="lbl-dato">{{dato.operatorName}}</span>
+                </div>
+              </div>
+
+              <div class="col-md-12 mb-3">
+                <div class="d-flex flex-column">
+                  <span class="lbl-titulo">Rango</span>
+                  <span class="lbl-dato">{{dato.rangeDetail}}</span>
+                </div>
+              </div>
+
+              <div class="col-md-12 mb-3">
+                <div class="d-flex flex-column">
+                  <span class="lbl-titulo">Producto</span>
+                  <span class="lbl-dato">{{dato.productName}}</span>
+                </div>
+              </div>
+
+              <div class="col-md-12 mb-3">
+                <div class="d-flex flex-column">
+                  <span class="lbl-titulo">Cantidad</span>
+                  <span class="lbl-dato">{{dato.quantity}}</span>
+                </div>
+              </div>
+
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+
+    </div>
+
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close color="primary">CERRAR</button>
+</mat-dialog-actions>

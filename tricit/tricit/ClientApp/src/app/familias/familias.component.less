@@ -1,0 +1,111 @@
+﻿.app-body {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 1fr auto;
+    grid-template-areas: 
+        'header'
+        'content';
+}
+
+.header {
+    grid-area: header;
+}
+
+.content {
+    grid-area: content;
+}
+
+.icon-fami {
+    width: 24px;
+    height: 24px;
+    font-size: 22px; 
+
+    &.ico-espe {
+        background-image: url(../../assets/img/espesificaciones_traceIt.svg);
+        background-position: center;
+        background-size: cover;
+
+        &.ico-active {
+            background-image: url(../../assets/img/espesificacionesActivo_traceIt.svg);
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    &.ico-uso {
+        background-image: url(../../assets/img/guiasUso_traceIt.svg);
+        background-position: center;
+        background-size: cover;
+
+        &.ico-active {
+            background-image: url(../../assets/img/guiasUsosActivo_traceIt.svg);
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    &.ico-instalacion {
+        background-image: url(../../assets/img/guiasinstalacion_traceIt.svg);
+        background-position: center;
+        background-size: cover;
+
+        &.ico-active {
+            background-image: url(../../assets/img/guiaInstalacionActivo_traceIt.svg);
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    &.ico-servicio {
+        background-image: url(../../assets/img/garantiasYservicios_traceIt.svg);
+        background-position: center;
+        background-size: cover;
+
+        &.ico-active {
+            background-image: url(../../assets/img/serviciosGarantiaActivo_traceIt.svg);
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    &.ico-productos {
+        background-image: url(../../assets/img/productosRelacionados04_traceIt.svg);
+        background-position: center;
+        background-size: cover;
+
+        &.ico-active {
+            background-image: url(../../assets/img/productosRelacionadosActive_traceIt.svg);
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    &.ico-embalajes {
+        background-image: url(../../assets/img/Cajas-04.svg);
+        background-position: center;
+        background-size: cover;
+
+        &.ico-active {
+            background-image: url(../../assets/img/Cajas-04activo.svg);
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+
+.icon-fa {
+    font-size:  22px;
+}

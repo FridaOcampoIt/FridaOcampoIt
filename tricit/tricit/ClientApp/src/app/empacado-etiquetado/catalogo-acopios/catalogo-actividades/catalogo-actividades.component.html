@@ -1,0 +1,199 @@
+<mat-card>
+    <mat-card-title class="d-flex mb-3">
+        <button mat-icon-button color="primary" (click)="back()" class="mr-1">
+          <mat-icon>chevron_left</mat-icon>
+        </button> {{acopioName}}/Actividad
+    </mat-card-title>
+
+    <div class="row">
+        <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6 col-xs-12 ">
+            <mat-form-field class="w-100">
+                <mat-label>Familia</mat-label>
+                <mat-select [(ngModel)]="productoId">
+                    <mat-option [value]="0">Selecciona una opción</mat-option>
+                    <mat-option *ngFor="let producto of productosListadoByCompany" [value]="producto.id">
+                        {{ producto.data }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6 col-xs-12 ">
+            <mat-form-field class="w-100">
+                <mat-label>Tipo Movimiento</mat-label>
+                <mat-select [(ngModel)]="tipoMovimientoId">
+                  <mat-option [value]="0">Selecciona una opción</mat-option>
+                  <mat-option *ngFor="let dataTipos of responseCombos.tiposMovimientosDataComboList" [value]="dataTipos.id">{{ dataTipos.data }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <mat-form-field class="w-100">
+                <mat-label>Desde</mat-label>
+                <input matInput [matDatepicker]="pickerDe"
+                readonly 
+                (click)="pickerDe.open()"
+                [(ngModel)]="fechaIngresoDe" 
+                (ngModelChange)='fechaIngresoDe=$event'
+                [max]="fechaIngresoHasta"
+                placeholder="Desde">
+                <mat-datepicker-toggle matSuffix [for]="pickerDe"></mat-datepicker-toggle>
+                <mat-datepicker #pickerDe></mat-datepicker>
+              </mat-form-field>
+        </div>
+        <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <mat-form-field class="w-100">
+                <mat-label>Hasta</mat-label>
+                <input matInput [matDatepicker]="pickerHasta"
+                readonly 
+                (click)="pickerHasta.open()"
+                [(ngModel)]="fechaIngresoHasta"
+                (ngModelChange)='fechaIngresoHasta=$event'
+                placeholder="Hasta" 
+                [min]="fechaIngresoDe" >
+                <mat-datepicker-toggle matSuffix [for]="pickerHasta"></mat-datepicker-toggle>
+                <mat-datepicker #pickerHasta></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            Mostrar:<br>
+            <mat-radio-group name="opciones" [(ngModel)]="quienes" (ngModelChange)='quienes=$event' layout="row">
+                <mat-radio-button *ngFor="let op of list" name="opciones" [value]="op.id"  style="margin: 10px">
+                  {{op.data}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <!-- <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 d-flex align-items-center justify-content-end"> 
+            <button mat-button mat-raised-button color="primary" mdbBtn class="btn btn1 card card-cascade narrower" (click)="Busqueda()">Buscar</button>
+        </div>   -->
+        <button mat-icon-button color="primary" aria-label="buscar" class="ml-2" (click)="Busqueda()">
+            <mat-icon>search</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" aria-label="buscar" class="" (click)="generarExcel()"
+                    matTooltip="Exportar">
+                    <mat-icon fontSet="fa" fontIcon="fa-file-export"></mat-icon>
+        </button>
+    </div>
+</mat-card>
+
+<!-- Table with panel -->
+<div class="card card-cascade narrower mat-elevation-z8">
+    <div class="mat-elevation-z8">
+        <!-- <h1 class="fontS-26" align="center">MOVIMIENTOS</h1> -->
+        <div class="px-4 text-center">
+            <div class="table-wrapper">
+                <div class="col-md-12 mat-elevation-z0 table-responsive overflow-visible text-center" [hidden]="emptyList" >
+                    <mat-table matSort [dataSource]="dataSource" class=" mat-table-100 text-center">   
+                        <!-- ID del Movimento Colum (Hidden) -->
+                        <ng-container matColumnDef="movimientoId">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg" [style.display]="'none'"> ID </mat-header-cell>
+                            <mat-cell *matCellDef="let element" class="th-lg" data-label="Quién" [style.display]="'none'"> {{element.movimientoId}}  </mat-cell>
+                        </ng-container>
+
+                        <!-- Agrupación Column -->
+                        <ng-container matColumnDef="nombreAgrupacion">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg"> Agrupación</mat-header-cell>
+                            <mat-cell *matCellDef="let element" class="th-lg al-Center" data-label="Agrupación" > {{element.nombreAgrupacion}} </mat-cell>
+                        </ng-container>
+                        
+                    
+                        <!-- Caja Column -->
+                        <!-- <ng-container matColumnDef="numeroCajas" style="text-align: center!important;">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg al-Center"> Caja(s) </mat-header-cell>
+                            <mat-cell *matCellDef="let element" class="th-lg al-Center" data-label="Caja(s)"> {{element.numeroCajas}} </mat-cell>
+                        </ng-container> -->
+                        <ng-container matColumnDef="numeroCajas">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Caja(s) </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.numeroCajas}} </mat-cell>
+                          </ng-container>
+                    
+                        <!-- Producto Column -->
+                            <!--Se ocultan las columnas que poseen los datos de los 4 datos de la consulta-->
+                            <ng-container matColumnDef="cantIndMov" >
+                                <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg al-Center" [style.display]="'none'" > Cantidad N Prod </mat-header-cell>
+                                <mat-cell *matCellDef="let element" class="th-lg al-Center" data-label="Cantidad N Prod" [style.display]="'none'"> {{element.cantIndMov}}  </mat-cell>
+                            </ng-container>
+                        <ng-container matColumnDef="producto">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg" >Familia(s) </mat-header-cell>
+                            <mat-cell *matCellDef="let element" class="th-lg al-Center" data-label="Producto(s)">
+                                <li style="border:none; background: transparent;" [style.display]="element.cantIndMov == 1 ? 'block' : 'none'">{{element.producto}}</li> 
+                                <li style="border:none; background: transparent;" [style.display]="element.cantIndMov > 1 ? 'block' : 'none'" > ----- </li>
+                            </mat-cell>
+                        </ng-container> 
+
+                        <!-- Cantidad Column -->
+                        <ng-container matColumnDef="cantidad">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg" > Cantidad </mat-header-cell>
+                            <mat-cell *matCellDef="let element" class="th-lg al-Center" data-label="Cantidad de Producto"> {{element.cantidadRecibida}}/{{element.cantidad}} </mat-cell>
+                        </ng-container>
+
+                        <!-- Tipo Column -->
+                        <ng-container matColumnDef="tipoMovimiento">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg al-Center" >Tipo </mat-header-cell>
+                            <mat-cell *matCellDef="let element" class="th-lg al-Center" data-label="Tipo"> {{element.tipoMovimiento}} </mat-cell>
+                        </ng-container>
+                    
+                        <!-- Quién Column -->
+                            <!--Se ocultan las columnas que poseen los datos de los 4 datos de la consulta-->
+                            <ng-container matColumnDef="nombreRemitente" >
+                                <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg" [style.display]="'none'" > NombreR </mat-header-cell>
+                                <mat-cell *matCellDef="let element" class="th-lg" data-label="Quién" [style.display]="'none'"> {{element.nombreRemitente}}  </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="apellidoRemitente">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg" [style.display]="'none'"> ApellidoR </mat-header-cell>
+                                <mat-cell *matCellDef="let element" class="th-lg" data-label="Quién" [style.display]="'none'"> {{element.apellidoRemitente}} </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="nombreDestinatario">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg" [style.display]="'none'"> NombreD </mat-header-cell>
+                                <mat-cell *matCellDef="let element" class="th-lg" data-label="Quién" [style.display]="'none'"> {{element.nombreDestinatario}}  </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="apellidoDestinatario">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg" [style.display]="'none'"> ApellidoD </mat-header-cell>
+                                <mat-cell *matCellDef="let element" class="th-lg" data-label="Quién" [style.display]="'none'">{{element.apellidoDestinatario}} </mat-cell>
+                            </ng-container>
+                        <!-- Se agrego otra columna extra en el arreglo de columnas, la cual no se relaciona con la base de datos, para poder unir los datos en una sola columna y mostrarlos -->
+                        <ng-container matColumnDef="quien">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg"> 
+                                <b style="font-size: 14px!important;">
+                                    <li style="border:none; background: transparent;" [style.display]="quienes == 1 ? 'block' : 'none'">Remitente </li>
+                                    <li style="border:none; background: transparent;" [style.display]="quienes == 2 ? 'block' : 'none'"> Destinatario</li> 
+                                </b> 
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element" class="th-lg" data-label="Quién">
+                                <li style="border:none; background: transparent;" [style.display]="quienes == 1 ? 'block' : 'none'">{{element.nombreRemitente}} </li>
+                                <li style="border:none; background: transparent;" [style.display]="quienes == 2 ? 'block' : 'none'"> {{element.nombreDestinatario}}</li>                            </mat-cell>
+                        </ng-container>
+                    
+                        <!-- Fecha Column -->
+                        <ng-container matColumnDef="fechaIngreso">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg" [style.flex]="'0 0 150px'">Fecha </mat-header-cell>
+                            <mat-cell *matCellDef="let element" class="th-lg" data-label="Fecha" [style.flex]="'0 0 150px'"> 
+                                {{element.fechaIngreso|date:'dd/MM/yyyy hh:mm:ss'}}
+                            </mat-cell>
+                        </ng-container>
+
+
+                        <!-- Lote Column -->
+                        <ng-container matColumnDef="lote">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg" [style.flex]="'0 0 100px'"> Lote </mat-header-cell>
+                            <mat-cell *matCellDef="let element" class="th-lg" data-label="Lote" [style.flex]="'0 0 100px'"> 
+                                {{element.lote}}
+                            </mat-cell>
+                        </ng-container>
+                    
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let element; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                    <mat-paginator [pageSizeOptions]="itemsPagina" showFirstLastButtons></mat-paginator>
+                </div>
+                <div [hidden]="!emptyList" class="col-12 text-center">
+                    <label class="lbl-empty fontS-26">No se encontraron registros</label>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div class="col-md-12">
+    
+</div>

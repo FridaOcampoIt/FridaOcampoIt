@@ -1,0 +1,21 @@
+.sec-productos {
+    max-height: 20rem;
+
+    .sec-tree, .sec-lista {
+        max-height: inherit;
+        overflow: auto;
+    }
+
+}
+
+.udid {
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.list-cajas {
+    max-height: 12rem;
+    overflow: auto;
+}
+
+

@@ -1,0 +1,132 @@
+<div class="app-body">
+
+  <div class="header">
+
+  </div>
+
+  <div class="content container-fluid">
+
+    <mat-card>
+
+      <mat-card-title class="d-flex mb-3">
+        <button mat-icon-button color="primary" (click)="back()" class="mr-1">
+          <mat-icon>chevron_left</mat-icon>
+        </button> {{producerName}} / Reporte de embalaje reproceso
+      </mat-card-title>
+
+      <mat-card-content>
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-row">
+                <div class="col-md-4">
+                  <mat-form-field class="w-100">
+                    <mat-label>Producto</mat-label>
+                    <mat-select [(ngModel)]="productoId">
+                      <mat-option [value]="0">Selecciona una opción</mat-option>
+                      <mat-option [value]="prod.id" *ngFor="let prod of productos">{{prod.data}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="w-100">
+                    <mat-label>Desde</mat-label>
+                    <input matInput [matDatepicker]="pickerDe" [(ngModel)]="dateStart" readonly
+                      (click)="pickerDe.open()" placeholder="Desde" (ngModelChange)="setearFechas($event)">
+                    <mat-datepicker-toggle matSuffix [for]="pickerDe"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerDe></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="w-100">
+                    <mat-label>Hasta</mat-label>
+                    <input matInput [matDatepicker]="pickerHasta" readonly (click)="pickerHasta.open()"
+                      placeholder="Hasta" [min]="dateStart" [(ngModel)]="dateEnd">
+                    <mat-datepicker-toggle matSuffix [for]="pickerHasta"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerHasta></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4 d-flex">
+                  <!--<mat-form-field class="w-100">
+                    <mat-label>Buscar</mat-label>
+                    <input matInput placeholder="" value="" [(ngModel)]="busquedaGenerica">
+                  </mat-form-field>-->
+                  <button mat-icon-button color="primary" aria-label="buscar" class="" (click)="aplicarFiltros()"
+                    matTooltip="Buscar">
+                    <mat-icon>search</mat-icon>
+                  </button>
+                  <button mat-icon-button color="primary" aria-label="buscar" class="" (click)="generarExcel()"
+                    matTooltip="Exportar">
+                    <mat-icon fontSet="fa" fontIcon="fa-file-export"></mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col-md-12 col-lg-6">
+              <div class="flex">
+                <div class="flex-item">
+                  <div style="display: block;" *ngIf="lineChartDataEnviados">
+                    <canvas #cajasChart baseChart width="300" height="200" [datasets]="lineChartDataEnviados"
+                      [labels]="lineChartLabelsEnviados" [options]="lineChartOptions" [legend]="lineChartLegend"
+                      [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 col-lg-6">
+              <div class="flex">
+                <div class="flex-item">
+                  <div style="display: block;" *ngIf="lineChartDataRecibidos">
+                    <canvas #recibidosChart baseChart width="300" height="200" [datasets]="lineChartDataRecibidos"
+                      [labels]="lineChartLabelsRecibidos" [options]="lineChartOptions" [legend]="lineChartLegend"
+                      [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--<div class="col-md-12 col-lg-6">
+              <div class="flex">
+                <div class="flex-item">
+                  <div style="display: block;" *ngIf="lineChartDataMerma">
+                    <canvas #mermasChart baseChart width="300" height="200" [datasets]="lineChartDataMerma"
+                      [labels]="lineChartLabelsMerma" [options]="lineChartOptions" [legend]="lineChartLegend"
+                      [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>-->
+
+            <div class="col-md-12 col-lg-6">
+              <div class="flex">
+                <div class="flex-item">
+                  <div style="display: block;" *ngIf="lineChartDataMermaSinReportar">
+                    <canvas #mermasSinReportarChart baseChart width="300" height="200" [datasets]="lineChartDataMermaSinReportar"
+                      [labels]="lineChartLabelsMermaSinReportar" [options]="lineChartOptions" [legend]="lineChartLegend"
+                      [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+</div>

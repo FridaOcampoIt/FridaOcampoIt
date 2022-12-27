@@ -1,0 +1,62 @@
+@media (max-width: 767px) {
+  /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+  .body-content {
+    padding-top: 85px;
+  }
+}
+
+.site-body {
+    display:flex;
+    flex-direction: column;
+    padding:15px;
+    overflow: auto;
+    max-height: calc(100% - 64px);
+}
+
+mat-sidenav-content {
+    overflow: hidden;
+}
+
+.sidenavhead {
+  .mat-drawer-inner-container {
+    height: calc(100% - 88px) !important;
+  }
+}
+
+
+.nav-logo {
+    height: 75px;
+    width: auto;
+}
+
+
+.toolbar-traceit {
+    height: 88px;
+}
+
+.vistaOrigen {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 88px;
+}
+
+.origen-movil {
+  top: 15vw; 
+}
+
+.origen-toolbar{
+  height: 15vw;
+
+  .nav-logo {
+    height: 13vw;
+  }
+}
+
+.no-header {
+  top: 0 !important;
+}
+
+
+    

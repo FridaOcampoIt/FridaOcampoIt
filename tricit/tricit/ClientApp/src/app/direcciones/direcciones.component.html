@@ -1,0 +1,104 @@
+<div class="app-body">
+
+    <div class="header">
+
+    </div>
+
+    <div class="content container-fluid">
+
+        <mat-card>
+
+            <mat-card-title>Direcciones</mat-card-title>
+
+            <mat-card-content>
+
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Compañía</mat-label>
+                                        <mat-select [(ngModel)]="idCompany">
+                                            <mat-option [value]="0" *ngIf="companiaActual == 0">Selecciona una opción</mat-option>
+                                            <mat-option *ngFor="let company of companies" [value]="company.id">{{ company.data }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4 d-flex">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Familia</mat-label>
+                                        <mat-select [(ngModel)]="idFamily">
+                                            <mat-option [value]="0">Selecciona una opción</mat-option>
+                                            <mat-option *ngFor="let family of responseListDropDown.familyData" [value]="family.id">{{ family.data }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <button mat-icon-button color="primary" (click)="Busqueda()" aria-label="buscar" class="ml-2"><mat-icon>search</mat-icon></button>
+                                </div>
+                                <div class="col-md-4 d-flex justify-content-end">
+                                    <button mat-icon-button color="primary" (click)="agregarDireccion(true)" [disabled]="!allowAdd ? 'disabled' : null" aria-label="agregar" class="ml-2" matTooltip="Agregar"><mat-icon>add</mat-icon></button>
+                                    <button mat-icon-button color="primary" (click)="agregarDireccion(false)" [disabled]="(selection.selected.length == 0 || !allowEdit) ? 'disabled' : null" aria-label="buscar" class="ml-2" matTooltip="Editar"><mat-icon>edit</mat-icon></button>
+                                    <button mat-icon-button color="primary" (click)="eliminarDireccion(1)" [disabled]="(selection.selected.length == 0 || !allowDelete) ? 'disabled' : null" aria-label="buscar" class="ml-2" matTooltip="Eliminar"><mat-icon>delete</mat-icon></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-12 mat-elevation-z0" [hidden]="emptyList">
+                            <mat-table matSort mat-table [dataSource]="dataSource" class=" mat-table-100">
+
+                                <!-- Checkbox Column -->
+                                <ng-container cdkColumnDef="select">
+                                    <mat-header-cell *cdkHeaderCellDef class="select-column">
+                                    </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let row" class="select-column">
+                                        <mat-checkbox (click)="$event.stopPropagation()"
+                                                      (change)="$event ? selection.toggle(row) : null"
+                                                      [checked]="selection.isSelected(row)"
+                                                      [aria-label]="checkboxLabel(row)">
+                                        </mat-checkbox>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Position Column -->
+                                <ng-container cdkColumnDef="serviceCenter">
+                                    <mat-header-cell *cdkHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let element"> {{element.serviceCenter}} </mat-cell>
+                                </ng-container>
+
+                                <!-- Name Column -->
+                                <ng-container cdkColumnDef="company">
+                                    <mat-header-cell *cdkHeaderCellDef mat-sort-header> Compañía </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let element"> {{element.company}} </mat-cell>
+                                </ng-container>
+
+                                <!-- Name Column -->
+                                <ng-container cdkColumnDef="type">
+                                    <mat-header-cell *cdkHeaderCellDef mat-sort-header> Tipo </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let element"> {{element.type}} </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *cdkRowDef="let row; columns: displayedColumns" (click)="selection.toggle(row);"></mat-row>
+
+                            </mat-table>
+                            <mat-paginator #paginator [pageSizeOptions]="itemsPagina" showFirstLastButtons></mat-paginator>
+
+                        </div>
+						<div [hidden]="!emptyList" class="col-12 text-center">
+							<label class="lbl-empty">No se encontraron registros</label>
+						</div>
+                    </div>
+
+                </div>
+
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+
+</div>
+

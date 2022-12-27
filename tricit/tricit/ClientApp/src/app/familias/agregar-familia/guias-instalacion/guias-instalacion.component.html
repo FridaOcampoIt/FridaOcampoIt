@@ -1,0 +1,18 @@
+<mat-card>
+
+    <mat-card-title class="d-flex mb-3"><button mat-icon-button color="primary" (click)="back()" class="mr-1"><mat-icon>chevron_left</mat-icon></button> Guías de Instalación</mat-card-title>
+
+    <mat-card-content>
+
+        <div class="container-fluid mb-5">
+
+            <app-swiper-videos-GI [idFamily]="familiaId"></app-swiper-videos-GI>
+
+            <app-swiper-links-GI [idFamily]="familiaId"></app-swiper-links-GI>
+
+            <app-swiper-docs-GI [idFamily]="familiaId"></app-swiper-docs-GI>
+
+        </div>
+
+    </mat-card-content>
+</mat-card>

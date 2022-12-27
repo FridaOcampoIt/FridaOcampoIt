@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Ubicación</h1>
+<mat-dialog-content class="mat-typography">
+
+  <div class="container-fluid">
+
+    <div class="row">
+
+      <div class="col-md-12">
+
+        <agm-map class="googlemap" [latitude]="latitudFloat" [longitude]="longitudFloat" [zoomControl]="true"
+          [zoom]="4">
+          <agm-marker *ngIf="latitudMarker != 0 && longitudMarker != 0" [latitude]="latitudMarker"
+            [longitude]="longitudMarker">
+
+          </agm-marker>
+        </agm-map>
+
+      </div>
+
+    </div>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" mat-dialog-close cdkFocusInitial>CERRAR</button>
+</mat-dialog-actions>

@@ -1,0 +1,103 @@
+<div class="justify-content-center container">
+   <div class="row">
+    aqui esta el formulario que no se ve
+    <form [formGroup]="form">
+      <div formArrayName="experienciaLaboral">
+        <div *ngFor="let trabajo of experienciaLaboral.controls; let i = index;">
+          <div formGroupName="0">
+            <div class="row m-5" >
+              <div class="col-11">
+                <input type="text" style="background-color: #01c8b142;" class="form-control border-0 border-bottom "  placeholder="Categoría" aria-label="Recipient's username" value="" aria-describedby="i"  formControlName="empresa" >
+              </div>
+              <div class="col-1 d-flex inline-flex" >
+                <button mat-button><mat-icon>edit</mat-icon></button>
+                <button mat-button><mat-icon (click)="borrarTrabajo(i)">delete</mat-icon></button>
+              </div>
+              <div class="col-12">
+                <input  class="btn btn-light m-3" type="button"  (click)="propiedadesInput(false,i)" value="Agregar Campo +" />
+              </div>
+            </div>
+            <hr />
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="col-12">
+      <h1 mat-dialog-title>{{_data.title}}</h1>
+      <div mat-dialog-content >
+        <div class="m-2" *ngIf="_data.title==='Propiedades del campo'">
+          
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="" value="" required [(ngModel)]="_data.nombreInput">
+          </mat-form-field>
+
+          
+          <mat-form-field appearance="fill">
+            <mat-label>Selecciona el tipo de input</mat-label>
+            <mat-select [(value)]="selected" [(ngModel)]="_data.tipoInput">
+              <mat-option>None</mat-option>
+              <mat-option value="file">file</mat-option>
+              <mat-option value="password">password</mat-option>
+              <mat-option value="URL">URL</mat-option>
+              <mat-option value="tel">tel</mat-option>
+              <mat-option value="text">text</mat-option>
+              <mat-option value="number">number</mat-option>
+              <mat-option value="email">email</mat-option>
+              <mat-option value="time">time</mat-option>
+              <mat-option value="checkbox">checkbox</mat-option>
+              <mat-option value="data">data</mat-option>
+              <mat-option value="radio">radio</mat-option>
+              <mat-option value="select">select</mat-option>
+              <mat-option value="textarea">textarea</mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+          <p>You selected: {{selected}}</p>
+          <div class="">
+            <button  mat-button>Opciones<mat-icon color="primary">add_circle_outline</mat-icon></button>
+          </div>
+        </div>
+        
+        
+        <div class="m-2"  *ngIf="_data.title==='Agregar input'" >
+          <label>Agregar Nombre</label>
+          <input class="form-control col-8" type="text" value="" [(ngModel)]="_data.nombreInput">
+        </div>
+
+        <div class="m-2"  *ngIf="_data.title==='Agregar tipo input'" >
+          <label>Agregar tipo de input</label>
+          <input class="form-control col-8" type="text" value="" [(ngModel)]="_data.tipoInput">
+        </div>
+
+
+        <div class=" border  col-12 ">
+          <p>Estatus</p>
+          <div class="input-group" *ngIf="(selected === 'select' || selected === 'radio' || selected === 'checkbox')">
+            <mat-form-field class="example-full-width">
+              <mat-label>Opción</mat-label>
+              <input matInput placeholder="" value="" [(ngModel)]="_data.nombreInput">
+            </mat-form-field>
+            <mat-icon class="col-3 btn mt-3" color="primary">clear</mat-icon>
+          </div>
+        </div>
+      </div>
+      <div>
+        <input type="button" value="agregar" (click)="agreagr()">
+      </div>
+      
+
+
+      
+      <div mat-dialog-actions align="end">
+        <button mat-button (click)="onNoClick()">Cancelar</button>
+        <button mat-raised-button color="primary"  *ngIf="_data.title==='Propiedades del campo'" (click)="save()"  cdkFocusInitial>Editar</button>
+        <button mat-raised-button color="primary"  *ngIf="_data.title==='Agregar input'" [mat-dialog-close]="_data.name" cdkFocusInitial>Agregar</button>
+        <button mat-raised-button color="primary"  *ngIf="_data.title==='Agregar tipo input'"  [mat-dialog-close]="_data.name" cdkFocusInitial>Agregar</button>
+        <button mat-raised-button color="primary"  *ngIf="_data.title==='Propiedades input'" [mat-dialog-close]="_data.name" cdkFocusInitial>Editar</button>
+      </div>
+    </div>
+   </div>
+</div>

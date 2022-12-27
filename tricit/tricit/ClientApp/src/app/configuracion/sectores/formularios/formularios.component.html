@@ -1,0 +1,74 @@
+<div class="" >
+    
+    <h5 class=" d-flex inline-flex">
+        <a class=" mt-2 ml-2 text-cursor"  (click)="goBack()">
+            <mat-icon  color="primary">keyboard_arrow_left</mat-icon>
+        </a>
+        <breadcrumb #parent>  
+            <ol class="breadcrumb bg-white">
+              <ng-template ngFor let-route [ngForOf]="parent.breadcrumbs">
+                <li *ngIf="!route.terminal" class="breadcrumb-item">
+                  <a href="" [routerLink]="[route.url]" >{{ route.displayName }}</a>
+                </li>
+                <li *ngIf="route.terminal" class="breadcrumb-item active" aria-current="page">{{ route.displayName }}</li>
+              </ng-template>
+            </ol>
+          </breadcrumb>  
+    </h5>
+</div>
+
+<div class=""> 
+    <h4>
+        Formulario 
+    </h4>  
+    <div class="d-flex bd-highlight">
+        <div class="p-2 w-100 bd-highlight"><h6 class="font-italic">Administra los formularios del sector</h6></div>
+        <div class="p-2 flex-shrink-1 bd-highlight"><button (click)="agregarSector(true)" mat-button color="primary"><mat-icon>add</mat-icon></button></div>
+      </div>
+    
+</div>
+<div class="d-flex inline-flex ">
+  
+    <section class="app border-5">
+        <div class="" >
+            <article class="feature1" *ngFor="let item of response.formsDataList; let i=index"  matTooltip="{{item.descripcionCorta}}" >
+                <input type="radio" name="status" id="feature1" (click)="selectSector(i)"/>
+                    <div>
+                    <span>
+                        <span class="text-center mr-3">
+                            {{item.nombre}} 
+                        </span>
+                        <button mat-icon-button [disabled]="valor === i ? null :'disabled'" [matMenuTriggerFor]="menu" class="ml-5" aria-label="Example icon-button with a menu ">
+                            <mat-icon>more_vert</mat-icon>
+                          </button>
+                          <mat-menu #menu="matMenu">
+                            <button (click)="agregarSector(false,item.formularioId)" color="primary"mat-menu-item>
+                            <span>Editar</span>
+                            </button>
+                            <button mat-menu-item (click)="apartadoCate(item.nombre,item.formularioId)"  >
+                                <span>Configurar</span>
+                            </button>
+    
+                            <button (click)="propiedadesInput(valor)" color="primary"mat-menu-item>
+                            <span>Asignar</span>
+                            </button>
+    
+                            <button [disabled]="valor === null ? 'disabled' : null" 
+                              color="primary"mat-menu-item>
+                            <span>Duplicar</span>
+                            </button>
+
+                            <button (click)="eliminarForm(item.estatusFormularioId,item.nombre)" color="primary"mat-menu-item>
+                                <span>Eliminar</span>
+                                </button>
+                          </mat-menu>
+                    </span>
+                </div>
+            </article> 
+        </div>
+    </section>
+</div>
+
+
+
+<router-outlet></router-outlet>

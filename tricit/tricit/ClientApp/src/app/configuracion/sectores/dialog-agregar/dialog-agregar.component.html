@@ -1,0 +1,124 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<mat-dialog-content class="mat-typography">
+    <div >
+
+        <!--AGREGAR SECTOR-->
+        <div *ngIf="title==='Agregar sector';" class="container-fluid">
+            <div class="row" [formGroup]="sectorForm">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="" formControlName="nombre" required maxlength="30">
+                    <mat-error *ngIf="sectorForm.get('nombre').hasError('required')" >Es necesario un nombre</mat-error>
+                  </mat-form-field>
+                
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Descripción</mat-label>
+                    <textarea #message maxlength="255" matInput placeholder="" formControlName="descripcionCorta" required  ></textarea>
+                    <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+                    <mat-error *ngIf="sectorForm.get('descripcionCorta').hasError('required')" >Es necesario una descripción</mat-error>
+                  </mat-form-field>
+            </div>
+      
+        </div>
+        <!--EDITAR NOMBRE DE SECTOR-->
+        <div *ngIf="title==='Editar sector';" class="container-fluid">
+            <div class="row" [formGroup]="sectorForm">
+                <div class="form-group col-md-12 col-sm-12">
+                    <div class="">
+                        <p class="d-fles inline-flex">Estatus</p>
+                        <mat-radio-group aria-label="Select an option col-12" formControlName="estatusId" >
+                            <mat-radio-button name="estatusId"  class="mr-3" [value]="1000038" >Activo</mat-radio-button>
+                            <mat-radio-button name="estatusId"  [value]="1000039">Inactivo</mat-radio-button>
+                            
+                        </mat-radio-group>
+                    </div>
+                    <div class="input-group mb-4">
+                        <div class="row">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Nombre</mat-label>
+                                <input matInput placeholder="" value="" formControlName="nombre" required maxlength="30" >
+                                <mat-error *ngIf="sectorForm.get('nombre').hasError('required')" >Es necesario un nombre</mat-error>
+                              </mat-form-field>
+
+                              
+                            
+                              <mat-form-field class="example-full-width">
+                                <mat-label>Descripción</mat-label>
+                                <textarea #message maxlength="255" matInput placeholder="" value="" formControlName="descripcionCorta" required   ></textarea>
+                                <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+                                <mat-error *ngIf="sectorForm.get('descripcionCorta').hasError('required')" >Es necesario una descripción</mat-error>
+                              </mat-form-field>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+      
+        </div>
+ 
+        <!--AGREGAR FORMULARIO-->
+        <div *ngIf="title==='Agregar formulario';"  class="container-fluid">
+
+            <div class="row" [formGroup]="Form">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder=""   formControlName="nombre"  required maxlength="30" >
+                    <mat-error *ngIf="Form.get('nombre').hasError('required')" >Es necesario un nombre</mat-error>
+
+                  </mat-form-field>
+                
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Descripción</mat-label>
+                    <textarea #message maxlength="255" matInput placeholder="" formControlName="descripcionCorta" required  ></textarea>
+                    <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+                    <mat-error *ngIf="Form.get('descripcionCorta').hasError('required')" >Es necesario una descripción</mat-error>
+                   
+                  </mat-form-field>
+
+                  
+            </div>
+      
+        </div>
+        <!--EDITAR NOMBRE DE FORMULARIO-->
+        <div *ngIf="title==='Editar formulario';"  class="container-fluid">
+            <div class="row" [formGroup]="Form">
+                <div class="form-group col-md-12 col-sm-12">
+                    <div class="">
+                        <p class="d-fles inline-flex">Estatus</p>
+                        <mat-radio-group aria-label="Select an option col-12" formControlName="estatusFormularioId">
+                            <mat-radio-button class="mr-3" [value]=1000041 >Activo</mat-radio-button>
+                            <mat-radio-button value="2" [value]=1000042>Inactivo</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div class="input-group mb-4">
+                        <div class="row">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Nombre</mat-label>
+                                <input matInput placeholder="" value="" formControlName="nombre"  required maxlength="30" >
+                                <mat-error *ngIf="Form.get('nombre').hasError('required')" >Es necesario un nombre</mat-error>
+                              </mat-form-field>
+                            
+                              <mat-form-field class="example-full-width">
+                                <mat-label>Descripción</mat-label>
+                                <textarea #message maxlength="255" matInput placeholder="" formControlName="descripcionCorta" required ></textarea>
+                                <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+                                <mat-error *ngIf="Form.get('descripcionCorta').hasError('required')" >Es necesario una descripción</mat-error>
+                              </mat-form-field>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+          
+      
+        </div>
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <mat-progress-bar mode="indeterminate" class="mb-3 mt-1" *ngIf="subiendo == true"></mat-progress-bar>
+    <button mat-button mat-dialog-close color="primary" [disabled]="subiendo == true ? 'disabled' : null">Cancelar</button>
+    <button *ngIf="title==='Agregar sector';" mat-raised-button color="primary" (click)="guardar()"  [disabled]="sectorForm.get('nombre').hasError('required') || sectorForm.get('descripcionCorta').hasError('required')  ? 'disabled' : null" >Guardar</button>
+    <button *ngIf="title==='Editar sector';" mat-raised-button color="primary" (click)="guardar()" [disabled]="sectorForm.get('nombre').hasError('required') || sectorForm.get('descripcionCorta').hasError('required')  ? 'disabled' : null" >Guardar cambios</button>
+    <button *ngIf="title==='Agregar formulario';" mat-raised-button color="primary" (click)="guardarForm()" [disabled]="Form.get('nombre').hasError('required') || Form.get('descripcionCorta').hasError('required')  ? 'disabled' : null">Guardar</button>
+    <button *ngIf="title==='Editar formulario';"  mat-raised-button color="primary" (click)="guardarForm()"  [disabled]="Form.get('nombre').hasError('required') || Form.get('descripcionCorta').hasError('required')  ? 'disabled' : null">Guardar cambios</button>
+   
+</mat-dialog-actions>

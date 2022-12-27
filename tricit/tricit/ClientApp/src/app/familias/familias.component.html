@@ -1,0 +1,174 @@
+<div class="app-body">
+
+    <div class="header">
+        
+    </div>
+
+    <div class="content container-fluid">
+
+        <mat-card>
+
+            <mat-card-title>Familia</mat-card-title>
+
+            <mat-card-content>
+
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-row">
+                                <div class="col-md-12 col-lg-4">
+                                    <mat-form-field class="w-100">
+                                        <input matInput placeholder="Familia" maxlength="100" [(ngModel)]="family" />
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-12 col-lg-4 d-flex">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Compañía</mat-label>
+                                        <mat-select [(ngModel)]="company" name="com" (click)="doSomething($event)">
+                                            <input [(ngModel)]="searchTxt" matInput id="mat-input-search" placeholder="Buscar" #search>
+                                            <mat-option *ngFor="let com of dropDown.companyData | search: searchTxt" [value]="com.id">{{ com.data }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <button mat-icon-button color="primary" (click)="Busqueda()" aria-label="buscar" class="ml-2"><mat-icon>search</mat-icon></button>
+                                </div>
+                                <div class="col-md-12 col-lg-4 d-flex justify-content-end">
+                                    <button mat-icon-button color="primary" routerLink="Agregar" aria-label="buscar" class="ml-2" matTooltip="Agregar"><mat-icon>add</mat-icon></button>
+                                    <button mat-icon-button color="primary" [routerLink]="['Editar', idFamily]" [disabled]="selection.selected.length == 0 ? 'disabled' : null" aria-label="buscar" class="ml-2" matTooltip="Editar"><mat-icon>edit</mat-icon></button>
+                                    <button mat-icon-button color="primary" (click)="eliminarFamilia(1)" [disabled]="selection.selected.length == 0 ? 'disabled' : null" aria-label="buscar" class="ml-2" matTooltip="Eliminar"><mat-icon>delete</mat-icon></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mat-elevation-z0" [hidden]="emptyList">
+                            <mat-table matSort mat-table [dataSource]="dataSource" class=" mat-table-100">
+                                <!-- Checkbox Column -->
+                                <ng-container cdkColumnDef="select">
+                                    <mat-header-cell *cdkHeaderCellDef class="select-column"></mat-header-cell>
+                                    <mat-cell *cdkCellDef="let row" class="select-column">
+                                        <mat-checkbox (click)="selection.toggle(row); seleccion();"
+                                                      (change)="$event ? selection.toggle(row) : null"
+                                                      [checked]="selection.isSelected(row)"
+                                                      [aria-label]="checkboxLabel(row)">
+                                        </mat-checkbox>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Position Column -->
+                                <ng-container cdkColumnDef="name">
+                                    <mat-header-cell *cdkHeaderCellDef mat-sort-header> Familia </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let element"> {{element.name}} </mat-cell>
+                                </ng-container>
+
+                                <!-- Name Column -->
+                                <ng-container cdkColumnDef="model">
+                                    <mat-header-cell *cdkHeaderCellDef mat-sort-header> Modelo </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let element"> {{element.model}} </mat-cell>
+                                </ng-container>
+
+                                <!-- Weight Column -->
+                                <ng-container cdkColumnDef="sku">
+                                    <mat-header-cell *cdkHeaderCellDef mat-sort-header> SKU </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let element"> {{element.sku}} </mat-cell>
+                                </ng-container>
+
+                                <!-- GTIN Column -->
+                                <ng-container cdkColumnDef="gtin">
+                                    <mat-header-cell *cdkHeaderCellDef mat-sort-header> Código de barras </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let element"> {{element.gtin}} </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *cdkRowDef="let row; columns: displayedColumns" (click)="selection.toggle(row); seleccion();"></mat-row>
+
+                            </mat-table>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-6 p-0 mt-2 mat-paginator">
+                                        <button 
+                                            mat-icon-button 
+                                            color="primary"
+                                            aria-label="buscar"
+                                            [routerLink]="['Especificaciones', idFamily]"
+                                            [disabled]="(selection.selected.length == 0 || !allowEspec) ? 'disabled' : null"
+                                            class="ml-2 fami-con" matTooltip="Especificaciones">
+                                                <div class="icon-fami ico-espe" [ngClass]="{'ico-active': selection.selected.length > 0 && allowEspec}" ></div>
+                                        </button>
+                                        <button 
+                                            mat-icon-button 
+                                            color="primary"
+                                            aria-label="buscar"
+                                            [routerLink]="['GuiasUso', idFamily]"
+                                            [disabled]="(selection.selected.length == 0 || !allowTips) ? 'disabled' : null"
+                                            class="ml-2 fami-con" matTooltip="Tips & Usos">
+                                            <div  class="icon-fami ico-uso" [ngClass]="{'ico-active': selection.selected.length > 0 && allowTips}"></div>
+                                        </button>
+                                        <button 
+                                            mat-icon-button 
+                                            color="primary"
+                                            aria-label="buscar"
+                                            [routerLink]="['GuiasInstalacion', idFamily]"
+                                            [disabled]="(selection.selected.length == 0 || !allowGuides) ? 'disabled' : null"
+                                            class="ml-2 fami-con" matTooltip="Guías de Instalación">
+                                            <div  class="icon-fami ico-instalacion" [ngClass]="{'ico-active': selection.selected.length > 0 && allowGuides}"></div>
+                                        </button>
+                                        <button 
+                                            mat-icon-button 
+                                            color="primary"
+                                            aria-label="buscar"
+                                            [routerLink]="['GarantiaServicio', idFamily]"
+                                            [disabled]="(selection.selected.length == 0 || !allowWarr) ? 'disabled' : null"
+                                            class="ml-2 fami-con" matTooltip="Garantía y Servicio">
+                                            <div  class="icon-fami ico-servicio" [ngClass]="{'ico-active': selection.selected.length > 0 && allowWarr}"></div>
+                                        </button>
+                                        <button 
+                                            mat-icon-button 
+                                            color="primary"
+                                            aria-label="buscar"
+                                            [routerLink]="['ProductosRelacionados', idFamily]"
+                                            [disabled]="(selection.selected.length == 0 || !allowRel) ? 'disabled' : null"
+                                            class="ml-2 fami-con" matTooltip="Productos Relacionados">
+                                            <div  class="icon-fami ico-productos" [ngClass]="{'ico-active': selection.selected.length > 0 && allowRel}"></div>
+                                        </button>
+                                        <button 
+                                            mat-icon-button 
+                                            color="accent"
+                                            aria-label="buscar"
+                                            [routerLink]="['ConfiguracionEmbalaje', idFamily, companyId]"
+                                            [disabled]="(selection.selected.length == 0 || !allowConfiguracion) ? 'disabled' : null"
+                                             class="ml-2 fami-con" matTooltip="Configuración de Embalaje">
+                                             <div  class="icon-fami" [ngClass]="{'ico-active': selection.selected.length > 0}"><fa-icon class="pointer icon-compania" [icon]="faBoxes"></fa-icon></div>
+                                        </button>
+                                        <button 
+                                            mat-icon-button 
+                                            color="accent"
+                                            aria-label="buscar"
+                                            [routerLink]="['ConfiguracionEmbalajeReproceso', idFamily]"
+                                            [disabled]="(selection.selected.length == 0 || !allowConfiguracionRepro) ? 'disabled' : null"
+                                            *ngIf="companyUs <= 0"
+                                            class="ml-2 fami-con"
+                                            matTooltip="Embalaje Reproceso">
+                                            <div  class="icon-fami ico-embalajes" [ngClass]="{'ico-active': selection.selected.length > 0}"></div>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-12 col-md-6 p-0"><mat-paginator #paginator [pageSizeOptions]="itemsPagina" showFirstLastButtons></mat-paginator></div>
+                                </div>
+                            </div>
+
+                        </div>
+						<div [hidden]="!emptyList" class="col-12 text-center">
+							<label class="lbl-empty">No se encontraron registros</label>
+						</div>
+
+                    </div>
+
+                </div>
+
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+
+</div>

@@ -1,0 +1,80 @@
+<h1 mat-dialog-title class="espacio titulo">Crear Operación</h1>
+<hr class="grosor">
+<mat-dialog-content class="espacio">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-row">
+        <div class="col-md-12 d-flex">
+          <mat-form-field class="w-100">
+            <mat-label>Etiqueta QR</mat-label>
+            <input matInput placeholder="Etiqueta QR" [(ngModel)]="searchCode" #qrInput>
+            <mat-icon class="pointer" matSuffix (click)="openScanerDialog()">qr_code_scanner
+            </mat-icon>
+          </mat-form-field>
+          <button mat-icon-button color="primary" aria-label="buscar" class="ml-2"
+            (click)="aplicarBusqueda()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid mb-5">
+      <mat-form-field>
+        <mat-label>Filtrar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+      </mat-form-field>
+      
+      <div class="mat-elevation-z8 table-responsive overflow-visible">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table-responsive">
+          <!-- Pallet Column -->
+          <ng-container matColumnDef="palletName" style="text-align: center !important;">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg al-Center" style="justify-content: center !important;"> # Pallet </th>
+            <td mat-cell *matCellDef="let row" class="th-lg al-Center"> {{row.palletName}} </td>
+          </ng-container>
+          
+          <!-- Producto Column -->
+          <ng-container matColumnDef="product" style="text-align: center !important;">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg al-Center" style="justify-content: center !important;"> Producto </th>
+            <td mat-cell *matCellDef="let row" class="th-lg al-Center"> {{row.product}} </td>
+          </ng-container>
+      
+          <!-- Cantidad Column -->
+          <ng-container matColumnDef="quantity" style="text-align: center !important;">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg al-Center" style="justify-content: center !important;"> Cantidad </th>
+            <td mat-cell *matCellDef="let row" class="th-lg al-Center"> {{row.quantity}}</td>
+          </ng-container>
+
+          <!-- Cantidad Column -->
+          <ng-container matColumnDef="delete" style="text-align: center !important;">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+            <td mat-cell *matCellDef="let iIndex = index;" class="th-lg al-Center">
+              <mat-icon style="cursor:pointer;" (click)="deleteItem(iIndex)">delete</mat-icon>
+            </td>
+          </ng-container>
+      
+          <!-- CodigoQR Column -->
+          <!-- <ng-container matColumnDef="codigoQR">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Código QR </th>
+              <td mat-cell *matCellDef="let row"> {{row.codigoQR}} </td>
+            </ng-container> -->
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="3">No data matching the filter "{{input.value}}"</td>
+          </tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()" class="btn btn2 card card-cascade narrower ">Cancelar</button>
+  <button mat-button (click)="save()" class="btn btn1 card card-cascade narrower ">Guardar</button>
+</mat-dialog-actions>

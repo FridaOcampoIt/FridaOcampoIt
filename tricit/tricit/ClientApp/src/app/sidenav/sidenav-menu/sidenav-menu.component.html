@@ -1,0 +1,14 @@
+<div>
+    <mat-action-list #section class="mat-dropdown-list">
+        <button mat-list-item (click)="toggleLink()">
+            <mat-label class="dropdown-label">{{tittle}}</mat-label>
+            <mat-icon matListIcon class="dropdown-icon">arrow_drop_down</mat-icon>
+        </button>
+    </mat-action-list>
+    <ul #listdp class="menu-toggle-list oculto">
+        <li *ngFor="let menu of child">
+            <app-sidenav-link [link]="menu" [pparent]="mparent" [pwid]="mwid"></app-sidenav-link>
+        </li>
+    </ul>
+</div>
+<!--[ngClass]="{'oculto': !active}"-->

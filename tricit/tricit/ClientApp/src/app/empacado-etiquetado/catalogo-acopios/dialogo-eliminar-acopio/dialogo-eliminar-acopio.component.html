@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Eliminar</h1>
+<mat-dialog-content class="mat-typography">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <p *ngIf="_acopioById && _acopioById.activo == false">¿Estás seguro de eliminar el acopio seleccionado?</p>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="_acopioById && _acopioById.activo == true">
+                <strong>Error</strong><br/>
+                No se puede eliminar un acopio, que aún este activo.
+            </div>
+
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="_acopioById && _acopioById.activo == false">
+                <strong>Advertencia</strong><br/>
+                Si usted elimina el acopio, todos los productores asociados a dicho <strong>Acopio</strong>, serán eliminados.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="primary" *ngIf="_acopioById && _acopioById.activo == true">Salir</button>
+    <button mat-button mat-dialog-close color="primary" *ngIf="_acopioById && _acopioById.activo == false">No</button>
+    <button mat-raised-button color="primary" (click)="deleteAcopio()" cdkFocusInitial *ngIf="_acopioById && _acopioById.activo == false">Si</button>
+</mat-dialog-actions>

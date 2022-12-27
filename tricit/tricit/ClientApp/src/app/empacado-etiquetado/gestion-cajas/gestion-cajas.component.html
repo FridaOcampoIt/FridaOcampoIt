@@ -1,0 +1,183 @@
+<div class="app-body">
+
+  <div class="header">
+
+  </div>
+
+  <div class="content container-fluid">
+
+    <mat-card>
+
+      <mat-card-title class="d-flex mb-3">
+        <button mat-icon-button color="primary" (click)="back()" class="mr-1">
+          <mat-icon>chevron_left</mat-icon>
+        </button> {{empresa}} / Gestión de cajas
+      </mat-card-title>
+
+      <mat-card-content>
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-row">
+                <!-- Agregamos la Compañia, para el empacador -->
+                <!--<h2>{{ isType }} </h2>-->
+                <!-- Ajuste de compania con empacador Frida Ocampo 29-04-2022-->
+                <!--<div class="col-md-3" *ngIf="tipoUsuario == 0 || tipoUusuario == 549" >-->
+                <div class="col-md-3" *ngIf="(isCompany <= 0 && isType == 0) || (isType == 1)">
+                  <mat-form-field class="w-100">
+                    <mat-label>Compañias</mat-label>
+                    <mat-select [(ngModel)]="companiaId" (ngModelChange)="obtenerDirecciones($event)">
+                      <mat-option *ngFor="let company of dataSourceCompany" [value]="company.idCompany">
+                        {{company.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field class="w-100">
+                    <mat-label>Producto</mat-label>
+                    <mat-select [(ngModel)]="productId">
+                      <mat-option [value]="0">Selecciona una opción</mat-option>
+                      <mat-option [value]="producto.id" *ngFor="let producto of productsCombo">{{producto.data}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field class="w-100">
+                    <mat-label>Tipo de vista</mat-label>
+                    <mat-select [(ngModel)]="typeView">
+                      <mat-option [value]="0">Selecciona una opción</mat-option>
+                      <mat-option [value]="vista.id" *ngFor="let vista of typoVista">{{vista.data}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field class="w-100">
+                    <mat-label>Desde</mat-label>
+                    <input matInput [matDatepicker]="pickerDe" readonly (click)="pickerDe.open()"
+                      [(ngModel)]="dateStart" placeholder="Desde">
+                    <mat-datepicker-toggle matSuffix [for]="pickerDe"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerDe></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field class="w-100">
+                    <mat-label>Hasta</mat-label>
+                    <input matInput [matDatepicker]="pickerHasta" readonly (click)="pickerHasta.open()"
+                      placeholder="Hasta" [min]="dateStart" [(ngModel)]="dateEnd">
+                    <mat-datepicker-toggle matSuffix [for]="pickerHasta"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerHasta></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field class="w-100">
+                    <mat-label>Buscar</mat-label>
+                    <input matInput [(ngModel)]="searchField" (ngModelChange)="aplicarFiltro()">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <button mat-icon-button color="primary" aria-label="buscar" class="font-icons"
+                    (click)="obtenerAgrupaciones()">
+                    <mat-icon>search</mat-icon>
+                  </button>
+                  <button color="primary" [disabled]="selection.selected.length > 1 ? null : 'disabled'" mat-icon-button
+                    matTooltip="Unir" class="font-icons" (click)="Union()">
+                    <fa-icon [icon]="faClone"></fa-icon>
+                  </button>
+                  <button color="primary"
+                    [disabled]="selection.selected.length == 1 && aplicado > 1 ? null : 'disabled'" mat-icon-button
+                    matTooltip="Reimprimir" class="font-icons">
+                    <fa-icon [icon]="faPrint" (click)="reimprimirEtiqueta()"></fa-icon>
+                  </button>
+                  <button color="primary" [disabled]="selection.selected.length == 1 ? null : 'disabled'"
+                    mat-icon-button matTooltip="Ver Detalle" class="font-icons" (click)="dialogoDetalle()">
+                    <fa-icon [icon]="faDetalle"></fa-icon>
+                  </button>
+                  <button color="primary" mat-icon-button matTooltip="Crear Pallet" class="font-icons"
+                    (click)="makePallet()">
+                    <fa-icon [icon]="faBoxes"></fa-icon>
+                  </button>
+                  <button mat-icon-button color="primary" aria-label="buscar" class="font-icons" (click)="generarExcel()"
+                    matTooltip="Exportar">
+                    <mat-icon fontSet="fa" fontIcon="fa-file-export"></mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div id="sec-tabla-agrupacion" class="col-md-12 mat-elevation-z0">
+
+              <mat-table matSort [dataSource]="dataSource" class=" mat-table-100">
+                <!-- Checkbox Column -->
+                <ng-container matColumnDef="select">
+                  <mat-header-cell *matHeaderCellDef class="select-column">
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" class="select-column">
+                    <mat-checkbox (click)="selection.toggle(row); seleccion();"
+                      (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)">
+                    </mat-checkbox>
+                  </mat-cell>
+                </ng-container>
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="grouping">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Agrupación </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.groupingName}} </mat-cell>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="pallet">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Pallet(s) </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.pallet}} </mat-cell>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="box">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Caja(s) </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.box}} </mat-cell>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="product">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Producto </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.productName}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="quantity">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.quantity}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="isGroup">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [style.display]="'none'"> Unión </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <fa-icon [icon]="faCheck" [style.display]="element.isGroup != 0 ? 'block' : 'none'"></fa-icon>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns" (click)="selection.toggle(row); seleccion();">
+                </mat-row>
+              </mat-table>
+              <mat-paginator #paginatorTraceIt [pageSizeOptions]="itemsPagina" showFirstLastButtons>
+              </mat-paginator>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+</div>

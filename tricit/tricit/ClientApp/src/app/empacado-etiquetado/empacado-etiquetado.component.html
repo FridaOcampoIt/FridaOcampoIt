@@ -1,0 +1,278 @@
+<mat-card>
+
+  <mat-card-title>Empacado y Etiquetado/Movimientos generales</mat-card-title>
+
+  <mat-card-content>
+
+    <div class="container-fluid">
+
+      <!-- FILTROS -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-row">
+            <div class="col-md-2">
+              <mat-form-field class="w-100">
+                <mat-label>Tipo de Compañia</mat-label>
+                <mat-select [(ngModel)]="tipoCompania" (selectionChange)="doSomething($event)">
+                  <mat-option [value]="0">Selecciona una opción</mat-option>
+                  <mat-option *ngFor="let proveedor of proveedores" [value]="proveedor.id">
+                    {{proveedor.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-2">
+              <mat-form-field class="w-100">
+                <mat-label>Producto</mat-label>
+                <mat-select [(ngModel)]="productId">
+                  <mat-option [value]="0">Selecciona una opción</mat-option>
+                  <mat-option *ngFor="let prod of productosList" [value]="prod.id">{{prod.data}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-2">
+              <mat-form-field class="w-100">
+                <mat-label>Desde</mat-label>
+                <input matInput [matDatepicker]="pickerDe" [(ngModel)]="dateStart" readonly (click)="pickerDe.open()"
+                  placeholder="Desde">
+                <mat-datepicker-toggle matSuffix [for]="pickerDe"></mat-datepicker-toggle>
+                <mat-datepicker #pickerDe>
+                </mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-md-2">
+              <mat-form-field class="w-100">
+                <mat-label>Hasta</mat-label>
+                <input matInput [matDatepicker]="pickerHasta" readonly (click)="pickerHasta.open()" placeholder="Hasta"
+                  [min]="dateStart" [(ngModel)]="dateEnd">
+                <mat-datepicker-toggle matSuffix [for]="pickerHasta"></mat-datepicker-toggle>
+                <mat-datepicker #pickerHasta></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-md-2">
+              <button mat-icon-button color="primary" aria-label="buscar" class="ml-2" (click)="aplicarBusqueda()">
+                <mat-icon>search</mat-icon>
+              </button>
+
+            </div>
+            <div class="col-md-2" *ngIf="(isType == 0 && isCompany == 0)">
+              <mat-checkbox [(ngModel)]="traceitDistributor" [hidden]="this.tUsuario != 0">
+                Distribuidores no Trace It
+              </mat-checkbox>
+            </div>
+          </div>
+          <div class="form-row">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </mat-card-content>
+</mat-card>
+
+
+
+<div class="col-md-12 mat-elevation-z8">
+  <div class="col-md-4 d-flex" *ngIf="emptyList">
+    <mat-form-field class="w-100">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Busqueda">
+    </mat-form-field>
+  </div>
+  <!-- no trace it -->
+  <div class="col-md-12 mat-elevation-z8" *ngIf="emptyList && tipoCompania != 6">
+    <mat-table matSort [dataSource]="dataSource">
+      <!-- Position Column -->
+      <ng-container matColumnDef="companyName" *ngIf="(isType == 0 && isCompany == 0) || isType == 1">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Compañia </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.companyName}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="nombreEmpacador">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Empacador</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.nombreEmpacador}} </mat-cell>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="groupingName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Agrupación </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.groupingName}} </mat-cell>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="pallet">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Pallet(s) </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.pallet}} </mat-cell>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="box">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Caja(s) </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.box}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="productName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Producto </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.productName}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.quantity}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="registerDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.registerDate}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+  <div class="col-md-12 mat-elevation-z0 table-responsive overflow-visible text-center"
+    *ngIf="emptyList && tipoCompania == 6">
+    <mat-table matSort [dataSource]="dataSource" class="mat-table-100 text-center">
+      <!-- Agrupación Column -->
+      <ng-container matColumnDef="nombreAcopio">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg">Nombre Acopio</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="th-lg text-center" data-label="Nombre Acopio">
+          {{element.nombreAcopio}}</mat-cell>
+      </ng-container>
+      <!-- ID del Movimento Colum (Hidden) -->
+      <ng-container matColumnDef="movimientoId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg" [style.display]="'none'"> ID </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="th-lg" data-label="Quién" [style.display]="'none'">
+          {{element.movimientoId}} </mat-cell>
+      </ng-container>
+
+      <!-- Agrupación Column -->
+      <ng-container matColumnDef="nombreAgrupacion">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg"> Agrupación</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="th-lg al-Center" data-label="Agrupación">
+          {{element.nombreAgrupacion}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="numeroCajas">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg"> Caja(s) </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="th-lg al-Center" data-label="Caja(s)"> {{element.numeroCajas}}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Producto Column -->
+      <!--Se ocultan las columnas que poseen los datos de los 4 datos de la consulta-->
+      <ng-container matColumnDef="cantIndMov">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg al-Center" [style.display]="'none'"> Cantidad N
+          Prod </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="th-lg al-Center" data-label="Cantidad N Prod"
+          [style.display]="'none'"> {{element.cantIndMov}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="producto">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg">Familia(s) </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="th-lg al-Center" data-label="Producto(s)">
+          <li style="border:none; background: transparent;"
+            [style.display]="element.cantIndMov == 1 ? 'block' : 'none'">{{element.producto}}</li>
+          <li style="border:none; background: transparent;" [style.display]="element.cantIndMov > 1 ? 'block' : 'none'">
+          </li>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Cantidad Column -->
+      <ng-container matColumnDef="cantidad">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg"> Cantidad </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="th-lg al-Center" data-label="Cantidad de Producto">
+          {{element.cantidadRecibida}}/{{element.cantidad}} </mat-cell>
+      </ng-container>
+
+      <!-- Tipo Column -->
+      <ng-container matColumnDef="tipoMovimiento">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg">Tipo</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="th-lg al-Center" data-label="Tipo"> {{element.tipoMovimiento}}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Quién Column -->
+      <!--Se ocultan las columnas que poseen los datos de los 4 datos de la consulta-->
+      <ng-container matColumnDef="nombreRemitente">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg" [style.display]="'none'"> NombreR
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="th-lg" data-label="Quién" [style.display]="'none'">
+          {{element.nombreRemitente}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="apellidoRemitente">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg" [style.display]="'none'"> ApellidoR
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="th-lg" data-label="Quién" [style.display]="'none'">
+          {{element.apellidoRemitente}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="nombreDestinatario">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg" [style.display]="'none'"> NombreD
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="th-lg" data-label="Quién" [style.display]="'none'">
+          {{element.nombreDestinatario}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="apellidoDestinatario">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg" [style.display]="'none'"> ApellidoD
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="th-lg" data-label="Quién" [style.display]="'none'">
+          {{element.apellidoDestinatario}} </mat-cell>
+      </ng-container>
+      <!-- Se agrego otra columna extra en el arreglo de columnas, la cual no se relaciona con la base de datos, para poder unir los datos en una sola columna y mostrarlos -->
+      <ng-container matColumnDef="quien">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg" [style.flex]="'0 0 150px'">Destinatario
+          <!--<b style="font-size: 14px!important;">
+            <li style="border:none; background: transparent;" [style.flex]="'0 0 100px'">
+              Remitente</li>
+            <a style="border:none; background: transparent;" [style.flex]="'0 0 100px'">
+              Destinatario</a>
+          </b>-->
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="th-lg" data-label="Destinatario" [style.flex]="'0 0 150px'">
+          {{element.nombreDestinatario}}
+          <!--<li style="border:none; background: transparent;" [style.flex]="'0 0 85px'">
+            {{element.nombreRemitente}}</li>
+          <a style="border:none; background: transparent;" [style.flex]="'0 0 150px'">
+            {{element.nombreDestinatario}}</a>-->
+        </mat-cell>
+      </ng-container>
+
+      <!-- Fecha Column -->
+      <ng-container matColumnDef="fechaIngreso">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg" [style.flex]="'0 0 150px'">Fecha
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="th-lg" data-label="Fecha" [style.flex]="'0 0 150px'">
+          {{element.fechaIngreso|date:'dd/MM/yyyy hh:mm:ss'}}
+        </mat-cell>
+      </ng-container>
+
+
+      <!-- Lote Column -->
+      <ng-container matColumnDef="lote">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="th-lg" [style.flex]="'0 0 100px'"> Lote
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="th-lg" data-label="Lote" [style.flex]="'0 0 100px'">
+          {{element.lote}}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumnsAcopio"></mat-header-row>
+      <mat-row *matRowDef="let element; columns: displayedColumnsAcopio;"></mat-row>
+    </mat-table>
+  </div>
+
+  <div [hidden]="emptyList" class="col-12 text-center">
+    <label class="lbl-empty fontS-26">No se encontraron registros</label>
+  </div>
+  <div class="container-fluid" *ngIf="tipoCompania != 0">
+    <div class="row">
+      <div class="col-md-12 col-lg-6 p-0 mt-2 mat-paginator">
+        <button mat-button color="primary" (click)="registroCompania()">
+          <span *ngIf="isType == 0 && isCompany == 0"> Registro de compañia</span>
+          <span *ngIf="(isType == 0) && isCompany > 0"> Ver/Agregar</span>
+          <span *ngIf="(isType == 1)">Ver</span>
+        </button>
+      </div>
+      <div class="col-md-12 col-md-6 p-0" *ngIf="emptyList">
+        <mat-paginator #scheduledOrdersPaginator [pageSizeOptions]="itemsPagina" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

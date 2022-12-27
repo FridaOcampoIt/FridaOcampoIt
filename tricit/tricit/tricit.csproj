@@ -1,0 +1,147 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+
+    <!-- Set this to true if you enable server-side prerendering -->
+    <BuildServerSideRenderer>false</BuildServerSideRenderer>
+    <AssemblyName>TraceITBO</AssemblyName>
+    <RootNamespace>TraceITBO</RootNamespace>
+    <Version>1.9.1</Version>
+    <Authors>Bernardo Lloret-Fuentes</Authors>
+    <Company>Bernardo Lloret-Fuentes</Company>
+    <Product>ASP.NET Core 2.2 with Angular 7 Template</Product>
+    <PackageId>ASP.NET Core 2.2 with Angular 7 Template</PackageId>
+    <Description>ASP.NET Core 2.2 with Angular 7 Template</Description>
+    <PackageProjectUrl>https://github.com/blfuentes/NETCore2_2_Angular7_Template</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/blfuentes/NETCore2_2_Angular7_Template</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Content Remove="$(SpaRoot)**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\companias\dialogo-eliminar\dialogo-eliminar.component.ts" />
+    <None Remove="ClientApp\src\app\direcciones\dialogo-eliminar\dialogo-eliminar.component.ts" />
+    <None Remove="ClientApp\src\app\familias\dialogo-eliminar\dialogo-eliminar.component.ts" />
+    <None Remove="ClientApp\src\app\Interfaces\CompanyModels.ts" />
+    <None Remove="ClientApp\src\app\Interfaces\Enviroments\dataClassSource.ts" />
+    <None Remove="ClientApp\src\app\Interfaces\Enviroments\enviroments.ts" />
+    <None Remove="ClientApp\src\app\Interfaces\general.service.ts" />
+    <None Remove="ClientApp\src\app\Interfaces\Guards\GuardsAuth.guard.ts" />
+    <None Remove="ClientApp\src\app\Interfaces\Guards\GuardsLogin.guard.ts" />
+    <None Remove="ClientApp\src\app\Interfaces\Models\AddressModels.ts" />
+    <None Remove="ClientApp\src\app\Interfaces\Models\ConfigurationModels.ts" />
+    <None Remove="ClientApp\src\app\Interfaces\Models\FamilyModels.ts" />
+    <None Remove="ClientApp\src\app\Interfaces\Models\LabelModels.ts" />
+    <None Remove="ClientApp\src\app\Interfaces\Models\LoginModels.ts" />
+    <None Remove="ClientApp\src\app\Interfaces\Models\Product.ts" />
+    <None Remove="ClientApp\src\app\Interfaces\Models\ProfilesModels.ts" />
+    <None Remove="ClientApp\src\app\Interfaces\Models\TraceITBaseModels.ts" />
+    <None Remove="ClientApp\src\app\Interfaces\Models\UserModels.ts" />
+    <None Remove="ClientApp\src\app\Interfaces\Models\VisorModels.ts" />
+    <None Remove="ClientApp\src\app\perfiles\dialogo-eliminar\dialogo-eliminar.component.ts" />
+    <None Remove="ClientApp\src\app\productos\dialogo-eliminar\dialogo-eliminar.component.ts" />
+    <None Remove="ClientApp\src\app\usuarios\dialogo-eliminar\dialogo-eliminar.component.ts" />
+    <None Remove="ClientApp\src\app\usuarios\usuarios-routing.module.ts" />
+    <None Remove="ClientApp\src\app\visor\TreeClasses.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\companias\dialogo-eliminar\dialogo-eliminar.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\direcciones\dialogo-eliminar\dialogo-eliminar.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\familias\dialogo-eliminar\dialogo-eliminar.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Interfaces\Enviroments\dataClassSource.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Interfaces\Enviroments\enviroments.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Interfaces\Guards\GuardsLogin.guard.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Interfaces\Guards\GuardsAuth.guard.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Interfaces\Models\AddressModels.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Interfaces\Models\ConfigurationModels.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Interfaces\Models\FamilyModels.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Interfaces\Models\VisorModels.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Interfaces\Models\LabelModels.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Interfaces\Models\LoginModels.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Interfaces\Models\Product.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Interfaces\Models\ProfilesModels.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Interfaces\Models\TraceITBaseModels.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Interfaces\Models\UserModels.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Interfaces\Services\general.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Interfaces\Models\CompanyModels.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\perfiles\dialogo-eliminar\dialogo-eliminar.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\productos\dialogo-eliminar\dialogo-eliminar.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\usuarios\dialogo-eliminar\dialogo-eliminar.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\usuarios\usuarios-routing.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\visor\TreeClasses.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ClientApp\tsconfig.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
+      <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES2015</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptModuleKind>ES6</TypeScriptModuleKind>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+
+</Project>

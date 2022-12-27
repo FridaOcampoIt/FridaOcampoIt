@@ -1,0 +1,279 @@
+<div class="app-body">
+
+	<div class="header">
+
+	</div>
+
+	<div class="content container-fluid">
+
+		<mat-card>
+
+			<mat-card-title>Rastreo</mat-card-title>
+
+			<mat-card-content>
+
+				<div class="container-fluid">
+
+					<div class="row">
+
+						<div class="col-md-12">
+							<div class="form-row">
+								<div class="col-md-3 d-none">
+									<mat-form-field class="w-100 hidden">
+										<mat-label>CIU/Códigos</mat-label>
+										<input type="text" placeholder="CIU/Códigos" aria-label="Number" matInput
+											[formControl]="CUICodeControl" [matAutocomplete]="auto">
+										<mat-autocomplete #auto="matAutocomplete">
+											<mat-option *ngFor="let option of options" [value]="option">
+												{{option}}
+											</mat-option>
+										</mat-autocomplete>
+									</mat-form-field>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-row">
+
+								<div class="col-md-3 d-flex">
+									<mat-form-field class="w-100">
+										<mat-label>Código</mat-label>
+										<input matInput placeholder="Código" [(ngModel)]="searchCode">
+										<mat-icon class="pointer" matSuffix (click)="openScanerDialog()">qr_code_scanner
+										</mat-icon>
+									</mat-form-field>
+									<button mat-icon-button color="primary" aria-label="buscar" class="ml-2"
+										(click)="aplicarBusqueda()">
+										<mat-icon>search</mat-icon>
+									</button>
+								</div>
+								<div class="col-md-4 d-flex">
+									<mat-form-field class="w-100">
+										<mat-label>Fase</mat-label>
+										<mat-select [(ngModel)]="phase">
+											<mat-option [value]="0">Selecciona una opción</mat-option>
+											<mat-option [value]="fase.id" *ngFor="let fase of phasesList">{{fase.data}}
+											</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+								<div class="col-md-5 d-flex justify-content-end hidden">
+									<!-- <button mat-icon-button [hidden]="lineaTabla" color="primary" aria-label="buscar"
+										class="ml-2 font-icons" matTooltip="Exportar">
+										<fa-icon [icon]="faExcel"></fa-icon>
+									</button> -->
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+
+						<!-- <div id="sec-tabla" class="col-md-12 mat-elevation-z0" [hidden]="lineaTabla">
+
+							<mat-table matSort [dataSource]="dataSource" class=" mat-table-100">
+								
+								<ng-container cdkColumnDef="select">
+									<mat-header-cell *cdkHeaderCellDef class="select-column">
+									</mat-header-cell>
+									<mat-cell *cdkCellDef="let row" class="select-column">
+										<mat-checkbox (click)="$event.stopPropagation()"
+											(change)="$event ? selection.toggle(row) : null"
+											[checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+										</mat-checkbox>
+									</mat-cell>
+								</ng-container>
+
+								
+								<ng-container cdkColumnDef="ciu">
+									<mat-header-cell *cdkHeaderCellDef mat-sort-header> CIU </mat-header-cell>
+									<mat-cell *cdkCellDef="let element"> {{element.ciu}} </mat-cell>
+								</ng-container>
+
+								
+								<ng-container cdkColumnDef="lote">
+									<mat-header-cell *cdkHeaderCellDef mat-sort-header> Lote </mat-header-cell>
+									<mat-cell *cdkCellDef="let element"> {{element.lote}} </mat-cell>
+								</ng-container>
+
+								
+								<ng-container cdkColumnDef="nserie">
+									<mat-header-cell *cdkHeaderCellDef mat-sort-header> N° Serie </mat-header-cell>
+									<mat-cell *cdkCellDef="let element"> {{element.serie}} </mat-cell>
+								</ng-container>
+
+								
+								<ng-container cdkColumnDef="fecha">
+									<mat-header-cell *cdkHeaderCellDef mat-sort-header> Fecha </mat-header-cell>
+									<mat-cell *cdkCellDef="let element"> {{element.fecha}} </mat-cell>
+								</ng-container>
+
+								<ng-container cdkColumnDef="evento">
+									<mat-header-cell *cdkHeaderCellDef mat-sort-header> Evento </mat-header-cell>
+									<mat-cell *cdkCellDef="let element"> {{element.evento}} </mat-cell>
+								</ng-container>
+
+								<ng-container cdkColumnDef="ubicacion">
+									<mat-header-cell *cdkHeaderCellDef mat-sort-header> Ubicación </mat-header-cell>
+									<mat-cell *cdkCellDef="let element">
+										<fa-icon class="pointer lbl-marker-tabla" (click)="openUbicacionDialog()"
+											[icon]="faMarker">
+										</fa-icon>
+									</mat-cell>
+								</ng-container>
+
+								<ng-container cdkColumnDef="detalle">
+									<mat-header-cell *cdkHeaderCellDef mat-sort-header> Detalle </mat-header-cell>
+									<mat-cell *cdkCellDef="let element"> <span class="lbl-detalle pointer cursor"
+											(click)="openDetalleDialog()">{{element.detalle}}</span></mat-cell>
+								</ng-container>
+
+								<ng-container cdkColumnDef="distribuidor">
+									<mat-header-cell *cdkHeaderCellDef mat-sort-header> Distribuidor </mat-header-cell>
+									<mat-cell *cdkCellDef="let element"> {{element.distribuidor}} </mat-cell>
+								</ng-container>
+
+								<mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+								<mat-row *cdkRowDef="let row; columns: displayedColumns"
+									[class.compania-row]="row.tipoEvento == 0"
+									[class.distribucion-row]="row.tipoEvento == 1"
+									[class.consumo-row]="row.tipoEvento == 2"></mat-row>
+							</mat-table>
+							<mat-paginator #paginator [pageSizeOptions]="itemsPagina" showFirstLastButtons>
+							</mat-paginator>
+
+						</div> -->
+
+						<div id="sec-historial" class="col-md-10 mat-elevation-z0" [hidden]="!lineaTabla">
+
+							<div class="item-ficha row" *ngFor="let evento of linea_data; let i=index; let lost=last">
+								<div class="head-date col-md-2 offset-md-2">
+									<span class="lbl-fecha"> {{evento.fecha}} </span>
+								</div>
+								<div class="col-12">
+									<div class="eventos-linea row"
+										*ngFor="let suceso of evento.datos; let j=index; let last=last">
+										<div class="lbl-hora col-md-1 col-lg-2" *ngIf="suceso.icono == 1">
+											<span class="span-evento">Empacado y Etiquetado</span>
+											<span class="span-hora">{{suceso.hora}} hrs</span>
+										</div>
+										<div class="lbl-hora col-md-1 col-lg-2" *ngIf="suceso.icono == 2">
+											<span class="span-evento">Envío</span>
+											<span class="span-hora">{{suceso.hora}} hrs</span>
+										</div>
+										<div class="lbl-hora col-md-1 col-lg-2" *ngIf="suceso.icono == 3">
+											<span class="span-evento">Recepción</span>
+											<span class="span-hora">{{suceso.hora}} hrs</span>
+										</div>
+										<div class="lbl-hora col-md-1 col-lg-2" *ngIf="suceso.icono == 4">
+											<span class="span-evento">Consulta App</span>
+											<span class="span-hora">{{suceso.hora}} hrs</span>
+										</div>
+										<div class="lbl-hora col-md-1 col-lg-2" *ngIf="suceso.icono == 5">
+											<span class="span-evento">Consulta Origen</span>
+											<span class="span-hora">{{suceso.hora}} hrs</span>
+										</div>
+										<div class="lbl-hora col-md-1 col-lg-2" *ngIf="suceso.icono == 6">
+											<span class="span-evento">Consulta Tracking</span>
+											<span class="span-hora">{{suceso.hora}} hrs</span>
+										</div>
+										<div class="lbl-hora col-md-1 col-lg-2" *ngIf="suceso.icono == 7">
+											<span class="span-evento">Recepción Tracking</span>
+											<span class="span-hora">{{suceso.hora}} hrs</span>
+										</div>
+										<div class="lbl-icon col-md-2 col-lg-2">
+											<span class="super-link"></span>
+											<span class="span-icono" *ngIf="suceso.icono == 1">
+												<img class="icon-evento" src="../../assets/img/Empacado.svg" alt="Empacado y etiquetado" matTooltip="Empacado y etiquetado">
+											</span>
+											<span class="span-icono" *ngIf="suceso.icono == 2">
+													<img class="icon-evento" src="../../assets/img/Envio.svg" alt="Envío" matTooltip="Envío">
+											</span>
+											<span class="span-icono" *ngIf="suceso.icono == 3">
+													<img class="icon-evento" src="../../assets/img/Recepcion.svg" alt="Recepción" matTooltip="Recepción">
+											</span>
+											<span class="span-icono" *ngIf="suceso.icono == 4">
+													<img class="icon-evento" src="../../assets/img/ConsultaApp.svg" alt="Consulta App" matTooltip="Consulta App">
+											</span>
+											<span class="span-icono" *ngIf="suceso.icono == 5">
+												<img class="icon-evento" src="../../assets/img/ConsultaApp.svg" alt="Consulta Origen" matTooltip="Consulta Origen">
+											</span>
+											<span class="span-icono" *ngIf="suceso.icono == 6">
+												<img class="icon-evento" src="../../assets/img/ConsultaApp.svg" alt="Consulta Stock" matTooltip="Consulta Stock">
+											</span>
+											<span class="span-icono" *ngIf="suceso.icono == 7">
+												<img class="icon-evento" src="../../assets/img/Recepcion.svg" alt="Recepción Tracking" matTooltip="Recepción Tracking">
+										</span>
+											<div class="super-link-last" *ngIf="last"></div>
+										</div>
+										<div class="lbl-datos col-md-3 col-lg-4" *ngIf="suceso.icono == 1"> <!-- Empacado y etiquetado-->
+											<span class="span-company">{{suceso.compania}}</span>
+											<span class="span-empacador">Empacador {{suceso.data.tipoEmp == 1 ? "Ext" : "Int"}}: {{suceso.data.empExt}}.</span>
+											<span class="span-operador">Op: {{suceso.data.operador}}. LP: {{suceso.data.lineaOp}}</span>
+										</div>
+										<div class="lbl-datos col-md-3 col-lg-4" *ngIf="suceso.icono == 2"> <!--envio-->
+											<span class="span-company" *ngIf="suceso.data.userType == 0">{{suceso.CompanyName}}</span>
+											<span class="span-receptor-o-enviador" *ngIf="suceso.data.userType == 0">{{suceso.data.remiEstado}}, {{suceso.data.remiPais}}. Envió: {{suceso.data.remiNombre}}</span>
+											<span class="span-company-receptiva" *ngIf="suceso.data.userType == 0">{{suceso.data.destRazonSocial}}</span>
+
+											<span class="span-titulo" *ngIf="suceso.data.userType == 1">Distribuidor</span>
+											<span class="span-direccion" *ngIf="suceso.data.userType == 1">{{suceso.data.stockUserEstado}}, {{suceso.data.stockUserPais}}</span>
+										</div>
+										<div class="lbl-datos col-md-3 col-lg-4" *ngIf="suceso.icono == 3"> <!--recepción-->
+											<span class="span-company" *ngIf="suceso.data.userType == 0">{{suceso.compania}}</span>
+											<span class="span-receptor-o-enviador" *ngIf="suceso.data.userType == 0">{{suceso.data.destEstado}}, {{suceso.data.destPais}}. Recibió: {{suceso.data.destNombre}}</span>
+											<span class="span-company-receptiva" *ngIf="suceso.data.userType == 0">{{suceso.data.destRazonSocial}}</span>
+
+											<span class="span-titulo" *ngIf="suceso.data.userType == 1">Distribuidor</span>
+											<span class="span-direccion" *ngIf="suceso.data.userType == 1">{{suceso.data.stockUserEstado}}, {{suceso.data.stockUserPais}}</span>
+										</div>
+										<div class="lbl-datos col-md-3 col-lg-4" *ngIf="suceso.icono >= 4 && suceso.icono < 7"> <!--consulta app-->
+											<span class="span-descripcion">{{suceso.data.eventName}}</span>
+											<!-- <span class="span-lugar">Ciudad, País</span>  -->
+											<!-- TODO Ver si es posible sacar la ciudad y país.-->
+										</div>
+										<div class="lbl-datos col-md-3 col-lg-4" *ngIf="suceso.icono == 7"> <!--consulta app-->
+											<span class="span-descripcion">{{suceso.descripcion}}</span>
+											<!-- <span class="span-lugar">Ciudad, País</span>  -->
+											<!-- TODO Ver si es posible sacar la ciudad y país.-->
+										</div>
+										<div class="lbl-marker col-md-1 col-lg-1" *ngIf="suceso.data.userType == 0 || suceso.icono >= 5">
+											<fa-icon class="pointer"
+												(click)="openUbicacionDialog(suceso.lat, suceso.long)"
+												[icon]="faMarker">
+											</fa-icon>
+										</div>
+										<div class="lbl-marker col-md-1 col-lg-1" *ngIf="suceso.data.userType == 1">
+											<fa-icon class="pointer"
+												(click)="openUbicacionDialog(suceso.lat, suceso.long)"
+												[icon]="faMarker">
+											</fa-icon>
+										</div>
+										<div class="lbl-descripcion col-md-3 col-lg-2" *ngIf="suceso.data.userType == 0 && suceso.icono <= 3">
+											<a class="cursor link" (click)="BusquedaDatosPDF(suceso.data.movimientoId, suceso.data.codigoQR)"><span>Guía de Embarque</span></a>
+										</div>
+										<div class="lbl-descripcion col-md-3 col-lg-2" *ngIf="suceso.data.userType == 0 && suceso.icono == 7">
+											<a class="cursor link" (click)="BusquedaDatosPDF(suceso.data.movimientoId, suceso.data.codigoQR)"><span>Guía de Embarque</span></a>
+										</div>
+									</div>
+								</div>
+								<mat-divider *ngIf="!lost"></mat-divider>
+							</div>
+
+						</div>
+
+
+					</div>
+
+				</div>
+
+			</mat-card-content>
+		</mat-card>
+
+	</div>
+
+</div>

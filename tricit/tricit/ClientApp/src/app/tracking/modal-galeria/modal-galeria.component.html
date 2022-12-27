@@ -1,0 +1,26 @@
+<div style="width: 100% !important; height: 90% !important; margin-top: 20px" class="text-center" *ngIf="_data.type != 'Foto'">
+  <ng-container *ngIf="_data.type != 'Foto'" >
+    <pdf-viewer 
+        [src]="_data.name"
+        [render-text]="true"
+        [original-size]="false"
+        style="display: block; height: 100%; bottom: 0;"
+    ></pdf-viewer>
+  </ng-container>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="close()"><mat-icon class="close">close</mat-icon> Cerrar</button>
+    <a mat-button href="{{ _data.name }}" download><mat-icon class="download">download</mat-icon> Descargar</a>
+  </div>
+</div>
+<!--Modal aviso-->
+<div style="width: 100% !important; height: 90% !important;" class="text-center" *ngIf="_data.type === 'Foto'">
+  <ng-container>
+      <img src="{{ _data.name }}" />
+  </ng-container>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="close()"><mat-icon class="close">close</mat-icon> Cerrar</button>
+    <a mat-button href="{{ _data.name }}" download><mat-icon class="download">download</mat-icon> Descargar</a>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<mat-card>
+    <mat-card-title class="d-flex mb-3"><button mat-icon-button color="primary" (click)="back()" class="mr-1"><mat-icon>chevron_left</mat-icon></button> <i>Tips&nbsp;</i> & Usos</mat-card-title>
+
+    <mat-card-content>
+
+        <div class="container-fluid mb-5">
+
+            <app-swiper-videos-GU [idFamily]="familiaId"></app-swiper-videos-GU>
+
+            <app-swiper-links-GU [idFamily]="familiaId"></app-swiper-links-GU>
+
+            <app-swiper-docs-GU [idFamily]="familiaId"></app-swiper-docs-GU>
+
+        </div>
+
+    </mat-card-content>
+</mat-card>

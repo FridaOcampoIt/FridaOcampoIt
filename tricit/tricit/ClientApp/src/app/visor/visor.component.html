@@ -1,0 +1,116 @@
+<div class="app-body">
+
+    <div class="header">
+    </div>
+
+    <div class="content container-fluid">
+
+        <mat-card>
+
+            <mat-card-title>Visor</mat-card-title>
+
+            <mat-card-content>
+
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-row">
+                                <div class="col-md-8">
+                                    <div class="w-50" fxLayout="row">
+                                        <mat-form-field>
+                                            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Busqueda">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 d-flex justify-content-end">
+                                    <button mat-icon-button color="primary" [hidden]="!addReport" (click)="dialogoReporte(false)" aria-label="Add" class="ml-2" matTooltip="Agregar"><mat-icon>add</mat-icon></button>
+                                    <button mat-icon-button color="primary" [hidden]="!viewReport" [disabled]="selection.selected.length == 0 ? 'disabled' : null" (click)="dialogoReporte(true)" aria-label="View" class="ml-2" matTooltip="Ver Reporte"><mat-icon>chrome_reader_mode</mat-icon></button>
+                                    <button mat-icon-button color="primary" (click)="eliminarItem()" [disabled]="selection.selected.length == 0 ? 'disabled' : null" aria-label="Eliminar" class="ml-2" matTooltip="Eliminar"><mat-icon>delete</mat-icon></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                      
+                    <div class="row">
+                        <div class="col-md-12 mat-elevation-z8" [hidden]="emptyList">
+                            <mat-table matSort  [dataSource]="dataSource">
+
+                                <!-- Checkbox Column -->
+                                <ng-container matColumnDef="select">
+                                    <mat-header-cell *matHeaderCellDef>
+
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row" data-label="">
+                                        <mat-checkbox (click)="$event.stopPropagation()"
+                                                      (change)="$event ? selection.toggle(row) : null"
+                                                      [checked]="selection.isSelected(row)"
+                                                      [aria-label]="checkboxLabel(row)">
+                                        </mat-checkbox>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Position Column -->
+                                <ng-container matColumnDef="roboId">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>ID </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="ID"> {{element.roboId}} </mat-cell>
+                                </ng-container>
+                                <!-- Position Column -->
+                                <ng-container matColumnDef="tipoAlertaNombre">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo alerta </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Tipo alerta"> {{element.tipoAlertaNombre}} </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="nombreUsuario">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Creado por </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Creado por"> {{element.nombreUsuario}} </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="fechaRobo">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha del reporte </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Fecha del reporte"> 
+                                        {{ element.fechaRobo | date:'dd/MM/yyyy HH:mm:ss' }}
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="compania">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Compañia </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Compañia"> {{element.compania}} </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="familia">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Familia </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Familia"> {{element.familia}} </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="usuarioSolicitud">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Solicitado por </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Solicitado por"> {{element.usuarioSolicitud}} </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="tipoReporteNombre">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo de reporte </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Tipo de reporte"> {{element.tipoReporteNombre}} </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="codigoAlerta">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Código alertado </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Código alertado"> {{element.codigoAlerta}} </mat-cell>
+                                </ng-container>
+
+
+                                
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row);"></mat-row>
+                            </mat-table>
+                            <mat-paginator #paginator [pageSizeOptions]="itemsPagina" showFirstLastButtons></mat-paginator>
+
+                        </div>
+						<div [hidden]="!emptyList" class="col-12 text-center">
+							<label class="lbl-empty">No se encontraron registros</label>
+						</div>
+
+                    </div>
+
+
+                </div>
+
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+
+</div>

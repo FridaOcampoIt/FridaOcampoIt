@@ -1,0 +1,566 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Sanchez:ital@0;1&display=swap');
+</style>
+
+<div class="row" class="vista-origen mainland" [style.background]="colorbg" *ngIf="typeProduct == 1">
+
+  <div class="col-md-12 p-0">
+
+    <div class="sec-imagen" [style.height]="altura" [style.width]="ancho" [style.background-image]="backimg">
+      <img [src]="prodimg" [style.height]="altura" [style.width]="ancho">
+    </div>
+
+    <div class="sec-datos container">
+
+      <div class="col-12 d-flex flex-column text-center sec-titulo" id="titt">
+      </div>
+
+      <!--<div class="col-12">
+        <p class="descri w-100 text-center">
+          {{resultados.descripcion}}
+        </p>
+      </div>-->
+
+      <div class="col-12 sec-producto producto">
+
+        <div class="titulo">
+          <label [style.color]="colortxt" [style.font-family]="tipotit">{{titulou}}</label>
+          <br>
+          <img class="cursiva" src="../../assets/img/nudo.png" alt="Cursiva">
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.presentacion.length > 0">
+          <span class="tit" [style.color]="colortxt" [style.font-family]="tipotxt">Presentation</span>
+          <span class="valor" [style.color]="colorval">{{resultados.presentacion != "" ? resultados.presentacion :
+            "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.marca.length > 0">
+          <span class="tit" [style.color]="colortxt" [style.font-family]="tipotxt">Brand</span>
+          <span class="valor" [style.color]="colorval">{{resultados.marca != "" ? resultados.marca : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.lote.length > 0" id="llote">
+
+        </div>
+
+        <!--<div class="dp-d" *ngIf="resultados.lote.length > 0">
+          <span class="tit">Lote</span>
+          <span class="valor">{{resultados.lote != "" ? resultados.lote : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.gtin.length > 0">
+          <span class="tit">GTIN</span>
+          <span class="valor">{{resultados.gtin != "" ? resultados.gtin : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.caducidad.length > 0">
+          <span class="tit">Caducidad</span>
+          <span class="valor">{{resultados.caducidad != "" ? resultados.caducidad : "&ensp;"}}</span>
+        </div>-->
+
+        <div class="dp-d" *ngIf="resultados.empresa.length > 0">
+          <span class="tit" [style.color]="colortxt" [style.font-family]="tipotxt">Company</span>
+          <span class="valor" [style.color]="colorval">{{resultados.empresa != "" ? resultados.empresa :
+            "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d"  *ngIf="resultados.ciu.length > 0">
+          <span class="tit" [style.color]="colortxt" [style.font-family]="tipotxt">CIU</span>
+          <span class="valor" [style.color]="colorval">{{ciu}}</span>
+        </div>
+
+      </div>
+
+      <div class="col-12 sec-producto origen">
+
+        <div class="titulo">
+          <label [style.color]="colortxt" [style.font-family]="tipotit">{{titulod}}</label>
+          <br>
+          <img class="cursiva" src="../../assets/img/nudo.png" alt="Cursiva">
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.pais.length > 0">
+          <span class="tit" [style.color]="colortxt" [style.font-family]="tipotxt">Country</span>
+          <span class="valor" [style.color]="colorval">{{resultados.pais != "" ? resultados.pais : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.estado.length > 0">
+          <span class="tit" [style.color]="colortxt" [style.font-family]="tipotxt">State</span>
+          <span class="valor" [style.color]="colorval">{{resultados.estado != "" ? resultados.estado : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.ciudad.length > 0">
+          <span class="tit" [style.color]="colortxt" [style.font-family]="tipotxt">City</span>
+          <span class="valor" [style.color]="colorval">{{resultados.ciudad != "" ? resultados.ciudad : "&ensp;"}}</span>
+        </div>
+        <!-- {{resultados.cosecheroNombre ||json}} -->
+        <div class="dp-d" *ngIf="resultados.cosecheroNombre.length > 0">
+          <span class="tit" [style.color]="colortxt" [style.font-family]="tipotxt">Grown by</span>
+          <span class="valor" [style.color]="colorval">{{resultados.cosecheroNombre != "" ? resultados.cosecheroNombre : "&ensp;"}}</span>
+          <!-- <span class="valor" [style.color]="colorval"></span> -->
+        </div>
+
+        <div class="dp-d" *ngIf="!!resultados.rancho" >
+          <span class="tit" [style.color]="colortxt" [style.font-family]="tipotxt">Ranch Name </span>
+          <!-- <span class="valor">{{rancho}}</span> -->
+          <span class="valor" [style.color]="colorval">{{resultados.rancho != "" ? resultados.rancho : "&ensp;"}}</span>
+          <!-- <span class="valor" [style.color]="colorval"></span> -->
+        </div>
+
+        <!--<div class="dp-d" *ngIf="resultados.planta.length > 0">
+          <span class="tit">Planta</span>
+          <span class="valor">{{resultados.planta != "" ? resultados.planta : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.lineaProd.length > 0">
+          <span class="tit">Línea de producción</span>
+          <span class="valor">{{resultados.lineaProd != "" ? resultados.lineaProd : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.sector.length > 0">
+          <span class="tit">Sector</span>
+          <span class="valor">{{resultados.sector != "" ? resultados.sector : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.rancho.length > 0">
+          <span class="tit">Rancho</span>
+          <span class="valor">{{resultados.rancho != "" ? resultados.rancho : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.operador.length > 0">
+          <span class="tit">Operador</span>
+          <span class="valor">{{resultados.operador != "" ? resultados.operador : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.cosecheroNombre.length > 0">
+          <span class="tit">Cosechero</span>
+          <span class="valor">{{resultados.cosecheroNombre != "" ? resultados.cosecheroNombre : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.cosecha.length > 0">
+          <span class="tit">Cosecha</span>
+          <span class="valor">{{resultados.cosecha != "" ? resultados.cosecha : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.fechaProduccion.length > 0">
+          <span class="tit">Fecha de producción</span>
+          <span class="valor">{{resultados.fechaProduccion != "" ? resultados.fechaProduccion : "&ensp;"}}</span>
+        </div>-->
+
+      </div>
+
+    </div>
+
+    <div class="sec-parte">
+
+      <!--<div class="divi" (click)="tobottom()" id="espe">
+
+        <div class="sec-titulo">
+
+          <label class="titulo">Especificaciones</label>
+          <span class="icono">
+            <img src="../../assets/img/origin/BLUEBERRIES 6oz-02.svg" alt="Tips">
+          </span>
+
+        </div>
+
+        <span class="icon-down">
+          <mat-icon>arrow_drop_down</mat-icon>
+        </span>
+
+      </div>-->
+
+      <!--<div class="divi" (click)="tobottom()">
+
+        <div class="sec-titulo">
+
+          <label class="titulo">Tips & Usos</label>
+          <span class="icono">
+            <img src="../../assets/img/origin/BLUEBERRIES 6oz-03.svg" alt="Tips">
+          </span>
+
+        </div>
+
+        <span class="icon-down">
+          <mat-icon>arrow_drop_down</mat-icon>
+        </span>
+
+      </div>
+
+      <div class="divi" (click)="tobottom()">
+
+        <div class="sec-titulo">
+
+          <label class="titulo">Guias de instalación</label>
+          <span class="icono">
+            <img src="../../assets/img/origin/BLUEBERRIES 6oz-04.svg" alt="Guias">
+          </span>
+
+        </div>
+
+        <span class="icon-down">
+          <mat-icon>arrow_drop_down</mat-icon>
+        </span>
+
+      </div>
+
+      <div class="divi" (click)="tobottom()">
+
+        <div class="sec-titulo">
+
+          <label class="titulo">Garantías & servicio</label>
+          <span class="icono">
+            <img src="../../assets/img/origin/BLUEBERRIES 6oz-05.svg" alt="Garantías">
+          </span>
+
+        </div>
+
+        <span class="icon-down">
+          <mat-icon>arrow_drop_down</mat-icon>
+        </span>
+
+      </div>-->
+
+      <div class="sec-imagen">
+        <!--<img [src]="resultados.productoImagen" [alt]="resultados.nombre" class="img-product">-->
+        <a href="https://redblossom.com/archive/" style="width: 100% !important;">
+          <img [src]="recipimg" [style.height]="altura" [style.width]="ancho">
+        </a>
+        <hr class="hrSeparate"> 
+        <a href="https://mainlandfarms.com/" style="width: 100% !important;">
+          <div  [ngClass]="classAuxBackground" style=" position:relative;   bottom: -20px;">
+            <img [src]="contactimg" [style.height]="altura" [style.width]="ancho" >
+          </div>
+        </a>
+        <h1>{{prodducto}}</h1>
+      </div>
+
+    </div>
+
+    <!--<div class="sec-info container text-center">
+
+      <p class="txt-info">
+        Descarga la App traceit y almacena toda la <br>
+        información de tus productos, aprende a <br>
+        instalarlos y usarlos con sencillos tutoriales <br>
+        y videos. Activa alertas de caducidad y de <br>
+        garantías, verifica su autenticidad. Obtén <br>
+        consumibles, soporte y accesorios del fabricante.
+      </p>
+
+      <div class="sec-imagenes">
+
+        <div class="img img1">
+          <img src="../../assets/img/INSTALACION.png" alt="Guias de Instalación">
+          <p>Guias de instalación & tutoriales de uso</p>
+        </div>
+        <div class="img img1">
+          <img src="../../assets/img/FICHA TECNICA.png" alt="Fichas Técnicas">
+          <p>Fichas técnicas</p>
+        </div>
+        <div class="img img1">
+          <img src="../../assets/img/ALERTAS.png" alt="Alertas">
+          <p>Alertas de caducidad & garantía</p>
+        </div>
+
+      </div>
+
+      <div class="sec-imagen">
+        <img [src]="resultados.productoImagen" [alt]="resultados.nombre" class="img-product">
+        <a href="https://mainlandfarms.com/">
+          <img [src]="contactimg" alt="Strawberries">
+        </a>
+      </div>
+
+    </div>-->
+
+    <!--<div class="sec-desc">
+
+      <span class="lbl-descarga">Descargar</span>
+
+      <div class="sec-iconos-descarga" id="sec-descargas">
+
+        <a href="https://apps.apple.com/mx/app/traceit/id1477665501" target="_blank">
+          <img src="../../assets/img/landing/Download_on_the_App_Store_Badge_ES_RGB_blk_100217.svg" class="apple-logo" alt="">
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=net.traceit.traceit" target="_blank">
+          <img src="../../assets/img/landing/google-play-badge.png" class="play-logo" alt="">
+        </a>
+
+      </div>
+
+    </div>-->
+
+
+
+  </div>
+
+</div>
+
+<div class="row" class="vista-origen no-mainland" *ngIf="typeProduct == 0">
+
+  <mat-toolbar color="accent" class="toolbar-traceit" *ngIf="!Login.hasOwnProperty('idUser');"
+    [ngClass]="{'origen-toolbar': urlActual == 1}">
+    <img src="../assets/img/imgpsh_fullsize_anim.png" class="nav-logo" alt="Alternate Text" />
+    <span class="flex-fill"></span>
+  </mat-toolbar>
+
+  <div class="col-md-12 bg-green p-0">
+
+    <div class="sec-imagen">
+      <img [src]="resultados.productoImagen" [alt]="resultados.nombre" class="img-product">
+    </div>
+
+    <div class="sec-datos container">
+
+      <div class="col-12 d-flex flex-column text-center sec-titulo">
+        <label class="titulo">{{resultados.nombre}}</label>
+        <label class="subtitulo">{{resultados.presentacion}}</label>
+      </div>
+
+      <div class="col-12">
+        <p class="descri w-100 text-center">
+          {{resultados.descripcion}}
+        </p>
+      </div>
+
+      <div class="col-12 sec-producto producto">
+
+        <div class="titulo">
+          <label>Datos del Producto</label>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.presentacion.length > 0">
+          <span class="tit">Presentación</span>
+          <span class="valor">{{resultados.presentacion != "" ? resultados.presentacion : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.marca.length > 0">
+          <span class="tit">Marca</span>
+          <span class="valor">{{resultados.marca != "" ? resultados.marca : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.lote.length > 0">
+          <span class="tit">Número de serie</span>
+          <span class="valor">{{resultados.lote != "" ? resultados.lote : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.lote.length > 0">
+          <span class="tit">Lote</span>
+          <span class="valor">{{resultados.lote != "" ? resultados.lote : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.gtin.length > 0">
+          <span class="tit">GTIN</span>
+          <span class="valor">{{resultados.gtin != "" ? resultados.gtin : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.caducidad.length > 0">
+          <span class="tit">Caducidad</span>
+          <span class="valor">{{resultados.caducidad != "" ? resultados.caducidad : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.empresa.length > 0">
+          <span class="tit">Empresa</span>
+          <span class="valor">{{resultados.empresa != "" ? resultados.empresa : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d">
+          <span class="tit">CIU</span>
+          <span class="valor">{{ciu}}</span>
+        </div>
+
+      </div>
+
+      <div class="col-12 sec-producto origen">
+
+        <div class="titulo">
+          <label>Origen</label>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.pais.length > 0">
+          <span class="tit">País</span>
+          <span class="valor">{{resultados.pais != "" ? resultados.pais : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.estado.length > 0">
+          <span class="tit">Estado</span>
+          <span class="valor">{{resultados.estado != "" ? resultados.estado : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.ciudad.length > 0">
+          <span class="tit">Ciudad</span>
+          <span class="valor">{{resultados.ciudad != "" ? resultados.ciudad : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.planta.length > 0">
+          <span class="tit">Planta</span>
+          <span class="valor">{{resultados.planta != "" ? resultados.planta : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.lineaProd.length > 0">
+          <span class="tit">Línea de producción</span>
+          <span class="valor">{{resultados.lineaProd != "" ? resultados.lineaProd : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.sector.length > 0">
+          <span class="tit">Sector</span>
+          <span class="valor">{{resultados.sector != "" ? resultados.sector : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="!!resultados.rancho">
+          <span class="tit">Rancho</span>
+          <span class="valor">{{resultados.rancho != "" ? resultados.rancho : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.operador.length > 0">
+          <span class="tit">Operador</span>
+          <span class="valor">{{resultados.operador != "" ? resultados.operador : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.cosecheroNombre.length > 0">
+          <span class="tit">Cosechero</span>
+          <span class="valor">{{resultados.cosecheroNombre != "" ? resultados.cosecheroNombre : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.cosecha.length > 0">
+          <span class="tit">Cosecha</span>
+          <span class="valor">{{resultados.cosecha != "" ? resultados.cosecha : "&ensp;"}}</span>
+        </div>
+
+        <div class="dp-d" *ngIf="resultados.fechaProduccion.length > 0">
+          <span class="tit">Fecha de producción</span>
+          <span class="valor">{{resultados.fechaProduccion != "" ? resultados.fechaProduccion : "&ensp;"}}</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="sec-parte">
+
+      <div class="divi" (click)="tobottom()">
+
+        <div class="sec-titulo">
+
+          <label class="titulo">Especificaciones</label>
+          <span class="icono">
+            <img src="../../assets/img/origin/BLUEBERRIES 6oz-02.svg" alt="Tips">
+          </span>
+
+        </div>
+
+        <span class="icon-down">
+          <mat-icon>arrow_drop_down</mat-icon>
+        </span>
+
+      </div>
+
+      <div class="divi" (click)="tobottom()">
+
+        <div class="sec-titulo">
+
+          <label class="titulo">Tips & Usos</label>
+          <span class="icono">
+            <img src="../../assets/img/origin/BLUEBERRIES 6oz-03.svg" alt="Tips">
+          </span>
+
+        </div>
+
+        <span class="icon-down">
+          <mat-icon>arrow_drop_down</mat-icon>
+        </span>
+
+      </div>
+
+      <div class="divi" (click)="tobottom()">
+
+        <div class="sec-titulo">
+
+          <label class="titulo">Guias de instalación</label>
+          <span class="icono">
+            <img src="../../assets/img/origin/BLUEBERRIES 6oz-04.svg" alt="Guias">
+          </span>
+
+        </div>
+
+        <span class="icon-down">
+          <mat-icon>arrow_drop_down</mat-icon>
+        </span>
+
+      </div>
+
+      <div class="divi" (click)="tobottom()">
+
+        <div class="sec-titulo">
+
+          <label class="titulo">Garantías & servicio</label>
+          <span class="icono">
+            <img src="../../assets/img/origin/BLUEBERRIES 6oz-05.svg" alt="Garantías">
+          </span>
+
+        </div>
+
+        <span class="icon-down">
+          <mat-icon>arrow_drop_down</mat-icon>
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="sec-info container text-center">
+
+      <p class="txt-info">
+        Descarga la App traceit y almacena toda la <br>
+        información de tus productos, aprende a <br>
+        instalarlos y usarlos con sencillos tutoriales <br>
+        y videos. Activa alertas de caducidad y de <br>
+        garantías, verifica su autenticidad. Obtén <br>
+        consumibles, soporte y accesorios del fabricante.
+      </p>
+
+      <div class="sec-imagenes">
+
+        <div class="img img1">
+          <img src="../../assets/img/INSTALACION.png" alt="Guias de Instalación">
+          <p>Guias de instalación & tutoriales de uso</p>
+        </div>
+        <div class="img img1">
+          <img src="../../assets/img/FICHA TECNICA.png" alt="Fichas Técnicas">
+          <p>Fichas técnicas</p>
+        </div>
+        <div class="img img1">
+          <img src="../../assets/img/ALERTAS.png" alt="Alertas">
+          <p>Alertas de caducidad & garantía</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="sec-desc">
+
+      <span class="lbl-descarga">Descargar</span>
+
+      <div class="sec-iconos-descarga" id="sec-descargas">
+
+        <a href="https://apps.apple.com/mx/app/traceit/id1477665501" target="_blank">
+          <img src="../../assets/img/landing/Download_on_the_App_Store_Badge_ES_RGB_blk_100217.svg" class="apple-logo"
+            alt="">
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=net.traceit.traceit" target="_blank">
+          <img src="../../assets/img/landing/google-play-badge.png" class="play-logo" alt="">
+        </a>
+
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+</div>

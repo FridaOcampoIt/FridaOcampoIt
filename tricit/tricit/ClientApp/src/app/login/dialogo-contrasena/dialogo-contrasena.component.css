@@ -1,0 +1,30 @@
+@font-face {
+  font-family: sansation-bold;
+  src: url(../../assets/Sansation_Bold.woff);
+}
+
+@font-face {
+  font-family: sansation-italic;
+  src: url(../../assets/Sansation_Italic.ttf);
+}
+
+@font-face {
+  font-family: sansation-italicBold;
+  src: url(../../assets/Sansation-BoldItalic.ttf);
+}
+
+@font-face {
+  font-family: sansation-regular;
+  src: url(../../assets/Sansation_Regular.ttf);
+}
+
+.rec-pass {
+  font-family: sansation-bold;
+  font-size: 3rem; 
+}
+/*# sourceMappingURL=dialogo-contrasena.component.css.map */
+
+#alertaDiv{
+  font-size: 20rem !important;
+  font-family: sansation-bold;
+}

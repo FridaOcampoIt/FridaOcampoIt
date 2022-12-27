@@ -1,0 +1,138 @@
+$compania-color: rgba(0, 80, 149, 0.3);
+$distribucion-color: rgba(0, 198, 172, 0.50);
+$consumo-color: rgba(0, 89, 124, 0.67);
+
+.compania-row {
+    background-color: $compania-color;
+}
+
+.distribucion-row {
+    background-color: $distribucion-color;
+}
+
+.consumo-row {
+    background-color: $consumo-color;
+
+    * {
+        color: #FFF;
+    }
+}
+
+.lbl-marker-tabla {
+    color: rgba(255, 0, 0, 0.79) !important;
+    font-size: 1.5rem;
+}
+
+.span-evento {
+    text-align: center;
+}
+
+.item-ficha {
+    margin: 2rem 0;
+    position: relative;
+
+    .mat-divider {
+        bottom: 0;
+    }
+
+    .head-date {
+        padding: 1rem;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        background: rgb(2 200 175);
+        color: #FFF;
+        border-radius: 0.3rem;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .eventos-linea {
+        font-size: 1rem;
+        min-height: 8rem;
+
+        div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .lbl-icon, .lbl-marker, .lbl-descrion {
+            align-items: center;
+        }
+
+        .lbl-marker {
+            font-size: 2rem;
+            color: #f10000;
+        }
+
+        .icon-compania {
+            color: $compania-color;
+            font-size: 2rem;
+            background-color: #FFF;
+        }
+
+        .icon-distribucion {
+            color: $distribucion-color;
+            font-size: 2rem;
+            background-color: #FFF;
+        }
+
+        .icon-consumo {
+            color: $consumo-color;
+            font-size: 2rem;
+            background-color: #FFF;
+        }
+
+        .lbl-hora {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .span-icono {
+            z-index: 3;
+
+            .icon-evento {
+                height: 4rem;
+                width: 4rem;
+            }
+        }
+
+        .span-mas {
+            span {
+                color: #0026ff;
+                text-decoration: underline;
+                cursor: pointer;
+
+                &:hover {
+                    color: #0094ff;
+                }
+            }
+        }
+
+        .super-link {
+            height: 100%;
+            width: 2px;
+            background-color: #000;
+            position: absolute
+        }
+
+        .super-link-last {
+            height: 50%;
+            width: 3px;
+            background-color: white;
+            position: absolute;
+            bottom: 0;
+            z-index: 2;
+        }
+    }
+}
+
+.cursor {
+    cursor:  pointer !important;
+}
+
+.link span {
+    color: #15c;
+}
+

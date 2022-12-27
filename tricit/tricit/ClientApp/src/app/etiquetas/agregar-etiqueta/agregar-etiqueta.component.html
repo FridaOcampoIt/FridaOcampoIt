@@ -1,0 +1,279 @@
+<div class="app-body">
+
+  <div class="header">
+
+  </div>
+
+  <div class="content container-fluid">
+    <mat-card>
+
+      <mat-card-title class="d-flex mb-3">
+        <button mat-icon-button color="primary" (click)="back()" class="mr-1">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        {{action}} formato de etiqueta
+      </mat-card-title>
+
+      <mat-card-content>
+
+        <div class="container-fluid mb-5">
+
+          <div class="row">
+
+            <div class="col-md-12 col-lg-7">
+
+              <div class="form-row">
+                <div class="col-12">
+                  <mat-form-field class="w-100">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput [(ngModel)]="qrStringConstructor['name']" placeholder="">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="form-row">
+
+                <div class="col-md-12 col-lg-12 col-xl-6 d-flex align-items-center">
+
+                  <mat-radio-group [(ngModel)]="qrStringConstructor['orientation']"
+                    (ngModelChange)="changeStrings($event, 'orientation')" class="d-flex justify-content-around flex-2">
+                    <mat-radio-button [value]="0">Horizontal</mat-radio-button>
+                    <mat-radio-button [value]="1">Vertical</mat-radio-button>
+                  </mat-radio-group>
+
+                  <mat-checkbox [(ngModel)]="qrStringConstructor['grouper']" class="flex-1 mb-2">Agrupador
+                  </mat-checkbox>
+
+                </div>
+
+                <div class="col-md-12 col-lg-12 col-xl-6">
+
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Cantidad de hijos</mat-label>
+                    <input matInput placeholder="" type="number" [value]="2"
+                      [(ngModel)]="qrStringConstructor['nChildren']"
+                      (ngModelChange)="qrStringConstructor['nChildren']($event)" name="cantidadHijos">
+                  </mat-form-field>
+
+                </div>
+
+
+                <div class="col-12 sec-formato">
+
+                  <div class="form-row sección-superior">
+
+                    <div class="col-6 col-md-6">
+
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Primario superior</mat-label>
+                        <mat-select [(ngModel)]="qrStringConstructor['topPrimary']"
+                          (ngModelChange)="changeStrings($event, 'topPrimary')" name="pSu">
+                          <mat-option *ngFor="let data of datas" [value]="data.id">
+                            {{data.value}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                    </div>
+
+                    <div class="col-6 col-md-6">
+
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Secundario superior</mat-label>
+                        <mat-select [(ngModel)]="qrStringConstructor['topSecondary']" name="sSu"
+                          (ngModelChange)="changeStrings($event, 'topSecondary')">
+                          <mat-option *ngFor="let data of datas" [value]="data.id">
+                            {{data.value}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                    </div>
+
+                    <div class="col-12 mb-3">
+                      <mat-divider>
+                      </mat-divider>
+                    </div>
+
+                  </div>
+
+                  <div class="form-row sección-izquierda">
+                    <div class="col-6 col-md-6">
+
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Primario izquierdo</mat-label>
+                        <mat-select [(ngModel)]="qrStringConstructor['leftPrimary']" name="pIz"
+                          (ngModelChange)="changeStrings($event, 'leftPrimary')">
+                          <mat-option *ngFor="let data of datas" [value]="data.id">
+                            {{data.value}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                    </div>
+
+                    <div class="col-6 col-md-6">
+
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Secundario izquierdo</mat-label>
+                        <mat-select [(ngModel)]="qrStringConstructor['leftSecondary']" name="sIz"
+                          (ngModelChange)="changeStrings($event, 'leftSecondary')">
+                          <mat-option *ngFor="let data of datas" [value]="data.id">
+                            {{data.value}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                    </div>
+
+                    <div class="col-12 mb-3">
+                      <mat-divider>
+                      </mat-divider>
+                    </div>
+
+                  </div>
+
+                  <div class="form-row sección-derecho">
+
+                    <div class="col-6 col-md-6">
+
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Primario derecho</mat-label>
+                        <mat-select [(ngModel)]="qrStringConstructor['rightPrimary']" name="pDe"
+                          (ngModelChange)="changeStrings($event, 'rightPrimary')">
+                          <mat-option *ngFor="let data of datas" [value]="data.id">
+                            {{data.value}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                    </div>
+
+                    <div class="col-6 col-md-6">
+
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Secundario derecho</mat-label>
+                        <mat-select [(ngModel)]="qrStringConstructor['rightSecondary']" name="sDe"
+                          (ngModelChange)="changeStrings($event, 'rightSecondary')">
+                          <mat-option *ngFor="let data of datas" [value]="data.id">
+                            {{data.value}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                    </div>
+
+                    <div class="col-12 mb-3">
+                      <mat-divider>
+                      </mat-divider>
+                    </div>
+
+                  </div>
+
+                  <div class="form-row sección-inferior">
+
+                    <div class="col-6 col-md-6">
+
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Primario inferior</mat-label>
+                        <mat-select [(ngModel)]="qrStringConstructor['bottomPrimary']" name="pIn"
+                          (ngModelChange)="changeStrings($event, 'bottomPrimary')">
+                          <mat-option *ngFor="let data of datas" [value]="data.id">
+                            {{data.value}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                    </div>
+
+                    <div class="col-6 col-md-6">
+
+                      <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Secundario inferior</mat-label>
+                        <mat-select [(ngModel)]="qrStringConstructor['bottomSecondary']" name="sIn"
+                          (ngModelChange)="changeStrings($event, 'bottomSecondary')">
+                          <mat-option *ngFor="let data of datas" [value]="data.id">
+                            {{data.value}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                    </div>
+
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-md-12 d-flex">
+
+                      <button class="ml-auto" mat-raised-button color="primary"
+                        (click)="guardarEtiqueta()">GUARDAR</button>
+
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="col-md-12 col-lg-5 sec-preview-madre">
+              <h5 class="lbl-titulo-madre" [hidden]="!myAngularxQrCode">Vista previa etiqueta madre</h5>
+              <div class="contenedor mt-2">
+
+                <div class="superior-sec">
+                  <span class="lbl-pSu">{{labelsConstructos['topPrimary']}}</span>
+                  <span class="lbl-sSu">{{labelsConstructos['topSecondary']}}</span>
+                </div>
+                <div class="izquierdo-sec">
+                  <span class="lbl-pIz">{{labelsConstructos['leftPrimary']}}</span>
+                  <span class="lbl-sIz">{{labelsConstructos['leftSecondary']}}</span>
+                </div>
+                <div class="derecho-sec">
+                  <span class="lbl-pDe">{{labelsConstructos['rightPrimary']}}</span>
+                  <span class="lbl-sDe">{{labelsConstructos['rightSecondary']}}</span>
+                </div>
+                <div class="inferior-sec">
+                  <span class="lbl-pIn">{{labelsConstructos['bottomPrimary']}}</span>
+                  <span class="lbl-sIn">{{labelsConstructos['bottomSecondary']}}</span>
+                </div>
+                <qrcode class="qr-Sec" [qrdata]="myAngularxQrCode" [width]="qrWidth" [errorCorrectionLevel]="'M'">
+                </qrcode>
+
+              </div>
+              <div class="sec-hijos">
+                <h5 class="lbl-titulo-hijos mt-2" [hidden]="!myAngularxQrCode">Vista previa etiqueta hijos</h5>
+
+                <div class="contenedor mt-2">
+
+                  <div class="sec-hp">
+                    <span class="lbl-pSu">{{labelsConstructos['topPrimary']}}</span>
+                    <span class="lbl-sSu">{{labelsConstructos['topSecondary']}}</span>
+                  </div>
+
+                  <div class="sec-qr">
+                    <qrcode class="qr-Sec" [qrdata]="myAngularxQrCode" [width]="qrWidth/2" [errorCorrectionLevel]="'M'">
+                    </qrcode>
+                  </div>
+
+                  <div class="sec-rangos">
+                    <span class="lbl-pDe">{{labelsConstructos['rightPrimary']}}</span>
+                    <span class="lbl-sDe">{{labelsConstructos['rightSecondary']}}</span>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </mat-card-content>
+
+    </mat-card>
+  </div>
+
+</div>

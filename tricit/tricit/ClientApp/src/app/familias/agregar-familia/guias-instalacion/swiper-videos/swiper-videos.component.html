@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-md-12 d-flex justify-content-end p-3">
+        <h3 class="mr-auto">Videos</h3>
+        <button mat-icon-button color="primary"  *ngIf="canAdd" (click)="AgregarVideo(1, 'Añadir Video')" matTooltip="Añadir Videos"><i class="material-icons">add</i></button>
+        <button mat-icon-button color="primary" [disabled]="response.linkFamilies.linkData.length == 0 ? 'disabled' : null" (click)="AgregarVideo(2, 'Gestionar Videos')" matTooltip="Gestionar Videos"><i class="fas fa-tasks"></i></button>
+    </div>
+    <div class="col-md-12">
+        <div class="container-fluid">
+            <swiper #slideVideos [config]="confiVideos" [index]="1">
+                <div class="swiper-slide clase-1" *ngFor="let video of response.linkFamilies.linkData">
+                    <mat-card class="mb-3 mt-2">
+                        <div class="img-container" mat-card-image (click)="abrirVideo(video.url)">
+                            <img class="card-image" mat-card-image [src]="video.thumbailUrl" alt="Photo of a Shiba Inu" />
+                            <div class="overlay"><mat-icon>play_circle_outline</mat-icon></div>
+                        </div>
+                        <mat-card-content class="d-flex flex-column">
+                            <p matTooltip="{{video.title}}">{{video.title}}</p>
+                            <p matTooltip="{{video.recommendedBy}}" class="mt-2">{{video.recommendedBy}}</p>
+                        </mat-card-content>
+                        <mat-card-actions align="end">
+                            <button mat-icon-button color="primary" (click)="eliminarVideo(video.linkId, 1)" matTooltip="Eliminar"><mat-icon>delete</mat-icon></button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </swiper>
+
+            <a mat-mini-fab color="primary" class="carousel-control-prev ctl-carr" (click)="prevV()" role="button" data-slide="prev" *ngIf="response.linkFamilies.linkData.length > 4">
+                <mat-icon>chevron_left</mat-icon>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a mat-mini-fab color="primary" class="carousel-control-next ctl-carr" (click)="nextV()" role="button" data-slide="next" *ngIf="response.linkFamilies.linkData.length > 4">
+                <mat-icon>chevron_right</mat-icon>
+                <span class="sr-only">Next</span>
+            </a>
+
+        </div>
+        <mat-divider></mat-divider>
+    </div>
+</div>

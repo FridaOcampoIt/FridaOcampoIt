@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<mat-dialog-content class="mat-typography">
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="form-group col-md-12">
+                <mat-form-field class="w-100">
+                    <mat-label>Nombre del Perfil</mat-label>
+                    <input matInput required [(ngModel)]="nameProfile"/>
+                </mat-form-field>
+            </div>
+
+            <div class="form-group col-md-12">
+                <mat-form-field class="w-100">
+                    <mat-label>Compañía</mat-label>
+                    <mat-select [(ngModel)]="idCompany">
+                        <mat-option [value]="0">Selecciona una opción</mat-option>
+                        <mat-option *ngFor="let company of companies" [value]="company.id">{{ company.data }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="form-group col-md-12">
+                <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                    <mat-tree-node *matTreeNodeDef="let node;when: isParent" matTreeNodePadding>
+                        <button mat-icon-button matTreeNodeToggle
+                                [attr.aria-label]="'toggle ' + node.name">
+                            <mat-icon class="mat-icon-rtl-mirror">
+                                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                            </mat-icon>
+                        </button>
+                        <label class="node-lbl mb-0">{{node.name}}</label>
+                    </mat-tree-node>
+
+                    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding [hidden]="idCompany != 0 && !node.isForCompany">
+                        <mat-checkbox [checked]="node.check" #check (change)="AgregarQuitarPermiso(node.idParent, node.id, check, node)">{{node.name}}</mat-checkbox>
+                    </mat-tree-node>
+                </mat-tree>
+            </div>
+        </div>
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>CANCELAR</button>
+    <button mat-raised-button color="primary" (click)="SaveProfiles()" cdkFocusInitial>GUARDAR</button>
+</mat-dialog-actions>

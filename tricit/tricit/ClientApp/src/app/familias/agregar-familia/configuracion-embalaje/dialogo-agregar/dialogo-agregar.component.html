@@ -1,0 +1,175 @@
+<h1 mat-dialog-title>Configuración de embalaje</h1>
+<mat-dialog-content class="mat-typography">
+
+  <div class="container-fluid">
+
+    <div class="form-row" [formGroup]="confiForm">
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Tipo de Empaque</mat-label>
+          <input matInput name="packagingType" type="text" value="" formControlName="packagingType">
+          <mat-error
+            *ngIf="(formGetter('packagingType').dirty || formGetter('packagingType').touched) && formGetter('packagingType').invalid && formGetter('packagingType').errors">
+            <span *ngIf="formGetter('packagingType').errors.required">Campo requerido</span>
+
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Tipo de lectura</mat-label>
+          <mat-select name="readingType" formControlName="readingType">
+            <mat-option *ngFor="let tipo of tiposLectura" [value]="tipo.id">
+              {{tipo.nombre}}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="(formGetter('readingType').dirty || formGetter('readingType').touched) && formGetter('readingType').invalid && formGetter('readingType').errors.required">
+            Campo requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Unidades por caja</mat-label>
+          <input matInput name="unitsPerBox" type="text" value="" formControlName="unitsPerBox">
+          <mat-error
+            *ngIf="(formGetter('unitsPerBox').dirty || formGetter('unitsPerBox').touched) && formGetter('unitsPerBox').invalid && formGetter('unitsPerBox').errors">
+            <span *ngIf="formGetter('unitsPerBox').errors.required">Campo requerido</span>
+            <span *ngIf="formGetter('unitsPerBox').errors.pattern">No es un número</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Copias por caja</mat-label>
+          <input matInput name="copiesPerBox" type="text" value="" formControlName="copiesPerBox">
+          <mat-error
+            *ngIf="(formGetter('copiesPerBox').dirty || formGetter('copiesPerBox').touched) && formGetter('copiesPerBox').invalid && formGetter('copiesPerBox').errors">
+            <span *ngIf="formGetter('copiesPerBox').errors.required">Campo requerido</span>
+            <span *ngIf="formGetter('copiesPerBox').errors.pattern">No es un número</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Líneas por caja</mat-label>
+          <input matInput name="linesPerBox" type="text" value="" formControlName="linesPerBox">
+          <mat-error
+            *ngIf="(formGetter('linesPerBox').dirty || formGetter('linesPerBox').touched) && formGetter('linesPerBox').invalid && formGetter('linesPerBox').errors">
+            <span *ngIf="formGetter('linesPerBox').errors.required">Campo requerido</span>
+            <span *ngIf="formGetter('linesPerBox').errors.pattern">No es un número</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Peso bruto por caja (Kg)</mat-label>
+          <input matInput name="grossWeightPerBox" type="text" value="" formControlName="grossWeightPerBox">
+          <mat-error
+            *ngIf="(formGetter('grossWeightPerBox').dirty || formGetter('grossWeightPerBox').touched) && formGetter('grossWeightPerBox').invalid && formGetter('grossWeightPerBox').errors">
+            <span *ngIf="formGetter('grossWeightPerBox').errors.required">Campo requerido</span>
+
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Dimensiones por caja</mat-label>
+          <input matInput name="dimensionsWeightPerBox" type="text" value="" formControlName="dimensionsWeightPerBox">
+          <mat-error
+            *ngIf="(formGetter('dimensionsWeightPerBox').dirty || formGetter('dimensionsWeightPerBox').touched) && formGetter('dimensionsWeightPerBox').invalid && formGetter('dimensionsWeightPerBox').errors">
+            <span *ngIf="formGetter('dimensionsWeightPerBox').errors.required">Campo requerido</span>
+
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Caja por pallet</mat-label>
+          <input matInput name="boxesPerPallet" type="text" value="" formControlName="boxesPerPallet">
+          <mat-error
+            *ngIf="(formGetter('boxesPerPallet').dirty || formGetter('boxesPerPallet').touched) && formGetter('boxesPerPallet').invalid && formGetter('boxesPerPallet').errors">
+            <span *ngIf="formGetter('boxesPerPallet').errors.required">Campo requerido</span>
+            <span *ngIf="formGetter('boxesPerPallet').errors.pattern">No es un número</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Copias por pallet</mat-label>
+          <input matInput name="copiesPerPallet" type="text" value="" formControlName="copiesPerPallet">
+          <mat-error
+            *ngIf="(formGetter('copiesPerPallet').dirty || formGetter('copiesPerPallet').touched) && formGetter('copiesPerPallet').invalid && formGetter('copiesPerPallet').errors">
+            <span *ngIf="formGetter('copiesPerPallet').errors.required">Campo requerido</span>
+            <span *ngIf="formGetter('copiesPerPallet').errors.pattern">No es un número</span>
+
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Peso bruto por pallet (Kg)</mat-label>
+          <input matInput name="grossWeightPerPallet" type="text" value="" formControlName="grossWeightPerPallet">
+          <mat-error
+            *ngIf="(formGetter('grossWeightPerPallet').dirty || formGetter('grossWeightPerPallet').touched) && formGetter('grossWeightPerPallet').invalid && formGetter('grossWeightPerPallet').errors">
+            <span *ngIf="formGetter('grossWeightPerPallet').errors.required">Campo requerido</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Dimensiones por pallet</mat-label>
+          <input matInput name="dimensionsPerPallet" type="text" value="" formControlName="dimensionsPerPallet">
+          <mat-error
+            *ngIf="(formGetter('dimensionsPerPallet').dirty || formGetter('dimensionsPerPallet').touched) && formGetter('dimensionsPerPallet').invalid && formGetter('dimensionsPerPallet').errors">
+            <span *ngIf="formGetter('dimensionsPerPallet').errors.required">Campo requerido</span>
+
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <!-- Agregamos la empacador, para el embalaje -->
+      <div class="col-md-6" *ngIf="empacadores.length > 0">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Empacadores asignados*</mat-label>
+          <mat-select multiple formControlName="empacadoresId">
+            <mat-option
+              *ngFor="let empacador of empacadores" 
+              [value]="empacador.packedId"
+            >
+              {{ empacador.packedName }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="(formGetter('empacadoresId').dirty || formGetter('empacadoresId').touched) && formGetter('empacadoresId').invalid && formGetter('empacadoresId').errors.required">
+            Campo requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!--
+      <div class="col-md-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Instrucciones y advertencias de manejo</mat-label>
+          <input matInput name="instructionsWarnings" type="text" value="" formControlName="instructionsWarnings">
+        </mat-form-field>
+      </div>-->
+
+    </div>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>CANCELAR</button>
+  <button mat-raised-button color="primary" (click)="guardarConfiguracion()" cdkFocusInitial>GUARDAR</button>
+</mat-dialog-actions>

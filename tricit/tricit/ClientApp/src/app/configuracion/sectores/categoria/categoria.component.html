@@ -1,0 +1,60 @@
+<div class="d-flex inline-flex ">
+  <a class="mt-2 ponter text-cursor"  (click)="goBack()">
+      <mat-icon  color="primary">keyboard_arrow_left</mat-icon>
+  </a>
+  <div class="">
+    <h5 class="justify-content-center align-items-center">
+      <breadcrumb #parent>  
+        <ol class="breadcrumb bg-white">
+          <ng-template ngFor let-route [ngForOf]="parent.breadcrumbs">
+            <li *ngIf="!route.terminal" class="breadcrumb-item">
+              <a href="" [routerLink]="[route.url]" >{{ route.displayName }}</a>
+            </li>
+            <li *ngIf="route.terminal" class="breadcrumb-item active" aria-current="page">{{ route.displayName }} {{Formulario.nombre}}</li>
+          </ng-template>
+        </ol>
+      </breadcrumb>  
+    </h5>
+  </div>
+</div>
+
+<div class="col-12 border">
+  <h3 class="" >  {{Formulario.nombre}}</h3>
+  <p class="text-right text-info text-cursor" (click)="vistaPrevia()" >Vista Previa</p>
+  <div class="input-group m-3 col-8 ">
+    <h5 class="mr-5" >Categoría</h5>
+    <input type="text" class="form-control" #identificador   placeholder="Nombre de categoría" value="" aria-label="Recipient's username" aria-describedby="i">
+    <input type="button" class="btn btn-info ml-3"  value="Crear categoría" style="background-color: #01c8b1;" (click)="addCampo()">
+  </div>
+  
+  <form [formGroup]="formm">
+    <div formArrayName="experienciaLaboral">
+      <div *ngFor="let trabajo of experienciaLaboral.controls; let i = index;">
+        <div formGroupName="0">
+          <div class="row m-5" >
+            <div class="col-11">
+              <input type="text" style="background-color: #01c8b142;" class="form-control border-0 border-bottom "  placeholder="Categoría" aria-label="Recipient's username" value="" aria-describedby="i"  formControlName="empresa" >
+            </div>
+            <div class="col-1 d-flex inline-flex" >
+              <button mat-button><mat-icon>edit</mat-icon></button>
+              <button mat-button><mat-icon (click)="borrarTrabajo(i)">delete</mat-icon></button>
+            </div>
+            <div class="col-12">
+              <input  class="btn btn-light m-3" type="button"  (click)="propiedadesInput(false,i)" value="Agregar Campo +" />
+            </div>
+          </div>
+          <hr />
+        </div>
+      </div>
+    </div>
+  </form>
+  <!--h5>Field Values</h5>
+  <pre style="font-size:15px">{{ form.value | json }}</pre-->
+</div>
+
+
+
+
+
+
+

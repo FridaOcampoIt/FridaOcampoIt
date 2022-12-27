@@ -1,0 +1,170 @@
+<div class="app-body">
+
+    <div class="header">
+
+    </div>
+
+    <div class="content container">
+        
+        <mat-tab-group animationDuration="0ms" mat-align-tabs="center">
+            <mat-tab label="Traceit App">
+               
+                <mat-card>
+                    <mat-card-title>Configuración</mat-card-title>
+                    <mat-card-content>
+        
+                        <div class="container">
+        
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5>General</h5>
+                                </div>
+                            </div>
+        
+                            <div class="row">
+        
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Notificar comentarios a</mat-label>
+                                        <mat-select class="mobile" multiple [(ngModel)]="comentariosNotificarA">
+                                            <mat-option *ngFor="let usc of response.configuration.userTraceIT" [value]="usc.data">{{ usc.data }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+        
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Notificar solicitudes a</mat-label>
+                                        <mat-select class="mobile" multiple [(ngModel)]="solicitudNotificarA">
+                                            <mat-option *ngFor="let uss of response.configuration.userTraceIT" [value]="uss.data">{{ uss.data }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+        
+                                <div class="form-group col-md-12 text-right">
+                                    <button mat-button color="primary" class="ml-auto" (click)="guardarConfiguracionGeneral()">GUARDAR</button>
+                                </div>
+                            </div>
+        
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5>Compañías</h5>
+                                </div>
+                            </div>
+        
+                            <div class="row">
+        
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Compañía</mat-label>
+                                        <mat-select class="no-mobile" [(ngModel)]="compania" (selectionChange)="busquedaConfigurationCompania()">
+                                            <mat-option *ngFor="let c of response.configuration.companyTraceIT" [value]="c.id">{{ c.data }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+        
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Número de guías de uso</mat-label>
+                                        <input matInput [(ngModel)]="NGuiasUso" type="number" max="500" min="0" (change)="validarNumero('GuiasUso')"/>
+                                    </mat-form-field>
+                                </div>
+        
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Número de guías de instalación</mat-label>
+                                        <input matInput [(ngModel)]="NGuiasInstalacion" type="number" max="500" min="0" (change)="validarNumero('GuiasInstalacion')"/>
+                                    </mat-form-field>
+                                </div>
+        
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Número de productos relacionados</mat-label>
+                                        <input matInput [(ngModel)]="NProductoRelacionado" type="number" max="500" min="0" (change)="validarNumero('ProductoRelacionado')"/>
+                                    </mat-form-field>
+                                </div>
+        
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Cantidad de Links PDF’s</mat-label>
+                                        <input matInput [(ngModel)]="NPDF" type="number" max="500" min="0" (change)="validarNumero('pdfLink')"/>
+                                    </mat-form-field>
+                                </div>
+        
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Cantidad de caracteres para especificaciones</mat-label>
+                                        <input matInput [(ngModel)]="NCharEspec" type="number" min="0"/>
+                                    </mat-form-field>
+                                </div>
+        
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Cantidad de imágenes para especificaciones</mat-label>
+                                        <input matInput [(ngModel)]="NImagenes" type="number" min="0" />
+                                    </mat-form-field>
+                                </div>
+        
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Cantidad de videos</mat-label>
+                                        <input matInput [(ngModel)]="NVideos" type="number" min="0" />
+                                    </mat-form-field>
+                                </div>
+        
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Cantidad de caracteres para preguntas frecuentes</mat-label>
+                                        <input matInput [(ngModel)]="NCharFaq" type="number" min="0"/>
+                                    </mat-form-field>
+                                </div>
+        
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Notificar los comentarios para Fabricante a</mat-label>
+                                        <input matInput [(ngModel)]="comentariosFabricante"/>
+                                    </mat-form-field>
+                                </div>
+        
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Notificar registro de garantía a</mat-label>
+                                        <input matInput [(ngModel)]="garantiaRegistro"/>
+                                    </mat-form-field>
+                                </div>
+        
+                                <div class="form-group col-md-12">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Notificar alerta de robo a</mat-label>
+                                        <input matInput [(ngModel)]="alertaRobo" />
+                                    </mat-form-field>
+                                </div>
+        
+                                <div class="form-group col-md-12 text-right">
+                                    <button mat-button color="primary" class="ml-auto" (click)="guardarConfiguracionCompania()">GUARDAR</button>
+                                </div>
+                            </div>
+        
+                        </div>
+        
+                    </mat-card-content>
+                </mat-card>
+
+            </mat-tab>
+        
+            <mat-tab  label="Traceit Supply">
+
+                <mat-card> 
+                    <mat-card-content>
+                        <router-outlet></router-outlet>
+                    </mat-card-content> 
+                </mat-card> 
+            </mat-tab>
+        </mat-tab-group>
+
+        
+
+    </div>
+
+</div>
+

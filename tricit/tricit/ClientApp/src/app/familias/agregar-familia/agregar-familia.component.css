@@ -1,0 +1,46 @@
+.product-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.product-card .product-image {
+  max-height: 100%;
+  object-fit: contain;
+  max-width: 15rem;
+  width: 100%;
+  height: 15rem;
+  background-color: transparent;
+}
+.product-card .product-image-default {
+  max-height: 100%;
+  max-width: 15rem;
+  width: 100%;
+  height: 15rem;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 10rem;
+  border-radius: 0.5rem;
+}
+.ajusItemCheck {
+  display: inline-table;
+}
+.ngx-mat-color-toggle{
+  font-size: x-large;
+  cursor: pointer;
+}
+
+
+.mat-form-field-suffix.ng-tns-c17-4.ng-star-inserted {
+  align-items: center !important;
+  width: 35% !important;
+}
+
+ngx-mat-color-toggle{
+  width: 35% !important;
+  height: 100% !important;
+  width: 100% !important;
+}

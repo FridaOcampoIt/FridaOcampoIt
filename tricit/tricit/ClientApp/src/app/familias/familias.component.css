@@ -1,0 +1,92 @@
+﻿.app-body {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 1fr auto;
+  grid-template-areas: 'header' 'content';
+}
+.header {
+  grid-area: header;
+}
+.content {
+  grid-area: content;
+}
+.icon-fami {
+  width: 24px;
+  height: 24px;
+  font-size: 22px;
+}
+.icon-fami.ico-espe {
+  background-image: url(../../assets/img/espesificaciones_traceIt.svg);
+  background-position: center;
+  background-size: cover;
+}
+.icon-fami.ico-espe.ico-active {
+  background-image: url(../../assets/img/espesificacionesActivo_traceIt.svg);
+}
+.icon-fami.ico-espe.ico-active:hover {
+  cursor: pointer;
+}
+.icon-fami.ico-uso {
+  background-image: url(../../assets/img/guiasUso_traceIt.svg);
+  background-position: center;
+  background-size: cover;
+}
+.icon-fami.ico-uso.ico-active {
+  background-image: url(../../assets/img/guiasUsosActivo_traceIt.svg);
+}
+.icon-fami.ico-uso.ico-active:hover {
+  cursor: pointer;
+}
+.icon-fami.ico-instalacion {
+  background-image: url(../../assets/img/guiasinstalacion_traceIt.svg);
+  background-position: center;
+  background-size: cover;
+}
+.icon-fami.ico-instalacion.ico-active {
+  background-image: url(../../assets/img/guiaInstalacionActivo_traceIt.svg);
+}
+.icon-fami.ico-instalacion.ico-active:hover {
+  cursor: pointer;
+}
+.icon-fami.ico-servicio {
+  background-image: url(../../assets/img/garantiasYservicios_traceIt.svg);
+  background-position: center;
+  background-size: cover;
+}
+.icon-fami.ico-servicio.ico-active {
+  background-image: url(../../assets/img/serviciosGarantiaActivo_traceIt.svg);
+}
+.icon-fami.ico-servicio.ico-active:hover {
+  cursor: pointer;
+}
+.icon-fami.ico-productos {
+  background-image: url(../../assets/img/productosRelacionados04_traceIt.svg);
+  background-position: center;
+  background-size: cover;
+}
+.icon-fami.ico-productos.ico-active {
+  background-image: url(../../assets/img/productosRelacionadosActive_traceIt.svg);
+}
+.icon-fami.ico-productos.ico-active:hover {
+  cursor: pointer;
+}
+.icon-fami.ico-embalajes {
+  background-image: url(../../assets/img/Cajas-04.svg);
+  background-position: center;
+  background-size: cover;
+}
+.icon-fami.ico-embalajes.ico-active {
+  background-image: url(../../assets/img/Cajas-04activo.svg);
+}
+.icon-fami.ico-embalajes.ico-active:hover {
+  cursor: pointer;
+}
+.icon-fa {
+  font-size: 22px;
+}
+
+input#mat-input-search {
+  position: initial;
+  height: 2.5rem !important;
+  width: 100% !important;
+}

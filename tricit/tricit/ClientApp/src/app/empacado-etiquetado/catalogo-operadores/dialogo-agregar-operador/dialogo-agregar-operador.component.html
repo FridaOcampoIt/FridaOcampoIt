@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>{{titulo}} operador</h1>
+<mat-dialog-content class="mat-typography">
+
+  <div class="container-fluid">
+
+    <div class="form-row" [formGroup]="opForm">
+
+      <div class="col-md-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Dirección</mat-label>
+          <input matInput name="numero" type="text" formControlName="directionName" readonly>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Código*</mat-label>
+          <input matInput name="code" type="text" value="" formControlName="code">
+          <mat-error
+            *ngIf="(formGetter('code').dirty || formGetter('code').touched) && formGetter('code').invalid && formGetter('code').errors.required">
+            Campo requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Nombre*</mat-label>
+          <input matInput name="tEmpaque" type="text" value="" formControlName="name">
+          <mat-error
+            *ngIf="(formGetter('name').dirty || formGetter('name').touched) && formGetter('name').invalid && formGetter('name').errors.required">
+            Campo requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-12">
+        <mat-form-field appearance="outline" class="w-100" (click)="imgFile.click()">
+          <mat-label>Imagen</mat-label>
+          <input matInput name="tEmpaque" type="text" readonly formControlName="imageName">
+        </mat-form-field>
+        <input type="file" name="" #imgFile hidden (change)="ImagenFamilia(imgFile.files)">
+      </div>
+
+    </div>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>CANCELAR</button>
+  <button mat-raised-button color="primary" (click)="guardarOperador()" cdkFocusInitial>GUARDAR</button>
+</mat-dialog-actions>

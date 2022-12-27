@@ -1,0 +1,77 @@
+<h1 mat-dialog-title>{{titulo}} Producto</h1>
+<br />
+<p>Agrega un número de serie o lote de manera individual</p>
+<mat-dialog-content class="mat-typography">
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="form-group col-md-12">
+                <mat-radio-group aria-label="Select an option" [hidden]="titulo  === 'Agregar' ? 'disabled' : null" [(ngModel)]="response.productDetails.status" #statusreference="ngModel">
+                    <mat-radio-button #stat value=1 [checked]="statusreference.value === 1" (click)="CambiarStatus()">Activo </mat-radio-button>
+                    <mat-radio-button value=0 [checked]="statusreference.value === 0" (click)="CambiarStatus()">Inactivo</mat-radio-button>
+                </mat-radio-group>
+                <br/>
+                <!--<div>{{ statusreference.value }}</div>-->
+            </div>
+
+                <div class="form-group col-md-6">
+                    <mat-form-field class="w-100">
+                        <mat-label>Familia</mat-label>
+                        <mat-select [(ngModel)]="selectedFamily.id" required (selectionChange)="obtenerEmbalajes()">
+                            <mat-option [value]="0">Selecciona una opción</mat-option>
+                            <mat-option *ngFor="let family of combosResponse.familyDropDown" [attr.caducidad]="family.extra" [value]="family.id" (click)="BusquedaComboOrigen(family.id, family.extra)">{{ family.data }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6" [hidden]="this.response.productDetails.idProduct != 0">
+                    <mat-form-field class="w-100">
+                        <mat-label>Embalaje</mat-label>
+                        <mat-select [(ngModel)]="packagingId" required>
+                            <mat-option [value]="0">Selecciona una opción</mat-option>
+                            <mat-option *ngFor="let embalaje of dataEmbalajes" [value]="embalaje.id">
+                              {{embalaje.data}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6" [hidden]="!familyExpiration">
+                    <mat-form-field class="w-100">
+                        <input matInput [(ngModel)]="response.productDetails.expirationDate" [matDatepicker]="picker" placeholder="Fecha de Caducidad" [required]="familyExpiration">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <mat-form-field class="w-100">
+                        <mat-label>UDID</mat-label>
+                        <input [(ngModel)]="response.productDetails.udid" matInput />
+                        <mat-hint>(Número de Serie, Número de Parte, Lote)</mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <mat-form-field class="w-100">
+                        <mat-label>Origen</mat-label>
+                        <mat-select [(ngModel)]="response.productDetails.directionId" required>
+                            <mat-option [value]="0">Selecciona una opción</mat-option>
+                            <mat-option *ngFor="let origin of combosResponse.originDropDown" [value]="origin.id">{{ origin.data }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+
+            </div>
+
+        
+
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="primary">CANCELAR</button>
+    <button mat-raised-button color="primary" (click)="closeD()" cdkFocusInitial>GUARDAR</button>
+</mat-dialog-actions>

@@ -1,0 +1,20 @@
+<h1 class="text-center" style="color: #e33e3e8f;" mat-dialog-title>
+    ¿Eliminar?
+</h1>
+
+<section>
+    <div class="text-center">
+        Esta apunto de eliminar, el elemento seleccionado.<br/>
+        ¿Continuar?<br>
+        <ng-container *ngIf="_property">
+            <span *ngFor="let item of _property">
+                {{_itemDelete[item]}} <br>
+            </span>
+        </ng-container>
+        
+    </div>
+    <div class="text-center">
+      <button mat-stroked-button (click)="cancelOperation()">Cancelar</button>
+      <button mat-stroked-button color="warn" (click)="actionConfirmDelete()">Eliminar</button>
+    </div>
+  </section>

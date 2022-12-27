@@ -1,0 +1,120 @@
+<h1 mat-dialog-title>Asociación de productos</h1>
+<mat-dialog-content class="mat-typography">
+
+  <div class="container-fluid">
+
+    <div class="form-row" [formGroup]="asociarForm">
+
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Compañia</mat-label>
+          <mat-select formControlName="companyId">
+            <mat-option *ngFor="let compania of dataCompanias" [value]="compania.id">
+              {{compania.data}}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="(formGetter('companyId').dirty || formGetter('companyId').touched) && formGetter('companyId').invalid && formGetter('companyId').errors.required">
+            Campo requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Producto</mat-label>
+          <mat-select formControlName="productId">
+            <mat-option *ngFor="let producto of dataProductos" [value]="producto.id">
+              {{producto.data}}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="(formGetter('productId').dirty || formGetter('productId').touched) && formGetter('productId').invalid && formGetter('productId').errors.required">
+            Campo requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Embalaje</mat-label>
+          <mat-select formControlName="packagingId">
+            <mat-option *ngFor="let embalaje of dataEmbalajes" [value]="embalaje.id">
+              {{embalaje.data}}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="(formGetter('packagingId').dirty || formGetter('packagingId').touched) && formGetter('packagingId').invalid && formGetter('packagingId').errors.required">
+            Campo requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-3 d-flex">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Materia prima</mat-label>
+          <input matInput name="tEmpaque" type="text" value="" formControlName="rawMaterial">
+          <mat-error
+            *ngIf="(formGetter('rawMaterial').dirty || formGetter('rawMaterial').touched) && formGetter('rawMaterial').invalid && formGetter('rawMaterial').errors.required">
+            Campo requerido
+          </mat-error>
+        </mat-form-field>
+        <button mat-icon-button color="primary" aria-label="agregar" (click)="agregarPrododucto()" class=""
+          matTooltip="Agregar">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <mat-table matSort [dataSource]="dataSource" class=" mat-table-100">
+
+          <!-- Checkbox Column -->
+          <!-- <ng-container cdkColumnDef="select">
+            <mat-header-cell *cdkHeaderCellDef class="select-column">
+            </mat-header-cell>
+            <mat-cell *cdkCellDef="let row" class="select-column">
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+              </mat-checkbox>
+            </mat-cell>
+          </ng-container> -->
+
+          <!-- Position Column -->
+          <ng-container cdkColumnDef="companyName">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Compañia </mat-header-cell>
+            <mat-cell *cdkCellDef="let element"> {{element.companyName}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container cdkColumnDef="productName">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Producto </mat-header-cell>
+            <mat-cell *cdkCellDef="let element"> {{element.productName}} </mat-cell>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container cdkColumnDef="rawMaterial">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Materia prima </mat-header-cell>
+            <mat-cell *cdkCellDef="let element"> {{element.rawMaterial}} </mat-cell>
+          </ng-container>
+
+          <ng-container cdkColumnDef="packagingName">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Embalaje </mat-header-cell>
+            <mat-cell *cdkCellDef="let element"> {{element.packagingName}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *cdkRowDef="let row; columns: displayedColumns" (click)="selection.toggle(row);"></mat-row>
+        </mat-table>
+      </div>
+
+    </div>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>CANCELAR</button>
+  <button mat-raised-button color="primary" (click)="asociarProductos()" cdkFocusInitial>ASOCIAR</button>
+</mat-dialog-actions>

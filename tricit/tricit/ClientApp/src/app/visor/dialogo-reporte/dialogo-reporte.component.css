@@ -1,0 +1,26 @@
+.sec-productos {
+  max-height: 20rem;
+}
+
+.sec-productos .sec-tree, .sec-productos .sec-lista {
+  max-height: inherit;
+  overflow: auto;
+}
+
+.udid {
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.list-cajas {
+  max-height: 12rem;
+  overflow: auto;
+}
+/*# sourceMappingURL=dialogo-reporte.component.css.map */
+
+
+input#mat-input-search {
+  position: initial;
+  height: 2.5rem !important;
+  width: 100% !important;
+}

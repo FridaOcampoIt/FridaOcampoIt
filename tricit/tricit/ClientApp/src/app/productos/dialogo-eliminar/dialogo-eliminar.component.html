@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Eliminar</h1>
+<mat-dialog-content class="mat-typography">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <p>¿Estás seguro de eliminar el producto seleccionado?</p>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="primary">No</button>
+    <button mat-raised-button color="primary" (click)="DeleteData()" cdkFocusInitial>Sí</button>
+</mat-dialog-actions>

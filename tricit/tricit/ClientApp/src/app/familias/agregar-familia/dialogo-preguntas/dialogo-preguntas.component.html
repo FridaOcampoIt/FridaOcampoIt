@@ -1,0 +1,73 @@
+<h1 mat-dialog-title>{{titulo}}</h1>
+<mat-dialog-content class="mat-typography">
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field class="w-100">
+                            <textarea matInput placeholder="Pregunta Español"
+                                      cdkAutosizeMinRows="7"
+                                      cdkAutosizeMaxRows="7"
+                                      cdkTextareaAutosize
+                                      #autosize="cdkTextareaAutosize"
+                                      [(ngModel)]="Pregunta"
+                                      [disabled]="subiendo == true ? 'disabled' : null"
+                                      class="mobile"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-12">
+                        <mat-form-field class="w-100">
+                            <textarea class="mobile"
+                                      matInput placeholder="Respuesta Español"
+                                      cdkAutosizeMinRows="7"
+                                      cdkAutosizeMaxRows="7"
+                                      cdkTextareaAutosize
+                                      #autosize="cdkTextareaAutosize"
+                                      [(ngModel)]="Respuesta"
+                                      [disabled]="subiendo == true ? 'disabled' : null"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field class="w-100">
+                            <textarea matInput placeholder="Pregunta Inglés"
+                                      cdkAutosizeMinRows="7"
+                                      cdkAutosizeMaxRows="7"
+                                      cdkTextareaAutosize
+                                      #autosize="cdkTextareaAutosize"
+                                      [(ngModel)]="PreguntaIngles"
+                                      [disabled]="subiendo == true ? 'disabled' : null"
+                                      class="mobile"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-12">
+                        <mat-form-field class="w-100">
+                            <textarea class="mobile"
+                                      matInput placeholder="Respuesta Inglés"
+                                      cdkAutosizeMinRows="7"
+                                      cdkAutosizeMaxRows="7"
+                                      cdkTextareaAutosize
+                                      #autosize="cdkTextareaAutosize"
+                                      [(ngModel)]="RespuestaIngles"
+                                      [disabled]="subiendo == true ? 'disabled' : null"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <mat-progress-bar mode="indeterminate" class="mb-3 mt-1" *ngIf="subiendo == true"></mat-progress-bar>
+    <button mat-button mat-dialog-close color="primary" [disabled]="subiendo == true ? 'disabled' : null" >CANCELAR</button>
+    <button mat-raised-button color="primary" (click)="guardarPregunta()" cdkFocusInitial [disabled]="subiendo == true ? 'disabled' : null">AÑADIR PREGUNTA</button>
+</mat-dialog-actions>

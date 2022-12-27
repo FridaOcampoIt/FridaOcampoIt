@@ -1,0 +1,124 @@
+<h1 mat-dialog-title>{{titulo}} empacador externo</h1>
+<mat-dialog-content class="mat-typography">
+
+  <div class="container-fluid">
+
+    <div class="form-row" [formGroup]="eEForm">
+
+      <div class="col-md-8" [ngClass]="{'col-md-12': data['action'] == 0}">
+        <div class="w-100 mt-2 d-flex flex-column">
+          <mat-label class="d-block mb-2">Estatus</mat-label>
+          <mat-radio-group formControlName="status" *ngIf="tipoUsuario == 0">
+            <mat-radio-button class="mr-3" name="status" [value]="true">Activo</mat-radio-button>
+            <mat-radio-button class="" name="status" [value]="false">Inactivo</mat-radio-button>
+          </mat-radio-group>
+          <mat-radio-group [value]="tempStatus" *ngIf="tipoUsuario != 0" disabled>
+            <mat-radio-button class="mr-3" name="status" [value]="true">Activo</mat-radio-button>
+            <mat-radio-button class="" name="status" [value]="false">Inactivo</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+      </div>
+
+      <div class="col-md-4" [ngClass]="{'d-none': data['action'] == 0}">
+        <mat-form-field color="primary" appearance="fill" class="w-100">
+          <mat-label>Empacador ID</mat-label>
+          <input matInput name="id" type="text" value="" readonly formControlName="packedId">
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4">
+        <mat-form-field appearance="outline" class="w-100"  *ngIf="tipoUsuario == 0">
+          <mat-label>Número de empacador externo*</mat-label>
+          <input matInput name="numero" type="text" value="" formControlName="packedNumber">
+          <mat-error
+            *ngIf="(formGetter('packedNumber').dirty || formGetter('packedNumber').touched) && formGetter('packedNumber').invalid && formGetter('packedNumber').errors">
+            <span *ngIf="formGetter('packedNumber').errors.required">Campo requerido</span>
+          </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline" class="w-100" *ngIf="tipoUsuario != 0">
+          <mat-label>Número de empacador externo*</mat-label>
+          <input matInput type="text" [value]="tempNInterno"   disabled>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4">
+        <mat-form-field appearance="outline" class="w-100" *ngIf="tipoUsuario == 0">
+          <mat-label>Nombre de empacador externo*</mat-label>
+          <input matInput name="nombre" type="text" value="" formControlName="packedName" >
+          <mat-error
+            *ngIf="(formGetter('packedName').dirty || formGetter('packedName').touched) && formGetter('packedName').invalid && formGetter('packedName').errors">
+            <span *ngIf="formGetter('packedName').errors.required">Campo requerido</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100"  *ngIf="tipoUsuario != 0">
+          <mat-label>Nombre de empacador externo*</mat-label>
+          <input matInput type="text" [value]="tempName" disabled>
+        </mat-form-field>
+      </div>
+
+      
+    <!-- Agregamos la Compañia, para el empacador -->
+    <div class="col-md-4" *ngIf="tipoUsuario == 0" >
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Compañias*</mat-label>
+        <mat-select
+          multiple
+          formControlName="companiasId"
+        >
+          <mat-option
+            *ngFor="let company of dataSource" 
+            [value]="company.idCompany"
+          >
+            {{ company.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="(formGetter('companiasId').dirty || formGetter('companiasId').touched) && formGetter('companiasId').invalid && formGetter('companiasId').errors.required">
+          Campo requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+      <div class="col-md-4">
+        <mat-form-field appearance="outline" class="w-100"*ngIf="tipoUsuario == 0">
+          <mat-label>Correo electrónico*</mat-label>
+          <input matInput name="tEmpaque" type="text" value="" formControlName="email" >
+          <mat-error
+            *ngIf="(formGetter('email').dirty || formGetter('email').touched) && formGetter('email').invalid && formGetter('email').errors">
+            <span *ngIf="formGetter('email').errors.required">Campo requerido</span>
+            <span *ngIf="formGetter('email').errors.pattern">No es un formato de correo valido.</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100"  *ngIf="tipoUsuario != 0">
+          <mat-label>Correo electrónico*</mat-label>
+          <input matInput type="text" [value]="tempCorreo" disabled>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4" *ngIf="tipoUsuario == 0">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Contraseña <span *ngIf="data['action'] == 0">*</span></mat-label>
+          <input matInput name="" type="password" value="" formControlName="password">
+          <mat-error
+            *ngIf="(formGetter('password').dirty || formGetter('password').touched) && formGetter('password').invalid && formGetter('password').errors">
+            <span *ngIf="formGetter('password').errors.required">Campo requerido</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4" *ngIf="tipoUsuario != 0">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>% merma empacado</mat-label>
+          <input matInput name="mermo" type="number" min="0" value="" formControlName="merma">
+        </mat-form-field>
+      </div>
+
+    </div>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>CANCELAR</button>
+  <button mat-raised-button color="primary" (click)="guardarEmpacado()" cdkFocusInitial>GUARDAR</button>
+</mat-dialog-actions>
