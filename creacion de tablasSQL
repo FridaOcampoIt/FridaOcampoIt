@@ -1,0 +1,501 @@
+-- INSERCIONDE ESTADUS EN CONTROLES MAESTROS SECTOR
+DELIMITER //
+-- CONTROL MAESTRO SECTOR ACTIVO 
+    INSERT INTO sis_024_controles_maestros_multiples (
+            ControlMaestroId,
+            Nombre,
+            Valor,
+            FK_UsuarioCreador, 
+            FechaCreacion,
+            Activo,
+            CmmSistema
+        )
+        VALUES 
+        (
+            1000038,
+            'ESTATUS_SECTOR',
+            'ACTIVO',
+            1,
+            now(),
+            true,
+            true
+        );
+//
+DELIMITER;
+DELIMITER //
+-- CONTROL MAESTRO SECTOR INACTIVO 
+    INSERT INTO sis_024_controles_maestros_multiples (
+            ControlMaestroId,
+            Nombre,
+            Valor,
+            FK_UsuarioCreador, 
+            FechaCreacion,
+            Activo,
+            CmmSistema
+        )
+        VALUES 
+        (
+            1000039,
+            'ESTATUS_SECTOR',
+            'INACTIVO',
+            1,
+            now(),
+            true,
+            true
+        );
+//
+DELIMITER;
+DELIMITER //
+-- CONTROL MAESTRO SECTOR ELIMINADO
+    INSERT INTO sis_024_controles_maestros_multiples (
+            ControlMaestroId,
+            Nombre,
+            Valor,
+            FK_UsuarioCreador, 
+            FechaCreacion,
+            Activo,
+            CmmSistema
+        )
+        VALUES 
+        (
+            1000040,
+            'ESTATUS_SECTOR',
+            'ELIMINADO',
+            1,
+            now(),
+            true,
+            true
+        );
+//
+DELIMITER;
+-- ESTATUS TABLA 2
+DELIMITER //
+-- CONTROL MAESTRO FORMULARIO ACTIVO 
+    INSERT INTO sis_024_controles_maestros_multiples (
+            ControlMaestroId,
+            Nombre,
+            Valor,
+            FK_UsuarioCreador, 
+            FechaCreacion,
+            Activo,
+            CmmSistema
+        )
+        VALUES 
+        (
+            1000041,
+            'ESTATUS_FORMULARIO',
+            'ACTIVO',
+            1,
+            now(),
+            true,
+            true
+        );
+//
+DELIMITER;
+DELIMITER //
+-- CONTROL MAESTRO FORMULARIO INACTIVO 
+    INSERT INTO sis_024_controles_maestros_multiples (
+            ControlMaestroId,
+            Nombre,
+            Valor,
+            FK_UsuarioCreador, 
+            FechaCreacion,
+            Activo,
+            CmmSistema
+        )
+        VALUES 
+        (
+            1000042,
+            'ESTATUS_FORMULARIO',
+            'INACTIVO',
+            1,
+            now(),
+            true,
+            true
+        );
+//
+DELIMITER;
+DELIMITER //
+-- CONTROL MAESTRO FORMULARIO ELIMINADO
+    INSERT INTO sis_024_controles_maestros_multiples (
+            ControlMaestroId,
+            Nombre,
+            Valor,
+            FK_UsuarioCreador, 
+            FechaCreacion,
+            Activo,
+            CmmSistema
+        )
+        VALUES 
+        (
+            1000043,
+            'ESTATUS_FORMULARIO',
+            'ELIMINADO',
+            1,
+            now(),
+            true,
+            true
+        );
+//
+DELIMITER;
+-- ESTATUS TABLA 4
+DELIMITER //
+-- CONTROL MAESTRO CATEGORIA FORMULARIO ACTIVO 
+    INSERT INTO sis_024_controles_maestros_multiples (
+            ControlMaestroId,
+            Nombre,
+            Valor,
+            FK_UsuarioCreador, 
+            FechaCreacion,
+            Activo,
+            CmmSistema
+        )
+        VALUES 
+        (
+            1000044,
+            'ESTATUS_CATEGORIA_FORMULARIO',
+            'ACTIVO',
+            1,
+            now(),
+            true,
+            true
+        );
+//
+DELIMITER;
+DELIMITER //
+-- CONTROL MAESTRO CATEGORIA FORMULARIO INACTIVO 
+    INSERT INTO sis_024_controles_maestros_multiples (
+            ControlMaestroId,
+            Nombre,
+            Valor,
+            FK_UsuarioCreador, 
+            FechaCreacion,
+            Activo,
+            CmmSistema
+        )
+        VALUES 
+        (
+            1000045,
+            'ESTATUS_CATEGORIA_FORMULARIO',
+            'INACTIVO',
+            1,
+            now(),
+            true,
+            true
+        );
+//
+DELIMITER;
+DELIMITER //
+-- CONTROL MAESTRO CATEGORIA FORMULARIO ELIMINADO 
+    INSERT INTO sis_024_controles_maestros_multiples (
+            ControlMaestroId,
+            Nombre,
+            Valor,
+            FK_UsuarioCreador, 
+            FechaCreacion,
+            Activo,
+            CmmSistema
+        )
+        VALUES 
+        (
+            1000046,
+            'ESTATUS_CATEGORIA_FORMULARIO',
+            'ELIMINADO',
+            1,
+            now(),
+            true,
+            true
+        );
+//
+DELIMITER;
+-- ******************************CRECION DE TABLAS Y ASOCIACION***********************************************
+
+DELIMITER //
+-- ****************TABLA 1*********
+    CREATE TABLE cat_052_sectores(
+        PK_sectorId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+        Nombre varchar(200),
+        DescripcionCorta varchar(500),
+        FK_UsuarioCreadorId INT (11) NOT NULL,
+        FechaCreacion DATETIME DEFAULT NOW() NOT NULL ,
+        FK_usuarioModificadorId INT (11),
+        FechaModificacion DATETIME,
+        FK_CMMEstatusId BIGINT UNSIGNED DEFAULT 1000038 NOT NULL,
+        -- asociaciones 
+        PRIMARY KEY (PK_sectorId),
+        CONSTRAINT FK_USUARIOCREADORID_SECTOR FOREIGN KEY (FK_UsuarioCreadorId) REFERENCES seg_001_usuario (PK_UsuarioId)
+                ON DELETE CASCADE
+                ON UPDATE RESTRICT,
+        CONSTRAINT FK_USUARIOMODIFICADORID_SECTOR FOREIGN KEY (FK_usuarioModificadorId) REFERENCES seg_001_usuario (PK_UsuarioId)
+                ON DELETE CASCADE
+                ON UPDATE RESTRICT,
+        CONSTRAINT FK_CMMESTATUS_ID_SECTOR FOREIGN KEY (FK_CMMEstatusId) REFERENCES sis_024_controles_maestros_multiples (ControlMaestroID)
+                ON DELETE CASCADE
+                ON UPDATE RESTRICT
+    )
+//
+DELIMITER;
+
+DELIMITER //
+-- ****************TABLA 2*********
+    CREATE TABLE cat_053_formulario(
+        PK_FormularioId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+        Nombre varchar(200), 
+        DescripcionCorta varchar(500),
+        FK_UsuarioCreadorId INT (11) NOT NULL, 
+        FechaCreacion DATETIME DEFAULT NOW() NOT NULL,
+        FK_UsuarioModificadorId INT (11),
+        FechaModificacion DATETIME,
+        FK_CMMEstatusFormularioId BIGINT UNSIGNED DEFAULT 1000041 NOT NULL,
+        -- asociaciones 
+        PRIMARY KEY (PK_FormularioId),
+        CONSTRAINT FK_USUARIOCREADORID_FORMULARIO FOREIGN KEY (FK_UsuarioCreadorId) REFERENCES seg_001_usuario (PK_UsuarioId)
+                ON DELETE CASCADE
+                ON UPDATE RESTRICT,
+        CONSTRAINT FK_USUARIOMODIFICADOID_FORMULARIO FOREIGN KEY (FK_usuarioModificadorId) REFERENCES seg_001_usuario (PK_UsuarioId)
+                ON DELETE CASCADE
+                ON UPDATE RESTRICT,
+        CONSTRAINT FK_CMMESTATUSFORMULARIOID_FORMULARIO FOREIGN KEY (FK_CMMEstatusFormularioId) REFERENCES sis_024_controles_maestros_multiples (ControlMaestroID)
+                ON DELETE CASCADE
+                ON UPDATE RESTRICT
+    )
+//
+DELIMITER;
+
+DELIMITER //
+-- ****************TABLA 3*********
+    CREATE TABLE rel_054_formulario_sector(
+        PK_FormularioSectorId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL ,
+        FK_SectorId BIGINT UNSIGNED,
+        FK_FormularioId BIGINT UNSIGNED,
+            -- asociaciones 
+        PRIMARY KEY (PK_FormularioSectorId),
+        CONSTRAINT FK_SECTORID_SECTOR FOREIGN KEY (FK_SectorId) REFERENCES cat_052_sectores (PK_sectorId)
+                ON DELETE CASCADE
+                ON UPDATE RESTRICT,
+        CONSTRAINT FK_FORMULARIOID_FORMULARIO_SECTOR FOREIGN KEY (FK_FormularioId) REFERENCES cat_053_formulario (PK_FormularioId)
+                ON DELETE CASCADE
+                ON UPDATE RESTRICT
+    )
+//
+DELIMITER;
+
+DELIMITER //
+-- ****************TABLA 4*********
+    CREATE TABLE cat_055_categorias_formulario(
+        PK_CategoriaFormularioId BIGINT NOT NULL AUTOINCREMENT UNSIGNED,
+        FK_FormularioId BIGINT UNSIGNED NOT NULL ,
+        NombreCategoria varchar(200),
+        FK_UsuarioCreadorId INT(11) NO NULL,
+        FechaCreacion DATETIME NOT NULL DEFAULT NOW(),
+        FK_UsuarioModificadorId INT(11),
+        FechaModificacion DATETIME,
+        FK_CMMEstatusCategoriaId bigint unsigned not null DEFAULT 1000044,
+            -- asociaciones 
+        PRIMARY KEY (PK_CategoriaFormularioId),
+        CONSTRAINT FK_FORMULARIOID FOREIGN KEY (FK_Formulario) REFERENCES cat_053_formulario (PK_FormularioId)
+                ON DELETE CASCADE
+                ON UPDATE RESTRICT,
+        CONSTRAINT FK_CATEGORIA_USUARIO_CREADOR FOREIGN KEY (FK_UsuarioCreadoId) REFERENCES seg_001_usuario (PK_UsuarioId)
+                ON DELETE CASCADE
+                ON UPDATE RESTRICT,
+        CONSTRAINT FK_USUARIOMODIFICADORID FOREIGN KEY (FK_UsuarioModificadorId) REFERENCES seg_001_usuario (PK_UsuarioId)
+                ON DELETE CASCADE
+                ON UPDATE RESTRICT,
+        CONSTRAINT FK_CMMESTATUSCATEGORIAID FOREIGN KEY (FK_CMMEstatusCategoriaId) REFERENCES sis_024_controles_maestros_multiples (ControlMaestroID)
+                ON DELETE CASCADE
+                ON UPDATE RESTRICT,
+
+    )
+//
+DELIMITER;
+-- ****************************************************SPI SECTOR***********************************************
+
+
+DELIMITER //
+-- SPI GUARDAR SECTORES TAMBLA 1
+    CREATE PROCEDURE spi_guardarSectores(
+        IN _Nombre varchar(200),
+        IN _DescripcionCorta varchar(500),
+        IN _UsuarioCreadorId INT (11),
+        INOUT _response int
+    )
+    BEGIN
+        /*
+            Proyecto: TraceIt
+            Programador: Roberto Ortega
+            Creación: 25-Nov-2022
+            Descripción: SP utilizado para guardar un sector
+            Querido  programador corre.
+        */
+        INSERT INTO cat_052_sectores 
+            (
+             Nombre,
+             DescripcionCorta,
+             FK_UsuarioCreadorId
+            )
+            VALUES
+            (
+             _Nombre, 
+             _DescripcionCorta,
+             _UsuarioCreadorId
+            );
+            -- Regresamos el ultimo id insertado. 
+            -- (No es necesario pero lo regresamos)
+        SET _response =  last_insert_id();
+    END
+//
+DELIMITER;
+
+DELIMITER //
+-- SPC CONSULTA SECTORES TABLA 1
+ CREATE PROCEDURE spc_consultarSectores()        
+    BEGIN
+        SELECT 
+            sec.PK_sectorId  sectorId,
+            sec.Nombre  nombre,
+            sec.DescripcionCorta descripcionCorta,
+            estado.Valor  valorestus,
+            CONCAT(usu.Nombre , ' ', usu.Apellido)  nombreCompleto
+            FROM cat_052_sectores sec
+            INNER JOIN sis_024_controles_maestros_multiples estado ON estado.ControlMaestroId  = sec.FK_CMMEstatusId  
+            INNER JOIN seg_001_usuario usu ON usu.PK_UsuarioId  = sec.FK_UsuarioCreadorId
+            WHERE estado.Valor="ACTIVO" OR estado.Valor="INACTIVO";
+    END
+//
+DELIMITER;
+
+DELIMITER //
+-- SPU EDICION SECTORES TABLA 1
+    CREATE PROCEDURE spu_edicionSectores(
+        IN _PK_sectorId BIGINT,
+        IN _Nombre varchar(200),
+        IN _DescripcionCorta varchar(500),
+        IN _FK_UsuarioCreadorId INT (11),
+        IN _FechaCreacion DATETIME NOW(),
+        IN _FK_usuarioModificadorId INT (11),
+        IN _FechaModificacion DATETIME NOW(),
+        IN _FK_CMMEstatusId BIGINT ,
+        INOUT _response INT
+    )
+    BEGIN
+        UPDATE cat_052_sectores
+            SET 
+    END
+//
+DELIMITER;
+
+DELIMITER //
+-- SPC ELIMINAR SECTORES TABLA 1
+    CREATE PROCEDURE spd_eliminarSector(
+        IN _sectorId INT(11),
+        INOUT _response int
+    )
+    BEGIN
+        UPDATE cat_052_sectores set
+        FK_CMMEstatusId = 1000040 WHERE 
+        SectorId = _sectorId;
+		set _response= 1;
+	END
+//
+DELIMITER;
+
+
+-- ****************************************************SPI FORMULARIO***********************************************
+
+DELIMITER //
+--SPI GUARDAR FORMULARIO TABLA 2
+        CREATE PROCEDURE spi_guardarFormulario(
+        in _Nombre varchar(200),
+        in _DescripcionCorta varchar(500),
+        in _UsuarioCreadorId INT (11),
+        INOUT _response int
+    )
+    BEGIN
+        /*
+            Proyecto: TraceIt
+            Programador: Roberto Ortega
+            Creación: 25-Nov-2022
+            Descripción: SP utilizado para guardar un formulario
+            Querido  programador corre.
+        */
+        insert into cat_053_formulario 
+            (
+             Nombre,
+             DescripcionCorta,
+             FK_UsuarioCreadorId
+            )
+            VALUES
+            (
+             _Nombre, 
+             _DescripcionCorta,
+             _UsuarioCreadorId
+            );
+            -- Regresamos el ultimo id insertado. 
+            -- (No es necesario pero lo regresamos)
+        SET _response =  last_insert_id();
+    END
+//
+DELIMITER;
+
+DELIMITER //
+-- SPC CONSULTA formulario TABLA 2
+ CREATE PROCEDURE spc_consultarFormularios()        
+    BEGIN
+        SELECT 
+            form.PK_FormularioId formularioId,
+            form.Nombre nombre,
+            form.DescripcionCorta descripcionCorta,
+            estado.Valor  valorestus,  
+            CONCAT(usu.Nombre, ' ', usu.Apellido)  nombreCompleto,
+            FROM cat_053_formulario form
+            INNER JOIN sis_024_controles_maestros_multiples estado ON  estado.ControlMaestroId  = form.FK_CMMEstatusId 
+            INNER JOIN seg_001_usuario usu ON usu.PK_UsuarioId = form.FK_UsuarioCreadorId
+            WHERE estado.Valor="ACTIVO" OR estado.Valor="INACTIVO";
+    END
+    
+//
+DELIMITER;
+-- ****************************************************SPI FORMULARIO SECTOR***********************************************
+DELIMITER //
+--SPI FORMUALRIO SECTOR TABLA 3
+    insert into cat_052_formularios 
+        (PK_CategoriaFormularioId,
+        FK_SectorId,
+        FK_FormularioId,
+        )
+        VALUES
+        (PK_FormularioSectorId,
+        _SectorId, 
+        _FormularioId
+        );
+//
+DELIMITER;
+-- ****************************************************SPI CATEGORIA FORMULARIO*********************************************
+DELIMITER //
+--SPI CATEGORIA FORMULARIO TABLA 4
+    insert into cat_052_formularios 
+        (PK_CategoriaFormularioId,
+        FK_Formulario,
+        NombreCategoria,
+        FK_UsuarioCreadorId,
+        FechaCreacion,
+        FK_UsuarioModificadorId,
+        FechaModificacion,
+        FK_CMMEstatusCategoriaId
+        )
+        VALUES
+        (_CategoriaFormularioId,
+        _Formulario, 
+        _NombreCategoria,
+        _UsuarioCreadorId,
+        _UsuarioModificadorId,
+        _FechaCreacion,
+        _FechaModificacion,
+        _EstatusCategoriaId,
+        NOW()
+        );
+//
+DELIMITER;
+
+
