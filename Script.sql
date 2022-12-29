@@ -386,6 +386,7 @@ SELECT *FROM cat_053_formulario cf
 
 
 
+
 DELIMITER //
 	DROP PROCEDURE IF EXISTS spc_consultarFormulario;
 // 
@@ -496,4 +497,48 @@ DELIMITER //
     END
 //
 DELIMITER;
+
+SELECT *FROM rel_054_formulario_sector 
+SELECT *FROM cat_052_sectores cs  
+SELECT *FROM cat_053_formulario cf 
+
+DELIMITER //
+	DROP PROCEDURE IF EXISTS spi_guardarDuplicadoFormulario;
+//
+DELIMITER;
+
+DeLIMITER //
+-- SPI GENRAR UN DUPLICADO 
+ CREATE PROCEDURE spi_guardarDuplicadoFormulario(
+ 	IN _formularioId INT (11)
+ )        
+    BEGIN
+        INSERT INTO cat_053_formulario  (
+			Nombre, 
+			DescripcionCorta,
+			FK_UsuarioCreadorId,
+			FechaCreacion,
+			FK_UsuarioModificadorId,
+			FechaModificacion,
+			FK_CMMEstatusFormularioId)
+	SELECT 	
+			form.Nombre, 
+			form.DescripcionCorta,
+			form.FK_UsuarioCreadorId,
+			form.FechaCreacion,
+			form.FK_UsuarioModificadorId,
+			form.FechaModificacion,
+			form.FK_CMMEstatusFormularioId,
+			fs.FK_SectorId 
+			FROM cat_053_formulario form
+			INNER JOIN rel_054_formulario_sector fs on fs.FK_FormularioId = form.PK_FormularioId 
+			WHERE form.PK_FormularioId =_formularioId;
+    END
+//
+DELIMITER;
+
+
+DELIMITER //
+//
+DELIMITTER;
 
