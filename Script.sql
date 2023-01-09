@@ -537,8 +537,91 @@ DeLIMITER //
 //
 DELIMITER;
 
+-- TABLAS DE FORMULARIO
+DELIMITER //
+	CREATE TABLE cat_054_categoria(
+	    PK_CategoriaId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+        FK_FormularioId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+		Nombre varchar(200), 
+		DescripcionCorta varchar(500),
+		FK_UsuarioCreadorId INT (11) NOT NULL, 
+		FechaCreacion DATETIME DEFAULT NOW() NOT NULL,
+		FK_UsuarioModificadorId INT (11),
+		FechaModificacion DATETIME,
+		FK_CMMEstatusCategoriaId BIGINT UNSIGNED DEFAULT 1000041 NOT NULL,
+        Tipo varchar(100),
+        Preguntas ,
+		-- asociaciones 
+		PRIMARY KEY (PK_CategoriaId),
+		CONSTRAINT FK_USUARIOCREADORID_CATEGORIA FOREIGN KEY (FK_UsuarioCreadorId) REFERENCES seg_001_usuario (PK_UsuarioId)
+	            ON DELETE CASCADE
+	            ON UPDATE RESTRICT,
+		CONSTRAINT FK_USUARIOMODIFICADOID_CATEGORIA FOREIGN KEY (FK_usuarioModificadorId) REFERENCES seg_001_usuario (PK_UsuarioId)
+	            ON DELETE CASCADE
+	            ON UPDATE RESTRICT,
+		CONSTRAINT FK_CMMESTATUSCATEGORIAID_CATEGORIA FOREIGN KEY (FK_CMMEstatusCategoriaId) REFERENCES sis_024_controles_maestros_multiples (ControlMaestroID)
+	            ON DELETE CASCADE
+	            ON UPDATE RESTRICT,
+        CONSTRAINT FK_FORMULARIOID_FORMULARIO_CATEGORIA FOREIGN KEY (FK_FormularioId) REFERENCES cat_053_formulario (PK_FormularioId)
+	            ON DELETE CASCADE
+	            ON UPDATE RESTRICT
+	)
+//
+DELIMITTER;
 
 DELIMITER //
+	CREATE TABLE cat_055_pregunta(
+	    PK_PreguntaId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+        FK_CategoriaId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+		Nombre varchar(200),
+        Placeholder varchar (100), 
+		FK_UsuarioCreadorId INT (11) NOT NULL, 
+		FechaCreacion DATETIME DEFAULT NOW() NOT NULL,
+		FK_UsuarioModificadorId INT (11),
+		FechaModificacion DATETIME,
+		FK_CMMEstatusPreguntaId BIGINT UNSIGNED DEFAULT 1000041 NOT NULL,
+        Propiedades ,
+        TipoPregunta varchar(50),
+		-- asociaciones 
+		PRIMARY KEY (PK_PreguntaId),
+		CONSTRAINT FK_USUARIOCREADORID_PREGUNTA FOREIGN KEY (FK_UsuarioCreadorId) REFERENCES seg_001_usuario (PK_UsuarioId)
+	            ON DELETE CASCADE
+	            ON UPDATE RESTRICT,
+		CONSTRAINT FK_USUARIOMODIFICADOID_PREGUNTA FOREIGN KEY (FK_usuarioModificadorId) REFERENCES seg_001_usuario (PK_UsuarioId)
+	            ON DELETE CASCADE
+	            ON UPDATE RESTRICT,
+		CONSTRAINT FK_CMMESTATUSPREGUNTAID_PREGUNTA FOREIGN KEY (FK_CMMEstatusPreguntaId) REFERENCES sis_024_controles_maestros_multiples (ControlMaestroID)
+	            ON DELETE CASCADE
+	            ON UPDATE RESTRICT,
+        CONSTRAINT FK_FORMULARIOID_FORMULARIO_PREGUNTA FOREIGN KEY (FK_CategoriaId) REFERENCES cat_055_formulario (PK_CategoriaId)
+	            ON DELETE CASCADE
+	            ON UPDATE RESTRICT
+	)
+//
+DELIMITTER;
+
+DELIMITER //
+	CREATE TABLE cat_056_propiedad(
+	    PK_PropiedadId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+		Nombre varchar(200), 
+		Valor INT (11),
+		FK_UsuarioCreadorId INT (11) NOT NULL, 
+		FechaCreacion DATETIME DEFAULT NOW() NOT NULL,
+		FK_UsuarioModificadorId INT (11),
+		FechaModificacion DATETIME,
+		FK_CMMEstatusPropiedadId BIGINT UNSIGNED DEFAULT 1000041 NOT NULL,
+		-- asociaciones 
+		PRIMARY KEY (PK_PropiedadId),
+		CONSTRAINT FK_USUARIOCREADORID_PROPIEDAD FOREIGN KEY (FK_UsuarioCreadorId) REFERENCES seg_001_usuario (PK_UsuarioId)
+	            ON DELETE CASCADE
+	            ON UPDATE RESTRICT,
+		CONSTRAINT FK_USUARIOMODIFICADOID_PROPIEDAD FOREIGN KEY (FK_usuarioModificadorId) REFERENCES seg_001_usuario (PK_UsuarioId)
+	            ON DELETE CASCADE
+	            ON UPDATE RESTRICT,
+		CONSTRAINT FK_CMMESTATUSPROPIEDADID_PROPIEDAD FOREIGN KEY (FK_CMMEstatusPropiedadId) REFERENCES sis_024_controles_maestros_multiples (ControlMaestroID)
+	            ON DELETE CASCADE
+	            ON UPDATE RESTRICT
+	)
 //
 DELIMITTER;
 
