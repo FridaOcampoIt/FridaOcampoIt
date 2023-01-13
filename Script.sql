@@ -527,7 +527,7 @@ DeLIMITER //
 			form.FK_UsuarioCreadorId,
 			form.FechaCreacion,
 			form.FK_UsuarioModificadorId,
-			form.FechaModificacion,
+			form.FechaModificacion, -- usuario clonado
 			form.FK_CMMEstatusFormularioId,
 			fs.FK_SectorId 
 			FROM cat_053_formulario form
