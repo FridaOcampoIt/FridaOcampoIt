@@ -550,7 +550,6 @@ DELIMITER //
 		FechaModificacion DATETIME,
 		FK_CMMEstatusCategoriaId BIGINT UNSIGNED DEFAULT 1000041 NOT NULL,
         Tipo varchar(100),
-        Preguntas ,
 		-- asociaciones 
 		PRIMARY KEY (PK_CategoriaId),
 		CONSTRAINT FK_USUARIOCREADORID_CATEGORIA FOREIGN KEY (FK_UsuarioCreadorId) REFERENCES seg_001_usuario (PK_UsuarioId)
@@ -580,7 +579,6 @@ DELIMITER //
 		FK_UsuarioModificadorId INT (11),
 		FechaModificacion DATETIME,
 		FK_CMMEstatusPreguntaId BIGINT UNSIGNED DEFAULT 1000041 NOT NULL,
-        Propiedades ,
         TipoPregunta varchar(50),
 		-- asociaciones 
 		PRIMARY KEY (PK_PreguntaId),
@@ -600,28 +598,79 @@ DELIMITER //
 //
 DELIMITTER;
 
+	DELIMITER //
+		CREATE TABLE cat_056_propiedad(
+		    PK_PropiedadId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+			Nombre varchar(200), 
+			Valor INT (11),
+			FK_UsuarioCreadorId INT (11) NOT NULL, 
+			FechaCreacion DATETIME DEFAULT NOW() NOT NULL,
+			FK_UsuarioModificadorId INT (11),
+			FechaModificacion DATETIME,
+			FK_CMMEstatusPropiedadId BIGINT UNSIGNED DEFAULT 1000041 NOT NULL,
+			-- asociaciones 
+			PRIMARY KEY (PK_PropiedadId),
+			CONSTRAINT FK_USUARIOCREADORID_PROPIEDAD FOREIGN KEY (FK_UsuarioCreadorId) REFERENCES seg_001_usuario (PK_UsuarioId)
+		            ON DELETE CASCADE
+		            ON UPDATE RESTRICT,
+			CONSTRAINT FK_USUARIOMODIFICADOID_PROPIEDAD FOREIGN KEY (FK_usuarioModificadorId) REFERENCES seg_001_usuario (PK_UsuarioId)
+		            ON DELETE CASCADE
+		            ON UPDATE RESTRICT,
+			CONSTRAINT FK_CMMESTATUSPROPIEDADID_PROPIEDAD FOREIGN KEY (FK_CMMEstatusPropiedadId) REFERENCES sis_024_controles_maestros_multiples (ControlMaestroID)
+		            ON DELETE CASCADE
+		            ON UPDATE RESTRICT
+		)
+	//
+	DELIMITTER;
+	
 DELIMITER //
-	CREATE TABLE cat_056_propiedad(
-	    PK_PropiedadId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
-		Nombre varchar(200), 
-		Valor INT (11),
-		FK_UsuarioCreadorId INT (11) NOT NULL, 
-		FechaCreacion DATETIME DEFAULT NOW() NOT NULL,
-		FK_UsuarioModificadorId INT (11),
-		FechaModificacion DATETIME,
-		FK_CMMEstatusPropiedadId BIGINT UNSIGNED DEFAULT 1000041 NOT NULL,
-		-- asociaciones 
-		PRIMARY KEY (PK_PropiedadId),
-		CONSTRAINT FK_USUARIOCREADORID_PROPIEDAD FOREIGN KEY (FK_UsuarioCreadorId) REFERENCES seg_001_usuario (PK_UsuarioId)
-	            ON DELETE CASCADE
-	            ON UPDATE RESTRICT,
-		CONSTRAINT FK_USUARIOMODIFICADOID_PROPIEDAD FOREIGN KEY (FK_usuarioModificadorId) REFERENCES seg_001_usuario (PK_UsuarioId)
-	            ON DELETE CASCADE
-	            ON UPDATE RESTRICT,
-		CONSTRAINT FK_CMMESTATUSPROPIEDADID_PROPIEDAD FOREIGN KEY (FK_CMMEstatusPropiedadId) REFERENCES sis_024_controles_maestros_multiples (ControlMaestroID)
-	            ON DELETE CASCADE
-	            ON UPDATE RESTRICT
-	)
+-- SPC ACTUALIZAR CATEGORIA
+    CREATE PROCEDURE spu_editarCategoria(
+        IN _categoriaId INT(11),
+        IN _formularioId INT(11),
+        IN _nombre VARCHAR(200),
+        IN _usuarioModificadorId INT (11),
+        IN _descripcionCorta VARCHAR(200),
+        IN _estatusPropiedadId BIGINT,
+        IN _tipo VARCHAR(50),
+        INOUT _response int
+    )
+    BEGIN
+        UPDATE cat_054_categoria  fcat 
+        INNER JOIN sis_024_controles_maestros_multiples estado ON estado.ControlMaestroId = fcat.FK_CMMEstatusCategoriaId 
+		SET fcat.Nombre  = _nombre,
+			fcat.FK_UsuarioModificadorId  =_usuarioModificadorId,
+			fcat.DescripcionCorta  =_descripcionCorta,
+			fcat.FK_CMMEstatusCategoriaId  =_estatusId,
+			fcat.FechaModificacion = NOW()
+		WHERE  PK_CategoriaId  = _categoriaId;
+	SET _response = 1;
+	END	
+	
 //
-DELIMITTER;
+DELIMITER;
 
+DELIMITER //
+-- SPC ACTUALIZAR PREGUNTA
+    CREATE PROCEDURE spu_editarCategoria(
+        IN _categoriaId INT(11),
+        IN _nombre VARCHAR(200),
+        IN _usuarioModificadorId INT (11),
+        IN _descripcionCorta VARCHAR(200),
+        IN _estatusPropiedadId BIGINT,
+        INOUT _response int
+    )
+    BEGIN
+        UPDATE cat_054_categoria  fcat 
+        INNER JOIN sis_024_controles_maestros_multiples estado ON estado.ControlMaestroId = fcat.FK_CMMEstatusCategoriaId 
+		SET fcat.Nombre  = _nombre,
+			fcat.FK_UsuarioModificadorId  =_usuarioModificadorId,
+			fcat.DescripcionCorta  =_descripcionCorta,
+			fcat.FK_CMMEstatusCategoriaId  =_estatusId,
+			fcat.FechaModificacion = NOW()
+		WHERE  PK_CategoriaId  = _categoriaId;
+	SET _response = 1;
+	END	
+	
+//
+DELIMITER;
