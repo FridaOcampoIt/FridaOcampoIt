@@ -522,7 +522,7 @@ DeLIMITER //
 			FechaModificacion,
 			FK_CMMEstatusFormularioId)
 	SELECT 	
-			form.Nombre, 
+			CONCAT(form.Nombre,'-Copy'),
 			form.DescripcionCorta,
 			form.FK_UsuarioCreadorId,
 			form.FechaCreacion,
