@@ -1,8 +1,8 @@
 SELECT *FROM cat_003_compania;
 SELECT *FROM sis_024_controles_maestros_multiples;
-
-   ------
-   INSERT INTO sis_024_controles_maestros_multiples (
+-- TIPO DE GIRO -----------------------------------
+DELIMITER //
+INSERT INTO sis_024_controles_maestros_multiples (
         ControlMaestroId,
         Nombre,
         Valor,
@@ -21,8 +21,11 @@ SELECT *FROM sis_024_controles_maestros_multiples;
         true,
         true
     );
+//
+DELIMITER;
    
-   INSERT INTO sis_024_controles_maestros_multiples (
+DELIMITER //
+INSERT INTO sis_024_controles_maestros_multiples (
         ControlMaestroId,
         Nombre,
         Valor,
@@ -41,8 +44,10 @@ SELECT *FROM sis_024_controles_maestros_multiples;
         true,
         true
     );
-   
-   INSERT INTO sis_024_controles_maestros_multiples (
+   //
+DELIMITER;
+DELIMITER //
+INSERT INTO sis_024_controles_maestros_multiples (
         ControlMaestroId,
         Nombre,
         Valor,
@@ -61,16 +66,18 @@ SELECT *FROM sis_024_controles_maestros_multiples;
         true,
         true
     );
--- columna tipo giro
+   //
+DELIMITER;
+   
+-- COLUMNA DE TIPO DE GIRO -------------------------
 ALTER TABLE cat_003_compania ADD Column FK_CMMTipoGiro Bigint UNSIGNED not null DEFAULT 1000022;
 
 ALTER TABLE cat_003_compania  ADD CONSTRAINT FKTIPOGIRO
 FOREIGN KEY ( FK_CMMTipoGiro) REFERENCES sis_024_controles_maestros_multiples (ControlMaestroID);
 	
 
---SEGUNDA CLAVE FORACEA EN CONTROLES MAESTROS Y SU INSERCION DE DATOS
-
-DELIMETER //
+-- SEGUNDA CLAVE FORANEA EN CONTROLES MAESTROS Y SU INSERCION DE DATOS
+DELIMITER //
 INSERT INTO sis_024_controles_maestros_multiples (
   ControlMaestroId,
   Nombre,
@@ -91,8 +98,8 @@ VALUES
   true
 );
 //
-DELIMETER;
-DELIMETER //
+DELIMITER;
+DELIMITER //
 INSERT INTO sis_024_controles_maestros_multiples (
   ControlMaestroId,
   Nombre,
@@ -113,8 +120,8 @@ VALUES
   true
   );
 //
-DELIMETER; 
-DELIMETER //  
+DELIMITER; 
+DELIMITER //  
 INSERT INTO sis_024_controles_maestros_multiples (
   ControlMaestroId,
   Nombre,
@@ -135,19 +142,19 @@ VALUES
   true
 );
 // 
-DELIMETER;
+DELIMITER;
 
-DELIMETER //
---AGREGAR TABLA A COMPAÑIA
+DELIMITER //
+-- AGREGAR TABLA A COMPAÑIA
 ALTER TABLE cat_003_compania ADD Column FK_CMMEstatus Bigint UNSIGNED not null DEFAULT 1000025;
 //
-DELIMETER;
+DELIMITER;
 --CRER LA CLAVE FORANEA DE COMPAÑIA A CONTROLES MAESTROS
-DELIMETER //
+DELIMITER //
 ALTER TABLE cat_003_compania  ADD CONSTRAINT FKESTATUS
 FOREIGN KEY ( FK_CMMEstatus) REFERENCES sis_024_controles_maestros_multiples (ControlMaestroID);
 //
-DELIMETER;
+DELIMITER;
 
 -- -----------------------------pruebas----------------------------------------------------------
 ALTER TABLE cat_003_compania DROP FOREIGN KEY FKESTATUS ; 
@@ -168,9 +175,8 @@ select CompaniaId, Nombre, RazonSocial FROM cat_003_compania where FK_CMMEstatus
 -- Formulario
 SELECT *FROM rel_054_formulario_sector rfs 
   
-
-DELIMITER //
 -- ****************TABLA 1*********
+DELIMITER //
 	CREATE TABLE cat_052_sectores(
 	    PK_sectorId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
 	    Nombre varchar(200),
@@ -194,9 +200,8 @@ DELIMITER //
 	)
 //
 DELIMITER;
-
-DELIMITER //
 -- ****************TABLA 2*********
+DELIMITER //
 	CREATE TABLE cat_053_formulario(
 	    PK_FormularioId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
 		Nombre varchar(200), 
@@ -220,14 +225,12 @@ DELIMITER //
 	)
 //
 DELIMITER;
-
-DELIMITER //
 -- ****************TABLA 3*********
+DELIMITER //
 	CREATE TABLE rel_054_formulario_sector(
 	    PK_FormularioSectorId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL ,
 		FK_SectorId BIGINT UNSIGNED,
-		FK_FormularioId BIGINT UNSIGNED,
-			-- asociaciones 
+		FK_FormularioId BIGINT UNSIGNED, 
 		PRIMARY KEY (PK_FormularioSectorId),
 		CONSTRAINT FK_SECTORID_SECTOR FOREIGN KEY (FK_SectorId) REFERENCES cat_052_sectores (PK_sectorId)
 	            ON DELETE CASCADE
@@ -238,9 +241,8 @@ DELIMITER //
 	)
 //
 DELIMITER;
-
+-- SPI GUARDAR SECTORES TAMBLA 1 -----------------
 DELIMITER //
--- SPI GUARDAR SECTORES TAMBLA 1
 	DROP PROCEDURE IF EXISTS spi_guardarSectores;
     CREATE PROCEDURE spi_guardarSectores(
         IN _Nombre varchar(200),
@@ -274,15 +276,13 @@ DELIMITER //
     END
 //
 DELIMITER;
-
+-- SPC CONSULTA SECTORES TABLA 1 ------------------
 DELIMITER //
-DROP PROCEDURE IF EXISTS spc_consultarSectores;
+	DROP PROCEDURE IF EXISTS spc_consultarSectores;
 // 
 DELIMITER;
-
 DELIMITER //
--- SPC CONSULTA SECTORES TABLA 1
- CREATE PROCEDURE spc_consultarSectores()        
+ 	CREATE PROCEDURE spc_consultarSectores()        
     BEGIN
         SELECT 
             sec.PK_sectorId  sectorId,
@@ -300,13 +300,12 @@ DELIMITER //
     END
 //
 DELIMITER;
-
+-- SPC ELIMINAR SECTORES TABLA 1 -------------------
 DELIMITER //
 	DROP PROCEDURE IF EXISTS spd_eliminarSector;
 // 
 DELIMITER:
 DELIMITER //
--- SPC ELIMINAR SECTORES TABLA 1
     CREATE PROCEDURE spd_eliminarSector(
         IN _sectorId INT(11),
         INOUT _response int
@@ -319,14 +318,12 @@ DELIMITER //
 	END
 //
 DELIMITER;
-
+-- SPC ACTUALIZAR SECTORES TABLA 1 -----------------
 DELIMITER //
 	DROP PROCEDURE IF EXISTS spu_editarSector;
 //
 DELIMITER;
-
 DELIMITER //
--- SPC ACTUALIZAR SECTORES TABLA 1
     CREATE PROCEDURE spu_editarSector(
         IN _sectorId INT(11),
         IN _nombre VARCHAR(200),
@@ -346,17 +343,14 @@ DELIMITER //
 		WHERE  PK_sectorId  = _sectorId;
 	SET _response = 1;
 	END	
-	
 //
 DELIMITER;
-
+-- SPC CONSULTA SECTORES BY ID TABLA 1 -------------
 DELIMITER //
 	DROP PROCEDURE IF EXISTS spc_consultarSectoresById;
 // 
 DELIMITER;
-
 DELIMITER //
--- SPC CONSULTA SECTORES BY ID TABLA 1
  CREATE PROCEDURE spc_consultarSectoresById(
  	IN _sectorId INT (11)
  )        
@@ -386,15 +380,9 @@ SELECT *FROM cat_053_formulario cf
 
 
 
-
+-- SPI GUARDAR FORMULARIO TABLA 2 ------------------
 DELIMITER //
-	DROP PROCEDURE IF EXISTS spc_consultarFormulario;
-// 
-DELIMITER;
-
-DELIMITER //
--- SPI GUARDAR FORMULARIO TABLA 2
-        CREATE PROCEDURE spi_guardarFormulario(
+    CREATE PROCEDURE spi_guardarFormulario(
         IN _Nombre varchar(200),
         IN _DescripcionCorta varchar(500),
         IN _UsuarioCreadorId INT (11),
@@ -426,10 +414,13 @@ DELIMITER //
     END
 //
 DELIMITER;
-
+-- SPC CONSULTA formulario TABLA 2 -----------------
 DELIMITER //
--- SPC CONSULTA formulario TABLA 2
- CREATE PROCEDURE spc_consultarFormulario(
+	DROP PROCEDURE IF EXISTS spc_consultarFormulario;
+// 
+DELIMITER;
+DELIMITER //
+ 	CREATE PROCEDURE spc_consultarFormulario(
  IN _sectorId INT (11))        
     BEGIN
         SELECT 
@@ -449,9 +440,8 @@ DELIMITER //
             WHERE estado.Valor="ACTIVO" OR estado.Valor="INACTIVO"  ;
 //
 DELIMITER;
-
+-- SPC ACTUALIZAR SECTORES TABLA 2 -----------------
 DELIMITER //
--- SPC ACTUALIZAR SECTORES TABLA 2
     CREATE PROCEDURE spu_editarFormulario(
         IN _formularioId INT(11),
         IN _nombre VARCHAR(200),
@@ -471,13 +461,11 @@ DELIMITER //
 		WHERE  PK_FormularioId  = _formularioId;
 	SET _response = 1;
 	END	
-	
 //
 DELIMITER;
-
+-- SPC CONSULTA SECTORES BY ID TABLA 1 -------------
 DELIMITER //
--- SPC CONSULTA SECTORES BY ID TABLA 1
- CREATE PROCEDURE spc_consultarFormulariosById(
+ 	CREATE PROCEDURE spc_consultarFormulariosById(
  	IN _formularioId INT (11)
  )        
     BEGIN
@@ -501,14 +489,14 @@ DELIMITER;
 SELECT *FROM rel_054_formulario_sector 
 SELECT *FROM cat_052_sectores cs  
 SELECT *FROM cat_053_formulario cf 
-
+SELECT *FROM sis_024_controles_maestros_multiples
+-- SPI GENRAR UN DUPLICADO --------------------------
 DELIMITER //
 	DROP PROCEDURE IF EXISTS spi_guardarDuplicadoFormulario;
 //
 DELIMITER;
 
-DeLIMITER //
--- SPI GENRAR UN DUPLICADO 
+DeLIMITER // 
  CREATE PROCEDURE spi_guardarDuplicadoFormulario(
  	IN _formularioId INT (11)
  )        
@@ -537,7 +525,8 @@ DeLIMITER //
 //
 DELIMITER;
 
--- TABLAS DE FORMULARIO
+-- -------------------------------- TABLAS DE FORMULARIO ---------------------------------------------------------------------------
+-- CATEGORIAS --------------------------------------
 DELIMITER //
 	CREATE TABLE cat_054_categoria(
 	    PK_CategoriaId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
@@ -548,7 +537,7 @@ DELIMITER //
 		FechaCreacion DATETIME DEFAULT NOW() NOT NULL,
 		FK_UsuarioModificadorId INT (11),
 		FechaModificacion DATETIME,
-		FK_CMMEstatusCategoriaId BIGINT UNSIGNED DEFAULT 1000041 NOT NULL,
+		FK_CMMEstatusCategoriaId BIGINT UNSIGNED DEFAULT 1000050 NOT NULL,
         Tipo varchar(100),
 		-- asociaciones 
 		PRIMARY KEY (PK_CategoriaId),
@@ -567,18 +556,18 @@ DELIMITER //
 	)
 //
 DELIMITTER;
-
+-- PREGUNTAS ---------------------------------------
 DELIMITER //
 	CREATE TABLE cat_055_pregunta(
 	    PK_PreguntaId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
         FK_CategoriaId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
 		Nombre varchar(200),
-        Placeholder varchar (100), 
+        Placeholder varchar (50), 
 		FK_UsuarioCreadorId INT (11) NOT NULL, 
-		FechaCreacion DATETIME DEFAULT NOW() NOT NULL,
 		FK_UsuarioModificadorId INT (11),
+		FechaCreacion DATETIME DEFAULT NOW() NOT NULL,
 		FechaModificacion DATETIME,
-		FK_CMMEstatusPreguntaId BIGINT UNSIGNED DEFAULT 1000041 NOT NULL,
+		FK_CMMEstatusPreguntaId BIGINT UNSIGNED DEFAULT 1000053 NOT NULL,
         TipoPregunta varchar(50),
 		-- asociaciones 
 		PRIMARY KEY (PK_PreguntaId),
@@ -597,7 +586,7 @@ DELIMITER //
 	)
 //
 DELIMITTER;
-
+-- PROPIEDADES --------------------------------------
 	DELIMITER //
 		CREATE TABLE cat_056_propiedad(
 		    PK_PropiedadId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
@@ -607,7 +596,7 @@ DELIMITTER;
 			FechaCreacion DATETIME DEFAULT NOW() NOT NULL,
 			FK_UsuarioModificadorId INT (11),
 			FechaModificacion DATETIME,
-			FK_CMMEstatusPropiedadId BIGINT UNSIGNED DEFAULT 1000041 NOT NULL,
+			FK_CMMEstatusPropiedadId BIGINT UNSIGNED DEFAULT 1000056 NOT NULL,
 			-- asociaciones 
 			PRIMARY KEY (PK_PropiedadId),
 			CONSTRAINT FK_USUARIOCREADORID_PROPIEDAD FOREIGN KEY (FK_UsuarioCreadorId) REFERENCES seg_001_usuario (PK_UsuarioId)
@@ -622,16 +611,19 @@ DELIMITTER;
 		)
 	//
 	DELIMITTER;
-	
+-- ----------------------------------------SP -------------------------------------------------------------------------------------- 
+-- SPC ACTUALIZAR CATEGORIA -------------------------
 DELIMITER //
--- SPC ACTUALIZAR CATEGORIA
+	DROP PROCEDURE IF EXISTS spu_editarCategoria;
+//
+DELIMITER;
+DELIMITER //
     CREATE PROCEDURE spu_editarCategoria(
         IN _categoriaId INT(11),
-        IN _formularioId INT(11),
         IN _nombre VARCHAR(200),
         IN _usuarioModificadorId INT (11),
         IN _descripcionCorta VARCHAR(200),
-        IN _estatusPropiedadId BIGINT,
+        IN _estatusCategoriaId BIGINT,
         IN _tipo VARCHAR(50),
         INOUT _response int
     )
@@ -641,36 +633,276 @@ DELIMITER //
 		SET fcat.Nombre  = _nombre,
 			fcat.FK_UsuarioModificadorId  =_usuarioModificadorId,
 			fcat.DescripcionCorta  =_descripcionCorta,
-			fcat.FK_CMMEstatusCategoriaId  =_estatusId,
+			fcat.FK_CMMEstatusCategoriaId  =_estatusCategoriaId,
 			fcat.FechaModificacion = NOW()
 		WHERE  PK_CategoriaId  = _categoriaId;
 	SET _response = 1;
 	END	
-	
 //
 DELIMITER;
-
+-- SPC ACTUALIZAR PREGUNTA --------------------------
 DELIMITER //
--- SPC ACTUALIZAR PREGUNTA
-    CREATE PROCEDURE spu_editarCategoria(
-        IN _categoriaId INT(11),
+	DROP PROCEDURE IF EXISTS spu_editarPregunta;
+//
+DELIMITER;
+DELIMITER //
+    CREATE PROCEDURE spu_editarPregunta(
+        IN _preguntaId INT(11),
+        IN _nombre VARCHAR(200),
+        IN _placeholder VARCHAR(50),
+        IN _usuarioModificadorId INT (11),
+        IN _tipoPregunta VARCHAR(50),
+        IN _estatusPreguntaId BIGINT,
+        INOUT _response int
+    )
+    BEGIN
+        UPDATE cat_055_pregunta  pre
+        INNER JOIN sis_024_controles_maestros_multiples estado ON estado.ControlMaestroId = pre.FK_CMMEstatusPreguntaId 
+		SET pre.Nombre  = _nombre,
+			pre.FK_UsuarioModificadorId  =_usuarioModificadorId,
+			pre.TipoPregunta  =_tipoPregunta,
+			pre.FK_CMMEstatusPreguntaId  =_estatusPreguntaId,
+			pre.Placeholder  =_placeholder,
+			pre.FechaModificacion = NOW()
+		WHERE  PK_PreguntaId  = _preguntaId;
+	SET _response = 1;
+	END	
+//
+DELIMITER;
+-- SPC ACTUALIZAR PROPIEDAD --------------------------
+DELIMITER //
+	DROP PROCEDURE IF EXISTS spu_editarPropiedad;
+//
+DELIMITER;
+DELIMITER //
+    CREATE PROCEDURE spu_editarPropiedad(
+        IN _propiedadId INT(11),
         IN _nombre VARCHAR(200),
         IN _usuarioModificadorId INT (11),
-        IN _descripcionCorta VARCHAR(200),
+        IN _valor INT(11),
         IN _estatusPropiedadId BIGINT,
         INOUT _response int
     )
     BEGIN
-        UPDATE cat_054_categoria  fcat 
-        INNER JOIN sis_024_controles_maestros_multiples estado ON estado.ControlMaestroId = fcat.FK_CMMEstatusCategoriaId 
-		SET fcat.Nombre  = _nombre,
-			fcat.FK_UsuarioModificadorId  =_usuarioModificadorId,
-			fcat.DescripcionCorta  =_descripcionCorta,
-			fcat.FK_CMMEstatusCategoriaId  =_estatusId,
-			fcat.FechaModificacion = NOW()
-		WHERE  PK_CategoriaId  = _categoriaId;
+        UPDATE cat_056_propiedad  pro 
+        INNER JOIN sis_024_controles_maestros_multiples estado ON estado.ControlMaestroId = pro.FK_CMMEstatusCategoriaId 
+		SET pro.Nombre  = _nombre,
+			pro.FK_UsuarioModificadorId  =_usuarioModificadorId,
+			pro.Valor  =_valor,
+			pro.FK_CMMEstatusCategoriaId  =_estatusPropiedadId,
+			pro.FechaModificacion = NOW()
+		WHERE  PK_PropiedadId  = _propiedadId;
 	SET _response = 1;
-	END	
-	
+	END		
 //
 DELIMITER;
+-- --------------------------------------INSERTO TABLA MAESTRA------------------------------------------------------------------------
+-- CATEGORIA -----------------------------------------
+DELIMETER //  
+	INSERT INTO sis_024_controles_maestros_multiples (
+	  	ControlMaestroId,
+        Nombre,
+        Valor,
+        FK_UsuarioCreador, 
+        FechaCreacion,
+        Activo,
+        CmmSistema
+	)
+	VALUES 
+	(
+	  1000050,
+	  'ESTATUS_CATEGORIA',
+	  'ACTIVO',
+	  1,
+	  now(),
+	  true,
+	  true
+	);
+// 
+DELIMETER;
+
+DELIMETER //  
+	INSERT INTO sis_024_controles_maestros_multiples (
+	  ControlMaestroId,
+	  Nombre,
+	  Valor,
+	  FK_UsuarioCreador, 
+	  FechaCreacion,
+	  Activo,
+	  CmmSistema
+	)
+	VALUES 
+	(
+	  1000051,
+	  'ESTATUS_CATEGORIA',
+	  'INACTIVO',
+	  1,
+	  now(),
+	  true,
+	  true
+	);
+// 
+DELIMETER;
+
+DELIMETER //  
+	INSERT INTO sis_024_controles_maestros_multiples (
+	  ControlMaestroId,
+	  Nombre,
+	  Valor,
+	  FK_UsuarioCreador, 
+	  FechaCreacion,
+	  Activo,
+	  CmmSistema
+	)
+	VALUES 
+	(
+	  1000052,
+	  'ESTATUS_CATEGORIA',
+	  'ELIMINADO',
+	  1,
+	  now(),
+	  true,
+	  true
+	);
+// 
+DELIMETER;
+
+-- PREGUNTA ------------------------------------------
+DELIMETER //  
+	INSERT INTO sis_024_controles_maestros_multiples (
+	  ControlMaestroId,
+	  Nombre,
+	  Valor,
+	  FK_UsuarioCreador, 
+	  FechaCreacion,
+	  Activo,
+	  CmmSistema
+	)
+	VALUES 
+	(
+	  1000053,
+	  'ESTATUS_PREGUNTA',
+	  'ACTIVO',
+	  1,
+	  now(),
+	  true,
+	  true
+	);
+// 
+DELIMETER;
+
+DELIMETER //  
+	INSERT INTO sis_024_controles_maestros_multiples (
+	  ControlMaestroId,
+	  Nombre,
+	  Valor,
+	  FK_UsuarioCreador, 
+	  FechaCreacion,
+	  Activo,
+	  CmmSistema
+	)
+	VALUES 
+	(
+	  1000054,
+	  'ESTATUS_PREGUNTA',
+	  'INACTIVO',
+	  1,
+	  now(),
+	  true,
+	  true
+	);
+// 
+DELIMETER;
+
+DELIMETER //  
+	INSERT INTO sis_024_controles_maestros_multiples (
+	  ControlMaestroId,
+	  Nombre,
+	  Valor,
+	  FK_UsuarioCreador, 
+	  FechaCreacion,
+	  Activo,
+	  CmmSistema
+	)
+	VALUES 
+	(
+	  1000055,
+	  'ESTATUS_PREGUNTA',
+	  'ELIMINADO',
+	  1,
+	  now(),
+	  true,
+	  true
+	);
+// 
+DELIMETER;
+
+-- PROPIEDADES ---------------------------------------
+DELIMETER //  
+	INSERT INTO sis_024_controles_maestros_multiples (
+	  ControlMaestroId,
+	  Nombre,
+	  Valor,
+	  FK_UsuarioCreador, 
+	  FechaCreacion,
+	  Activo,
+	  CmmSistema
+	)
+	VALUES 
+	(
+	  1000056,
+	  'ESTATUS_PROPIEDADES',
+	  'ACTIVO',
+	  1,
+	  now(),
+	  true,
+	  true
+	);
+// 
+DELIMETER;
+
+DELIMETER //  
+	INSERT INTO sis_024_controles_maestros_multiples (
+	  ControlMaestroId,
+	  Nombre,
+	  Valor,
+	  FK_UsuarioCreador, 
+	  FechaCreacion,
+	  Activo,
+	  CmmSistema
+	)
+	VALUES 
+	(
+	  1000057,
+	  'ESTATUS_PROPIEDADES',
+	  'INACTIVO',
+	  1,
+	  now(),
+	  true,
+	  true
+	);
+// 
+DELIMETER;
+
+DELIMETER //  
+	INSERT INTO sis_024_controles_maestros_multiples (
+	  ControlMaestroId,
+	  Nombre,
+	  Valor,
+	  FK_UsuarioCreador, 
+	  FechaCreacion,
+	  Activo,
+	  CmmSistema
+	)
+	VALUES 
+	(
+	  1000058,
+	  'ESTATUS_PROPIEDADES',
+	  'ELIMINADO',
+	  1,
+	  now(),
+	  true,
+	  true
+	);
+// 
+DELIMETER;
