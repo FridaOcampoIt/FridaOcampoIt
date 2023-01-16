@@ -489,7 +489,9 @@ DELIMITER;
 SELECT *FROM rel_054_formulario_sector 
 SELECT *FROM cat_052_sectores cs  
 SELECT *FROM cat_053_formulario cf 
-SELECT *FROM sis_024_controles_maestros_multiples
+SELECT *FROM cat_054_categoria cc 
+SELECT *FROM cat_055_pregunta cp  
+SELECT *FROM cat_056_propiedad cp 
 -- SPI GENRAR UN DUPLICADO --------------------------
 DELIMITER //
 	DROP PROCEDURE IF EXISTS spi_guardarDuplicadoFormulario;
@@ -530,7 +532,7 @@ DELIMITER;
 DELIMITER //
 	CREATE TABLE cat_054_categoria(
 	    PK_CategoriaId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
-        FK_FormularioId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+        FK_FormularioId BIGINT UNSIGNED,
 		Nombre varchar(200), 
 		DescripcionCorta varchar(500),
 		FK_UsuarioCreadorId INT (11) NOT NULL, 
@@ -560,7 +562,7 @@ DELIMITTER;
 DELIMITER //
 	CREATE TABLE cat_055_pregunta(
 	    PK_PreguntaId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
-        FK_CategoriaId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+        FK_CategoriaId BIGINT UNSIGNED,
 		Nombre varchar(200),
         Placeholder varchar (50), 
 		FK_UsuarioCreadorId INT (11) NOT NULL, 
@@ -580,16 +582,18 @@ DELIMITER //
 		CONSTRAINT FK_CMMESTATUSPREGUNTAID_PREGUNTA FOREIGN KEY (FK_CMMEstatusPreguntaId) REFERENCES sis_024_controles_maestros_multiples (ControlMaestroID)
 	            ON DELETE CASCADE
 	            ON UPDATE RESTRICT,
-        CONSTRAINT FK_FORMULARIOID_FORMULARIO_PREGUNTA FOREIGN KEY (FK_CategoriaId) REFERENCES cat_055_formulario (PK_CategoriaId)
+        CONSTRAINT FK_FORMULARIOID_FORMULARIO_PREGUNTA FOREIGN KEY (FK_CategoriaId) REFERENCES cat_054_categoria (PK_CategoriaId)
 	            ON DELETE CASCADE
 	            ON UPDATE RESTRICT
 	)
 //
 DELIMITTER;
+
 -- PROPIEDADES --------------------------------------
 	DELIMITER //
 		CREATE TABLE cat_056_propiedad(
 		    PK_PropiedadId BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+		    FK_PreguntaId BIGINT UNSIGNED,
 			Nombre varchar(200), 
 			Valor INT (11),
 			FK_UsuarioCreadorId INT (11) NOT NULL, 
@@ -607,7 +611,10 @@ DELIMITTER;
 		            ON UPDATE RESTRICT,
 			CONSTRAINT FK_CMMESTATUSPROPIEDADID_PROPIEDAD FOREIGN KEY (FK_CMMEstatusPropiedadId) REFERENCES sis_024_controles_maestros_multiples (ControlMaestroID)
 		            ON DELETE CASCADE
-		            ON UPDATE RESTRICT
+		            ON UPDATE RESTRICT,
+		    CONSTRAINT FK_FORMULARIOID_FORMULARIO_PREGUNTA_ID FOREIGN KEY (FK_PreguntaId) REFERENCES cat_055_pregunta (PK_PreguntaId)
+	            ON DELETE CASCADE
+	            ON UPDATE RESTRICT
 		)
 	//
 	DELIMITTER;
@@ -698,7 +705,7 @@ DELIMITER //
 DELIMITER;
 -- --------------------------------------INSERTO TABLA MAESTRA------------------------------------------------------------------------
 -- CATEGORIA -----------------------------------------
-DELIMETER //  
+DELIMITER //  
 	INSERT INTO sis_024_controles_maestros_multiples (
 	  	ControlMaestroId,
         Nombre,
@@ -719,9 +726,9 @@ DELIMETER //
 	  true
 	);
 // 
-DELIMETER;
+DELIMITER;
 
-DELIMETER //  
+DELIMITER //  
 	INSERT INTO sis_024_controles_maestros_multiples (
 	  ControlMaestroId,
 	  Nombre,
@@ -742,9 +749,9 @@ DELIMETER //
 	  true
 	);
 // 
-DELIMETER;
+DELIMITER;
 
-DELIMETER //  
+DELIMITER //  
 	INSERT INTO sis_024_controles_maestros_multiples (
 	  ControlMaestroId,
 	  Nombre,
@@ -765,10 +772,10 @@ DELIMETER //
 	  true
 	);
 // 
-DELIMETER;
+DELIMITER;
 
 -- PREGUNTA ------------------------------------------
-DELIMETER //  
+DELIMITER //  
 	INSERT INTO sis_024_controles_maestros_multiples (
 	  ControlMaestroId,
 	  Nombre,
@@ -789,9 +796,9 @@ DELIMETER //
 	  true
 	);
 // 
-DELIMETER;
+DELIMITER;
 
-DELIMETER //  
+DELIMITER //  
 	INSERT INTO sis_024_controles_maestros_multiples (
 	  ControlMaestroId,
 	  Nombre,
@@ -812,9 +819,9 @@ DELIMETER //
 	  true
 	);
 // 
-DELIMETER;
+DELIMITER;
 
-DELIMETER //  
+DELIMITER //  
 	INSERT INTO sis_024_controles_maestros_multiples (
 	  ControlMaestroId,
 	  Nombre,
@@ -835,10 +842,10 @@ DELIMETER //
 	  true
 	);
 // 
-DELIMETER;
+DELIMITER;
 
 -- PROPIEDADES ---------------------------------------
-DELIMETER //  
+DELIMITER //  
 	INSERT INTO sis_024_controles_maestros_multiples (
 	  ControlMaestroId,
 	  Nombre,
@@ -859,9 +866,9 @@ DELIMETER //
 	  true
 	);
 // 
-DELIMETER;
+DELIMITER;
 
-DELIMETER //  
+DELIMITER //  
 	INSERT INTO sis_024_controles_maestros_multiples (
 	  ControlMaestroId,
 	  Nombre,
@@ -882,9 +889,9 @@ DELIMETER //
 	  true
 	);
 // 
-DELIMETER;
+DELIMITER;
 
-DELIMETER //  
+DELIMITER //  
 	INSERT INTO sis_024_controles_maestros_multiples (
 	  ControlMaestroId,
 	  Nombre,
@@ -905,4 +912,4 @@ DELIMETER //
 	  true
 	);
 // 
-DELIMETER;
+DELIMITER;
