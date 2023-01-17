@@ -692,11 +692,11 @@ DELIMITER //
     )
     BEGIN
         UPDATE cat_056_propiedad  pro 
-        INNER JOIN sis_024_controles_maestros_multiples estado ON estado.ControlMaestroId = pro.FK_CMMEstatusCategoriaId 
+        INNER JOIN sis_024_controles_maestros_multiples estado ON estado.ControlMaestroId = pro.FK_CMMEstatusPropiedadId 
 		SET pro.Nombre  = _nombre,
 			pro.FK_UsuarioModificadorId  =_usuarioModificadorId,
 			pro.Valor  =_valor,
-			pro.FK_CMMEstatusCategoriaId  =_estatusPropiedadId,
+			pro.FK_CMMEstatusPropiedadId =_estatusPropiedadId,
 			pro.FechaModificacion = NOW()
 		WHERE  PK_PropiedadId  = _propiedadId;
 	SET _response = 1;
@@ -913,3 +913,88 @@ DELIMITER //
 	);
 // 
 DELIMITER;
+-- INSERT DE PRUEBAAA------------------
+DELIMITER //  
+	INSERT INTO cat_054_categoria  (
+	    PK_CategoriaId,
+        FK_FormularioId,
+		Nombre , 
+		DescripcionCorta ,
+		FK_UsuarioCreadorId , 
+		FechaCreacion ,
+		FK_UsuarioModificadorId ,
+		FechaModificacion ,
+		FK_CMMEstatusCategoriaId,
+        Tipo
+	)
+	VALUES 
+	(
+	  1,
+	  14,
+	  'prueba',
+	  'holaaa',
+	  2,
+	  now(),
+	  NULL,
+	  now(),
+	  1000050,
+	  'SELECT'
+	);
+// 
+DELIMITER;
+DELIMITER //  
+	INSERT INTO cat_055_pregunta  (
+	  	PK_PreguntaId ,
+        FK_CategoriaId ,
+		Nombre ,
+        Placeholder ,
+		FK_UsuarioCreadorId , 
+		FK_UsuarioModificadorId ,
+		FechaCreacion ,
+		FechaModificacion ,
+		FK_CMMEstatusPreguntaId ,
+        TipoPregunta
+	)
+	VALUES 
+	(
+	  1,
+	  1,
+	  'prueba PREGUNTA',
+	  'LINEA SIMPLE',
+	  2,
+	  NULL,
+	  now(),
+	  now(),
+	  1000053,
+	  'TEXT'
+	);
+// 
+DELIMITER;
+DELIMITER //  
+	INSERT INTO cat_056_propiedad  (
+	  		PK_PropiedadId ,
+		    FK_PreguntaId ,
+			Nombre , 
+			Valor ,
+			FK_UsuarioCreadorId , 
+			FechaCreacion ,
+			FK_UsuarioModificadorId ,
+			FechaModificacion ,
+			FK_CMMEstatusPropiedadId
+	)
+	VALUES 
+	(
+	  1,
+	  1,
+	  'OPCIONN 1',
+	  3,
+	  2,
+	  now(),
+	  NULL,
+	  now(),
+	  1000056
+	);
+// 
+DELIMITER;
+-- ------------------------------------
+
