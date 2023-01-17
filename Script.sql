@@ -929,10 +929,10 @@ DELIMITER //
 	)
 	VALUES 
 	(
-	  1,
-	  14,
-	  'prueba',
-	  'holaaa',
+	  3,
+	  15,
+	  'prueba 3',
+	  'otro formulario',
 	  2,
 	  now(),
 	  NULL,
@@ -997,4 +997,19 @@ DELIMITER //
 // 
 DELIMITER;
 -- ------------------------------------
+SELECT 
+            cc.PK_CategoriaId  CategoriaId ,
+            cc.Nombre  nombre,
+            cc.DescripcionCorta DescripcionCorta,
+            cc.FK_CMMEstatusCategoriaId  EstatusCategoriaId,
+            cc.FK_UsuarioCreadorId usuarioCreadorId,
+            cc.FK_UsuarioModificadorId UsuarioModificadorId,
+            estado.Valor  valorestus,
+            fs.FK_SectorId  sectorId,
+            CONCAT(usu.Nombre , ' ', usu.Apellido)  nombreCompleto
+            FROM cat_054_categoria cc  
+            INNER JOIN sis_024_controles_maestros_multiples estado ON  estado.ControlMaestroId  = cc.FK_CMMEstatusCategoriaId  
+            INNER JOIN seg_001_usuario usu ON usu.PK_UsuarioId = cc.FK_UsuarioCreadorId	
+            INNER JOIN rel_054_formulario_sector fs ON fs.FK_FormularioId  = cc.FK_FormularioId 
+            WHERE cc.FK_FormularioId=15 ;
 
