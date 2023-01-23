@@ -1,32 +1,35 @@
 export class Pregunta{
     public preguntaId?:number;
-    public categoriaId?:number;
-
-    public nombre?:string;
-    public descripcionCorta:string;
+    public nombreES?:string;
+    public nombreEN?:string;
+    public descripcionES:string;
+    public descripcionEN:string;
     public placeholder?:string;
-    
-    public tipoPregunta?:string;
-    public validacion?:string;
-    
+    public sectorId?:number;
+    public tipoPreguntaId?:number;
+    public validaciones?:string;
+    public CreadoPorId?:number;
     public fechaCreacion?:Date;
+    public ModificadoPorId?:number;
     public fechaModificacion?:Date;
     
-    public estatus?:number;
 
-    public usuarioCreador?:number;
-    public usuarioModificador?:number;
+    public categoriaId?:number;
+    public estatus?:number;
     constructor(){
         this.preguntaId=0;
-        this.categoriaId=0;
-        this.nombre="";
-        this.tipoPregunta="";
-        this.estatus=0;
+        this.nombreES="";
+        this.nombreEN="";
+        this.descripcionES="";
+        this.descripcionEN=""
+        this.sectorId=0;
+        this.tipoPreguntaId=0;
         this.placeholder="";
+        this.validaciones="";
         this.fechaCreacion=new Date();
+        this.CreadoPorId=0;
         this.fechaModificacion=new Date();
-        this.usuarioCreador=0;
-        this.usuarioModificador=0;
+        this.ModificadoPorId=0;
     }
 
 }
