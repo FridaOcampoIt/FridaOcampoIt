@@ -1,4 +1,4 @@
-export class Opciones{
+export class Opcion{
     public opcionId?:number;
     public nombreEN?:string;
     public nombreES?:string;

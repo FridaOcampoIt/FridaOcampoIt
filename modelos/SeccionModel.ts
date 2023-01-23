@@ -1,5 +1,5 @@
 
-export class Secciones{
+export class Seccion{
     public categoriaId?:number;
     public nombreEN?:string;
     public nombreES?:string;
