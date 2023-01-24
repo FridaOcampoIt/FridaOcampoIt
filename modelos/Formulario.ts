@@ -1,5 +1,5 @@
 
-export class Formularios{
+export class Formulario{
     public formularioId?:number;
     public nombre?:string;
     public estatusId?:number;

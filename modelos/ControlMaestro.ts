@@ -1,4 +1,4 @@
-export class ConstrolesMaestrosMultiples {
+export class ConstrolMaestro {
     public controlMaestroId:number;
     public companiaId:number;
     public nombre:string;

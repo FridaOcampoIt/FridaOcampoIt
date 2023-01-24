@@ -1,4 +1,4 @@
-export class Autonumericos {
+export class AutoNumerico {
     public autoNumericoId:number;
     public companiaId:number;
     public nombre:string;

@@ -1,4 +1,4 @@
-export class RolesPersmisos{
+export class RolPersmiso{
     public permisoId:number;
     public rolId:number;
     public permisoID:number;

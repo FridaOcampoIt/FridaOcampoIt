@@ -1,4 +1,4 @@
-export class Roles{
+export class Rol{
     public rolId:number;
     public nombre:string;
     public activo:number;
