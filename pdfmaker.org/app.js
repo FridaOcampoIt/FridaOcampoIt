@@ -1,17 +1,16 @@
-const pdfprint = require("pdfmake");
+const PdfPrinter = require("pdfmake");
 const fs =require("fs");
 
-const fonts =require("./fonts");
+const fonts =require("./font");
 const styles =require("./styles");
 const {content} =require("./pdfContent");
-const PdfPrinter = require("pdfmake");
 
  let docDefinicion={
     content:content,
     styles:styles
  };
- const print = new PdfPrinter(fonts);
+ const printer= new PdfPrinter(fonts);
 
- let pdfDoc =printer.createPdfKitDocument(docDefinition);
- pdfDoc.pipe(fs.createReadStream("pdfs/pdfTest.pdf"));
+ let pdfDoc =printer.createPdfKitDocument(docDefinicion);
+ pdfDoc.pipe(fs.createWriteStream("pdfs/pdfTest.pdf"));
  pdfDoc.end();

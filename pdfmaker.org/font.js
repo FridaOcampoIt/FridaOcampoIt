@@ -9,17 +9,6 @@
          require("pdfmake/build/vfs_fonts.js").pdfMake.vfs["Roboto-Medium.ttf"],
          "base64"
          ),
-     }
+     },
  
- }
-
-
-
- 
-
- 
-
-ee
-
- 
-
+ };

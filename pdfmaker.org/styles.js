@@ -1,12 +1,24 @@
 module.exports={
-    heder:{
-
-        bold: true,
-        fontSize: 12,
-        alignment: "center",
-        color: "#000000"
+   
+    tableExample: {
+        margin: [0, 5, 0, 15]
     },
-    label:{
-        color:"#FF0000",
+    header: {
+        fontSize: 18,
+        bold: true,
+        margin: [0, 0, 0, 10]
+    },
+    subheader: {
+        fontSize: 16,
+        bold: true,
+        margin: [0, 10, 0, 5]
+    },
+    tableExample: {
+        margin: [0, 5, 0, 15]
+    },
+    tableHeader: {
+        bold: true,
+        fontSize: 13,
+        color: 'black'
     }
 };
