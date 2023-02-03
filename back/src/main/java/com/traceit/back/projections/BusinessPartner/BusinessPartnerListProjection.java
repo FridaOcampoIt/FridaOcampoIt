@@ -12,7 +12,6 @@ public interface BusinessPartnerListProjection {
     String getnombre();
     String getrazonsocial();
     String getrfc();
-
     Integer getcreadoporid();
     Integer getmodificadoporid();
 

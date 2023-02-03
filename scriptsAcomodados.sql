@@ -3,7 +3,7 @@ DELIMITER //
 CREATE TABLE Usuarios(
 	USU_usuarioId BIGSERIAL NOT NULL,
 	USU_Nombre VARCHAR(200) NOT NULL,
-	USU_Contrasenia INT NOT NULL,
+	USU_Contrasenia VARCHAR(200) NOT NULL,
 	USU_FechaUltimaSesion timestamp NULL,
 	USU_USU_CreadoPorId INT NOT NULL,
 	USU_FechaCreacion timestamp NOT NULL,
@@ -592,3 +592,36 @@ CREATE TABLE ControlesMaestros(
 )
 //
 DELIMITTER;
+
+CREATE TABLE SociosDeNegocios(
+	soc_sociodenegocioid BIGSERIAL NOT NULL,
+	soc_nombre VARCHAR(50) NOT NULL,
+	soc_razonsocial VARCHAR (50)NOT NULL,
+	soc_rfc VARCHAR (50)NOT NULL,
+	soc_usu_creadoporid INT NOT NULL,
+	soc_usu_modificadoporid INT NOT NULL,
+	PRIMARY KEY (soc_sociodenegocioid)
+)
+
+private Integer id;
+
+    @Column(name="soc_nombre")
+    private String nombre;
+
+    @Column(name="soc_razonsocial")
+    private String razonsocial;
+
+    @Column(name="soc_rfc")
+    private String rfc;
+
+   @Column(name="soc_usu_creadoporid")
+    private Integer creadoporid;
+
+   // @Column(name="soc_fechacreacion")
+   // private String fechacreacion;
+
+   @Column(name="soc_usu_modificadoporid")
+   private Integer modificadoporid;
+
+    //@Column(name="soc_fechamodificacion")
+   // private String fechamodificacion;
