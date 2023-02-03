@@ -3,7 +3,7 @@ DELIMITER //
 CREATE TABLE Usuarios(
 	USU_usuarioId BIGSERIAL NOT NULL,
 	USU_Nombre VARCHAR(200) NOT NULL,
-	USU_Contrasenia INT NOT NULL,
+	USU_Contrasenia VARCHAR NOT NULL,
 	USU_FechaUltimaSesion timestamp NULL,
 	USU_USU_CreadoPorId INT NOT NULL,
 	USU_FechaCreacion timestamp NOT NULL,
@@ -339,7 +339,7 @@ DELIMITTER;
 DELIMITTER //
 CREATE TABLE Productos(
 	PRO_productoId BIGSERIAL NOT NULL,
-	PRO_CAT_categoriaId int NOT NULL,
+	PRO_CAT_categoriaId INT NOT NULL,
 	PRIMARY KEY (PRO_productoId),
 	CONSTRAINT FK_CATEGORIAFAMILIAID_PRO FOREIGN KEY (PRO_CAT_categoriaId) REFERENCES Categorias (CAT_categoriaId)
 			ON DELETE CASCADE
@@ -592,3 +592,42 @@ CREATE TABLE ControlesMaestros(
 )
 //
 DELIMITTER;
+
+-- 32
+DELIMITER //
+CREATE TABLE SociosDeNegocios(
+	soc_sociodenegocioid BIGSERIAL NOT NULL,
+	soc_nombre VARCHAR(100) NOT NULL,
+	soc_razonsocial VARCHAR(100) NOT NULL,
+	soc_rfc VARCHAR(50) UNIQUE NOT NULL ,
+	soc_usu_creadoporid INT NOT NULL,
+	soc_fechacreacion timestamp NOT NULL,
+	soc_usu_modificadoporid INT NULL,
+	soc_fechamodificacion timestamp NULL,
+	PRIMARY KEY (soc_sociodenegocioid)
+	
+)
+//
+DELIMITTER;
+
+
+-- 33
+
+CREATE TABLE SociosDeNegociosCompania(
+	snc_sociodenegociocompaniaid BIGSERIAL NOT NULL,
+	snc_com_companiaid INT NOT NULL,
+	snc_cmm_estatusid INT NOT NULL,
+	snc_nombre VARCHAR(100) NOT NULL,
+	snc_usu_creadoporid INT NOT NULL,
+	snc_fechacreacion timestamp NOT NULL,
+	snc_usu_modificadoporid INT NULL,
+	snc_fechamodificacion timestamp NULL,
+	PRIMARY KEY (SNC_socioDeNegocioIdCompania),
+	CONSTRAINT FK_USUARIOCREADORID_SNC FOREIGN KEY (snc_usu_creadoporid) REFERENCES Usuarios (usu_usuarioid)
+			ON DELETE CASCADE
+			ON UPDATE RESTRICT,
+	CONSTRAINT FK_USUARIOMODIFICADOID_SNC FOREIGN KEY (snc_usu_modificadoporid) REFERENCES Usuarios (usu_usuarioid)
+			ON DELETE CASCADE
+			ON UPDATE RESTRICT.
+	CONSTRAINT
+)

@@ -170,6 +170,10 @@ module.exports={
                     ['row 1 with height 20', 'column B', 'column C'],
 					['row 2 with height 50', 'column B', 'column C'],
 					['row 3 with height 70', 'column B', 'column C'],
+					['row datos de la s 50', 'column B', 'column C'],
+					['row 3 with aadfg  70', 'column B', 'column C'],
+					['row poiyth height 50', 'column B', 'column C'],
+					['row 3 reob potyom 70', 'column B', 'column C'],
 				]
 			}
 		}
