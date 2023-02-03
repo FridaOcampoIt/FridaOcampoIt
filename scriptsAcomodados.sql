@@ -1,20 +1,16 @@
 -- 1
 DELIMITER //
 CREATE TABLE Usuarios(
-	USU_usuarioId BIGSERIAL NOT NULL,
-	USU_Nombre VARCHAR(200) NOT NULL,
-<<<<<<< HEAD
-	USU_Contrasenia VARCHAR NOT NULL,
-=======
-	USU_Contrasenia VARCHAR(200) NOT NULL,
->>>>>>> b1f9ffb77541710cbefd0afd2f5cf5b196f5667d
-	USU_FechaUltimaSesion timestamp NULL,
-	USU_USU_CreadoPorId INT NOT NULL,
-	USU_FechaCreacion timestamp NOT NULL,
-	USU_USU_ModificadoPorId INT NULL,
-	USU_FechaModificacion timestamp NULL,
+	usu_usuarioid BIGSERIAL NOT NULL,
+	usu_nombre VARCHAR(200) NOT NULL,
+	usu_contrasenia VARCHAR(200) NOT NULL,
+	usu_fechaultimasesion timestamp NULL,
+	usu_usu_creadoporid INT NOT NULL,
+	usu_fechacreacion timestamp,
+	usu_usu_modificadoporid INT NULL,
+	usu_fechamodificacion timestamp,
 	-- asociaciones 
-	PRIMARY KEY (USU_usuarioId)
+	PRIMARY KEY (usu_usuarioid)
 )
 //
 DELIMITTER;
@@ -609,6 +605,7 @@ CREATE TABLE SociosDeNegocios(
 	soc_fechacreacion timestamp NOT NULL,
 	soc_usu_modificadoporid INT NULL,
 	soc_fechamodificacion timestamp NULL,
+	soc_cmm_estatusid INT NOT NULL,
 	PRIMARY KEY (soc_sociodenegocioid)
 	
 )

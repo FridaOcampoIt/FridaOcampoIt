@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,13 +34,15 @@ public class BusinessPartner {
    @Column(name="soc_usu_creadoporid")
     private Integer creadoporid;
 
-   // @Column(name="soc_fechacreacion")
-   // private String fechacreacion;
+  // @Column(name="soc_fechacreacion")
+   // private Date fechacreacion;
 
    @Column(name="soc_usu_modificadoporid")
    private Integer modificadoporid;
+   // @Column(name="soc_fechamodificacion")
+    //private Date fechamodificacion;
 
-    //@Column(name="soc_fechamodificacion")
-   // private String fechamodificacion;
+    @Column(name="soc_cmm_controlId")
+    private Integer controlId;
 
 }

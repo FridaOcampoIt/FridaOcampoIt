@@ -1,9 +1,11 @@
 package com.traceit.back.projections.BusinessPartner;
 
 import com.traceit.back.models.BusinessPartner;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.rest.core.config.Projection;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Projection(types= {BusinessPartner.class})
 public interface BusinessPartnerListProjection {
@@ -14,5 +16,11 @@ public interface BusinessPartnerListProjection {
     String getrfc();
     Integer getcreadoporid();
     Integer getmodificadoporid();
+   // @CreationTimestamp
+    //Date getfechacreacion();
+    //@UpdateTimestamp
+    //Date getfechamodificacion();
+   Integer getcontrolId();
+
 
 }
