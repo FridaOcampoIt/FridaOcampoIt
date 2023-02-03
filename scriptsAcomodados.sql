@@ -621,9 +621,9 @@ CREATE TABLE SociosDeNegociosCompania(
 	snc_cmm_estatusid INT NOT NULL,
 	snc_nombre VARCHAR(100) NOT NULL,
 	snc_usu_creadoporid INT NOT NULL,
-	snc_fechacreacion timestamp NOT NULL,
+	snc_fechacreacion TIMESTAMP NOT NULL,
 	snc_usu_modificadoporid INT NULL,
-	snc_fechamodificacion timestamp NULL,
+	snc_fechamodificacion TIMESTAMP NULL,
 	PRIMARY KEY (SNC_socioDeNegocioIdCompania),
 	CONSTRAINT FK_USUARIOCREADORID_SNC FOREIGN KEY (snc_usu_creadoporid) REFERENCES Usuarios (usu_usuarioid)
 			ON DELETE CASCADE
