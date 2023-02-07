@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,28 +40,30 @@ public class BusinessPartnerController {
     public JsonResponse createBusinessPartner(HttpServletRequest req){
         BusinessPartner BusinessPartner= new BusinessPartner();
 
-        BusinessPartner.setNombre("naaaaaaaaaa");
+        BusinessPartner.setNombre("primer nombre");
         BusinessPartner.setRazonsocial("");
         BusinessPartner.setRfc("ibeenhigh");
         BusinessPartner.setCreadoporid(2);
         BusinessPartner.setModificadoporid(3);
         BusinessPartner.setEstatusid(1000002);
+        BusinessPartner.setFechacreacion(new Date());
 
 
         BP.save(BusinessPartner);
-        return new JsonResponse( null,"Socio de negocio creado satisfactoriamente",JsonResponse.STATUS_OK);
+        return new JsonResponse( BusinessPartner,"Socio de negocio creado satisfactoriamente",JsonResponse.STATUS_OK);
     }
         //https://inezpre5.wordpress.com/2018/05/01/tutorial-crud-spring-boot-aplicacion-con-bases-de-datos/
 
     @RequestMapping(value="/update/{id}", method = RequestMethod.PUT)
     public JsonResponse updateBusinessPartner(HttpServletRequest req, BusinessPartner businessPartner ){
 
-        businessPartner.setRazonsocial("otrosdf");
+        businessPartner.setRazonsocial("nombre actualizado");
         businessPartner.setRfc("khjk89756ty4");
         businessPartner.setNombre("aloo");
         businessPartner.setCreadoporid(56);
         businessPartner.setModificadoporid(56);
         businessPartner.setEstatusid(1000000);
+        businessPartner.setFechamodificacion(new Date());
 
         BP.save(businessPartner);
 

@@ -1,4 +1,4 @@
-export class Compania {
+export class Companias {
     public companiaId:number;
     public nombre:string;
     public razonSocial:string;

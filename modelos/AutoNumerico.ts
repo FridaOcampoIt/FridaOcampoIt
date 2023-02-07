@@ -1,22 +1,18 @@
-export class AutoNumerico {
+export class Autonumericos {
     public autoNumericoId:number;
-    public companiaId:number;
     public nombre:string;
     public prefijo:string;
-    public siguiente:string;
+    public siguiente:number;
     public digitos:number;
-    public activo:number;
-
+    public activo:boolean;
 
     constructor(){
         this.autoNumericoId=0;
-        this.companiaId=0;
         this.nombre="";
         this.prefijo="";
-        this.siguiente="";
+        this.siguiente=0;
         this.digitos=0;
-        this.activo=0;
+        this.activo=true;
  
-
     }
 }

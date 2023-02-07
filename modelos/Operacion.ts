@@ -1,4 +1,4 @@
-export class Operacion{
+export class Operaciones{
     public operacionId:number; 
     public companiaId:number;
     public operadorId:number;

@@ -1,4 +1,4 @@
-export class UsuarioCompania{
+export class UsuariosCompanias{
     public usuarioCompaniaId:number;
     public usuarioId:number;
     public companiaId:number;

@@ -1,4 +1,4 @@
-export class Modulo{
+export class Modulos{
     public modoluId:number;
     public moduloPadreId:number;
     public nombreES:string;

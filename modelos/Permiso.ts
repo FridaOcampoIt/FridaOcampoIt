@@ -1,4 +1,4 @@
-export class Permiso{
+export class Permisos{
     public permisoId:number;
 
     constructor (){

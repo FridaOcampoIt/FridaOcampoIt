@@ -1,37 +1,40 @@
-export class Direccion{
-    public diccionarioId:number;
-    public alias:string;
+export class Direcciones{
+    public direcionioId:number;
+    public socioDeNegocioId:number;
+    public companiaId:number;
+    public usuarioId:number;
     public pais:number;
-    public estadoId:number;
-    public ciudad:string;
-    public codigoPostal:string;
+    public estatusId:number;
+    public ciudadProvidencia:string;
     public dirrecion:String;
-    public exterio:string;
-    public interior:string;
+    public numeroExterio:string;
+    public numeroInterior:string;
     public latitud:number;
     public logitud:number;
-    public estatusId:number;
+    public estadoId:number;
     public creadorPorId:number;
-    public fechaCreacion:Date;
     public modificadoPorId:number;
+    public fechaCreacion:Date;
     public fechaModificacion:Date;
 
+    
     constructor (){
-    this.diccionarioId=0;
-    this.alias="";
-    this.pais=0;
-    this.estadoId=0;
-    this.ciudad="";
-    this.codigoPostal="";
-    this.dirrecion="";
-    this.exterio="";
-    this.interior="";
-    this.latitud=0;
-    this.logitud=0;
-    this.estatusId=0;
-    this.creadorPorId=0;
-    this.fechaCreacion=new Date();
-    this.modificadoPorId=0;
-    this.fechaModificacion=new Date();
+        this.direcionioId=0;
+        this.socioDeNegocioId=0;
+        this.companiaId=0;
+        this.usuarioId=0;
+        this.pais=0;
+        this.estatusId=0;
+        this.ciudadProvidencia="";
+        this.dirrecion="";
+        this.numeroExterio="";
+        this.numeroInterior="";
+        this.latitud=0;
+        this.logitud=0;
+        this.estadoId=0;
+        this.creadorPorId=0;
+        this.modificadoPorId=0;
+        this.fechaCreacion=new Date();
+        this.fechaModificacion=new Date();
     }
 }

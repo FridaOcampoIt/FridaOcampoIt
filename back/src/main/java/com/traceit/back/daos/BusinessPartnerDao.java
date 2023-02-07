@@ -9,13 +9,6 @@ import java.util.List;
 
 public interface BusinessPartnerDao extends CrudRepository<BusinessPartner,String> {
 
-    List<BusinessPartner> findAllBy();
-
-    BusinessPartner findBusinessPartnerByNombre(String nombre);
-    BusinessPartner findBusinessPartnerByrazonsocial(String razonsocial);
-    BusinessPartner findBusinessPartnerByrfc(String rfc);
-    BusinessPartner findBusinessPartnerBycreadoporid(Integer creadoporid);
-    BusinessPartner findBusinessPartnerBymodificadoporid(Integer modificadoporid);
     BusinessPartner findByIdIn (List<Integer> ids);
     BusinessPartner deleteById(Integer id);
 

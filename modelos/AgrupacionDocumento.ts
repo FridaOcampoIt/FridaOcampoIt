@@ -1,4 +1,4 @@
-export class AgrupacionDocumento{
+export class AgrupacionesDocumentos{
     public agrupacionDocumentoId:number;
     public agrupacionId:number;
     public rutaDocumento:string;

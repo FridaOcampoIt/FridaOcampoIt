@@ -1,9 +1,9 @@
-export class Almacen{
-    public almacenId:number;
-    public CompaniaId:number;
+export class Almacenes{
+    almacenId:number;
+    companiaId:number;
 
-    constructor (){
-    this.almacenId=0;
-    this.CompaniaId=0;
+    constructor(){
+        this.almacenId=0;
+        this.companiaId=0;
     }
 }

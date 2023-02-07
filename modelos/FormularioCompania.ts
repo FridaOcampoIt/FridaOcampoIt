@@ -1,4 +1,4 @@
-export class FormularioCompania{
+export class FormulariosCompanias{
     public formularioCompaniaId:number;
     public formularioId:number;
     public conpaniaId:number;

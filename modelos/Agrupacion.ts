@@ -1,4 +1,4 @@
-export class Agrupacion{
+export class Agrupaciones{
     public agrupacionId:number;
     public nombre:string;
 

@@ -1,9 +1,10 @@
-export class ConstrolMaestroMultiple {
+export class ConstrolesMaestrosMultiples {
     public controlId:number;
     public control:string;
     public valorES:string;
     public valorEN:string;
-    public archivo:boolean;
+    public activo:boolean;
+    public sistema:boolean;
     public fechaCreacion:Date;
     public fechaModificacion:Date;
     public usuarioCreadorPortId:number;
@@ -13,11 +14,11 @@ export class ConstrolMaestroMultiple {
         this.control="";
         this.valorES="";
         this.valorEN="";
-        this.archivo=true;
+        this.activo=true;
+        this.sistema=true;
         this.fechaCreacion=new Date();
         this.fechaModificacion=new Date();
         this.usuarioCreadorPortId=0;
         this.usuarioModificadorPorId=0;
-
     }
 }

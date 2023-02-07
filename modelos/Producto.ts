@@ -1,9 +1,9 @@
-export class Producto{
-   public ProductoId:number;
+export class Productos{
+   public productoId:number;
    public categoriaId:number;
     
    constructor (){
-    this.ProductoId=0;
+    this.productoId=0;
     this.categoriaId=0;
    }
 };

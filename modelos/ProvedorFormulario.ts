@@ -1,4 +1,4 @@
-export class ProvedorFormulario{
+export class ProvedoresFormularios{
     public provedorFormularioId:number;
     public formulariId:number;
     public provedorId:number;

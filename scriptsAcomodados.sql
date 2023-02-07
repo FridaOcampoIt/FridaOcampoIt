@@ -1,5 +1,5 @@
 -- 1
-DELIMITER //
+
 CREATE TABLE Usuarios(
 	usu_usuarioid BIGSERIAL NOT NULL,
 	usu_nombre VARCHAR(200) NOT NULL,
@@ -12,11 +12,8 @@ CREATE TABLE Usuarios(
 	-- asociaciones 
 	PRIMARY KEY (usu_usuarioid)
 )
-//
-DELIMITTER;
-
 -- 2
-DELIMITER //
+
 CREATE TABLE ControlesMaestrosMultiples(
 	CMM_ControlId BIGSERIAL NOT NULL,
 	CMM_Control VARCHAR(255) NOT NULL,
@@ -36,11 +33,7 @@ CREATE TABLE ControlesMaestrosMultiples(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
-
 -- 3
-DELIMITER //
 CREATE TABLE Roles(
 	ROL_rolId BIGSERIAL NOT NULL,
 	ROL_Nombre VARCHAR(100) NOT NULL,
@@ -58,10 +51,7 @@ CREATE TABLE Roles(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
 -- 4
-DELIMITTER //
 CREATE TABLE Formularios(
 	FOR_FormularioId BIGSERIAL NOT NULL,
 	FOR_Nombre VARCHAR(200) NOT NULL,
@@ -81,10 +71,7 @@ CREATE TABLE Formularios(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT 
 )
-//
-DELIMITTER;
 -- 5
-DELIMITTER //
 CREATE TABLE Secciones(
 	SEC_CategoriaId BIGSERIAL NOT NULL,
 	SEC_NombreEN VARCHAR(100) NOT NULL,
@@ -110,10 +97,7 @@ CREATE TABLE Secciones(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT 
 )
-//
-DELIMITTER;
 -- 6
-DELIMITTER //
 CREATE TABLE Preguntas(
 	PRE_PreguntaId BIGSERIAL NOT NULL,
 	PRE_NombreEN VARCHAR(100) NOT NULL,
@@ -142,10 +126,7 @@ CREATE TABLE Preguntas(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT 
 )
-//
-DELIMITTER;
 -- 7
-DELIMITTER //
 CREATE TABLE Opciones(
 	OPC_OpcionId BIGSERIAL NOT NULL,
 	OPC_NombreEN VARCHAR(100) NOT NULL,
@@ -171,10 +152,7 @@ CREATE TABLE Opciones(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT 
 )
-//
-DELIMITTER;
 -- 8
-DELIMITTER //
 CREATE TABLE Operadores(
 	OPE_operadorId BIGSERIAL NOT NULL,
 	OPE_USU_usuarioId INT NOT NULL,
@@ -183,10 +161,7 @@ CREATE TABLE Operadores(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
 -- 9
-DELIMITTER //
 CREATE TABLE Lineas(
 	LIN_lineaId BIGSERIAL NOT NULL,
 	LIN_USU_usuarioId INT NOT NULL,
@@ -208,10 +183,7 @@ CREATE TABLE Lineas(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
 -- 10
-DELIMITTER //
 CREATE TABLE Direcciones(
 	DIR_DireccionId BIGSERIAL NOT NULL,
 	DIR_Alias VARCHAR(250) NULL,
@@ -243,10 +215,7 @@ CREATE TABLE Direcciones(
 			-- ON DELETE CASCADE
 			-- ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
 -- 11
-DELIMITTER //
 CREATE TABLE Modulos(
 	MOD_ModuloId BIGSERIAL NOT NULL,
 	MOD_ModuloPadreId INT NULL,
@@ -259,10 +228,7 @@ CREATE TABLE Modulos(
 	MOD_URL VARCHAR(255) NULL,
 	PRIMARY KEY (MOD_ModuloId)
 )
-//
-DELIMITTER;
 -- 12
-DELIMITTER //
 CREATE TABLE Companias(
 	COM_companiaId INT NOT NULL,
 	COM_nombre VARCHAR(100) NOT NULL,
@@ -279,10 +245,7 @@ CREATE TABLE Companias(
 	COM_sitioURL VARCHAR(100) NOT NULL,
 	PRIMARY KEY (COM_companiaId)
 )
-//
-DELIMITTER;
 -- 13
-DELIMITTER //
 CREATE TABLE Almacenes(
 	ALM_almacenId BIGSERIAL NOT NULL,
 	ALM_COM_companiaId INT NOT NULL,
@@ -291,28 +254,19 @@ CREATE TABLE Almacenes(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
 -- 14
-DELIMITTER //
 CREATE TABLE Permisos(
 	PER_permisoId BIGSERIAL NOT NULL,
 	PRIMARY KEY (PER_permisoId)
 )
-//
-DELIMITTER;
 -- 15
-DELIMITTER //
 CREATE TABLE Proveedores(
 	PRV_ProveedorId BIGSERIAL NOT NULL,
 	PRV_RFC VARCHAR(50) NOT NULL,
 	PRV_Direccion VARCHAR(100) NOT NULL,
 	PRIMARY KEY (PRV_ProveedorId)
 )
-//
-DELIMITTER;
 -- 16
-DELIMITTER //
 CREATE TABLE Familias(
 	FAM_familiaId BIGSERIAL NOT NULL,
 	FAM_COM_companiaId int NOT NULL,
@@ -321,10 +275,7 @@ CREATE TABLE Familias(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
 -- 17
-DELIMITTER //
 CREATE TABLE Categorias(
 	CAT_categoriaId BIGSERIAL NOT NULL,
 	CAT_FAM_familiaId INT NOT NULL,
@@ -333,10 +284,7 @@ CREATE TABLE Categorias(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
 -- 18
-DELIMITTER //
 CREATE TABLE Productos(
 	PRO_productoId BIGSERIAL NOT NULL,
 	PRO_CAT_categoriaId INT NOT NULL,
@@ -354,10 +302,7 @@ CREATE TABLE Agrupaciones(
 	customer_name char(50) NOT NULL,
 	PRIMARY KEY (AGR_agrupacionId)
 )
-//
-DELIMITTER;
 -- 20
-DELIMITTER //
 CREATE TABLE AgrupacionesProductos(
 	AGP_agrupacionProductoId BIGSERIAL NOT NULL,
 	AGP_AGR_agrupacionId INT NOT NULL,
@@ -370,10 +315,7 @@ CREATE TABLE AgrupacionesProductos(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
 -- 21
-DELIMITTER //
 CREATE TABLE AgrupacionesDocumentos(
 	AGD_agrupacionDocumentoId BIGSERIAL NOT NULL,
 	AGD_AGR_agrupacionId INT NOT NULL,
@@ -383,10 +325,7 @@ CREATE TABLE AgrupacionesDocumentos(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
 -- 22
-DELIMITTER //
 CREATE TABLE Movimientos(
 	MOV_movimientoId BIGSERIAL NOT NULL,
 	MOV_COM_companiaId INT NOT NULL,
@@ -420,10 +359,7 @@ CREATE TABLE Movimientos(
 			-- ON DELETE CASCADE
 			-- ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
 -- 23 
-DELIMITTER //
 CREATE TABLE ProveedoresCompanias(
 	PCO_ProveedorCompaniaId BIGSERIAL NOT NULL,
 	PCO_PRV_ProveedorId INT  NOT NULL,
@@ -437,10 +373,7 @@ CREATE TABLE ProveedoresCompanias(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
 -- 24
-DELIMITTER //
 CREATE TABLE Operaciones(
 	OPR_operacionId BIGSERIAL NOT NULL,
 	OPR_COM_companiaId INT NOT NULL,
@@ -472,10 +405,7 @@ CREATE TABLE Operaciones(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
 -- 25
-DELIMITTER //
 CREATE TABLE RolesPermisos(
 	RPE_rolPermisoId SERIAL NOT NULL,
 	RPE_ROL_rolId INT NOT NULL,
@@ -492,10 +422,7 @@ CREATE TABLE RolesPermisos(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
 -- 26 
-DELIMITTER //
 CREATE TABLE UsuariosCompanias(
 	USC_usuarioCompaniaId BIGSERIAL NOT NULL,
 	USC_USU_usuarioId INT NOT NULL,
@@ -508,10 +435,7 @@ CREATE TABLE UsuariosCompanias(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
 -- 27
-DELIMITTER //
 CREATE TABLE UsuariosRolesCompañias(
 	URC_usuarioRolCompaniaId BIGSERIAL NOT NULL,
 	URC_USC_usuarioCompaniaId INT NOT NULL,
@@ -524,10 +448,7 @@ CREATE TABLE UsuariosRolesCompañias(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
 -- 28
-DELIMITTER //
 CREATE TABLE ProveedoresFormularios(
     PFR_ProveedorFormularioId BIGSERIAL NOT NULL,
     PFR_FOR_FormularioId INT NOT NULL,
@@ -540,10 +461,7 @@ CREATE TABLE ProveedoresFormularios(
             ON DELETE CASCADE
             ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
 -- 29
-DELIMITTER //
 CREATE TABLE FormulariosCompanias(
 	FRC_FormularioCompaniaId BIGSERIAL NOT NULL,
 	FRC_FOR_FormularioId INT NOT NULL,
@@ -556,10 +474,7 @@ CREATE TABLE FormulariosCompanias(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
 -- 30
-DELIMITER //
 CREATE TABLE Autonumericos(
 	AUT_AutonumericoId BIGSERIAL NOT NULL,
 	AUT_COM_CompaniaId INT NOT NULL,
@@ -573,10 +488,7 @@ CREATE TABLE Autonumericos(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
 -- 31
-DELIMITER //
 CREATE TABLE ControlesMaestros(
 	CM_ControlMaestroId BIGSERIAL NOT NULL,
 	CM_COM_CompaniaId INT NOT NULL,
@@ -590,12 +502,7 @@ CREATE TABLE ControlesMaestros(
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT
 )
-//
-DELIMITTER;
-
-<<<<<<< HEAD
 -- 32
-DELIMITER //
 CREATE TABLE SociosDeNegocios(
 	soc_sociodenegocioid BIGSERIAL NOT NULL,
 	soc_nombre VARCHAR(100) NOT NULL,
@@ -609,12 +516,7 @@ CREATE TABLE SociosDeNegocios(
 	PRIMARY KEY (soc_sociodenegocioid)
 	
 )
-//
-DELIMITTER;
-
-
 -- 33
-
 CREATE TABLE SociosDeNegociosCompania(
 	snc_sociodenegociocompaniaid BIGSERIAL NOT NULL,
 	snc_com_companiaid INT NOT NULL,
@@ -633,37 +535,19 @@ CREATE TABLE SociosDeNegociosCompania(
 			ON UPDATE RESTRICT.
 	CONSTRAINT
 )
-=======
+/******************pruebas de posgressql*****************/
 CREATE TABLE SociosDeNegocios(
 	soc_sociodenegocioid BIGSERIAL NOT NULL,
 	soc_nombre VARCHAR(50) NOT NULL,
 	soc_razonsocial VARCHAR (50)NOT NULL,
-	soc_rfc VARCHAR (50)NOT NULL,
+	soc_rfc VARCHAR (50) UNIQUE NOT NULL,
 	soc_usu_creadoporid INT NOT NULL,
 	soc_usu_modificadoporid INT NOT NULL,
+	soc_fechacreacion TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    soc_fechamodificacion TIMESTAMP WITHOUT TIME ZONE,
+	soc_cmm_estatusid integer NOT NULL,
 	PRIMARY KEY (soc_sociodenegocioid)
 )
 
-private Integer id;
 
-    @Column(name="soc_nombre")
-    private String nombre;
-
-    @Column(name="soc_razonsocial")
-    private String razonsocial;
-
-    @Column(name="soc_rfc")
-    private String rfc;
-
-   @Column(name="soc_usu_creadoporid")
-    private Integer creadoporid;
-
-   // @Column(name="soc_fechacreacion")
-   // private String fechacreacion;
-
-   @Column(name="soc_usu_modificadoporid")
-   private Integer modificadoporid;
-
-    //@Column(name="soc_fechamodificacion")
-   // private String fechamodificacion;
->>>>>>> b1f9ffb77541710cbefd0afd2f5cf5b196f5667d
+    

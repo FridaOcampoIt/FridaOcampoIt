@@ -33,14 +33,15 @@ public class BusinessPartner {
 
    @Column(name="soc_usu_creadoporid")
     private Integer creadoporid;
-
-   @Column(name="soc_fechacreacion")
+   @Temporal(TemporalType.TIMESTAMP)
+   @Column(name="soc_fechacreacion",updatable = false,nullable = false)
     private Date fechacreacion;
 
    @Column(name="soc_usu_modificadoporid")
    private Integer modificadoporid;
-   @Column(name="soc_fechamodificacion")
-    private Date fechamodificacion;
+   @Temporal(TemporalType.TIMESTAMP)
+   @Column(name="soc_fechamodificacion",insertable = false)
+   private Date fechamodificacion;
 
     @Column(name="soc_cmm_estatusid")
     private Integer estatusid;

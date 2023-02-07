@@ -1,13 +1,13 @@
-export class RolPersmiso{
-    public permisoId:number;
+export class RolesPersmisos{
+    public rolpermisoId:number;
     public rolId:number;
-    public permisoID:number;
+    public permisoId:number;
     public moduloId:number;
 
     constructor (){
-    this.permisoId=0;
+    this.rolpermisoId=0;
     this.rolId=0;
-    this.permisoID=0;
+    this.permisoId=0;
     this.moduloId=0;
     }
 }

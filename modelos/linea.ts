@@ -1,4 +1,4 @@
-export class Linea{
+export class Lineas{
     public lineaId:number;
     public usuarioId:number;
 

@@ -1,21 +1,18 @@
-export class ConstrolMaestro {
+export class ConstrolesMaestros {
     public controlMaestroId:number;
-    public companiaId:number;
     public nombre:string;
-    public valorES:string;
-    public valorEN:string;
-    public sistema:number;
+    public valor:string;
+    public sistema:boolean;
+    public fechaCreacion:Date;
     public fechaModificacion:Date;
 
     constructor(){
         this.controlMaestroId=0;
-        this.companiaId=0;
         this.nombre="";
-        this.valorES="";
-        this.valorEN="";
+        this.valor="";
         this.nombre="";
+        this.fechaCreacion=new Date();
         this.fechaModificacion=new Date();
  
-
     }
 }

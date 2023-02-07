@@ -1,11 +1,11 @@
-export class AgrupacionProducto{
+export class AgrupacionesProductos{
     public agrupacionProductoId:number;
     public agrupaciomId:number;
-    public productoID:number;
+    public productoId:number;
 
     constructor (){
     this.agrupacionProductoId=0;
     this.agrupaciomId=0;
-    this.productoID=0;
+    this.productoId=0;
     }
 }

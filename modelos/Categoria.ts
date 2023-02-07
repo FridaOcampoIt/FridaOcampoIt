@@ -1,4 +1,4 @@
-export class Categoria{
+export class Categorias{
     public categoriaId:number;
     public familiaId:number;
 

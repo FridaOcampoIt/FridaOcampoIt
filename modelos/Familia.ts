@@ -1,4 +1,4 @@
-export class Familia{
+export class Familias{
     public familiaId:number;
     public companiaId:number;
 

@@ -20,7 +20,7 @@ public interface BusinessPartnerListProjection {
     Date getfechacreacion();
     @UpdateTimestamp
     Date getfechamodificacion();
-   Integer getestatusid();
+    Integer getestatusid();
 
 
 }

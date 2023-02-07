@@ -1,4 +1,4 @@
-export class Movimiento{
+export class Movimientos{
     public movimientoId:number;
     public companiaId:number;
     public almacenId:number;

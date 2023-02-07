@@ -1,4 +1,4 @@
-export class Provedor{
+export class Provedores{
     public provedorId:number;
     public RFC: string;
     public direccion:string;
