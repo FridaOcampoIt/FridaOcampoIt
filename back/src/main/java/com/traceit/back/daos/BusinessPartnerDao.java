@@ -17,6 +17,7 @@ public interface BusinessPartnerDao extends CrudRepository<BusinessPartner,Strin
     BusinessPartner findBusinessPartnerBycreadoporid(Integer creadoporid);
     BusinessPartner findBusinessPartnerBymodificadoporid(Integer modificadoporid);
     BusinessPartner findByIdIn (List<Integer> ids);
+    BusinessPartner deleteById(Integer id);
 
     List<BusinessPartnerListProjection> findAllProjectedBy();
 }

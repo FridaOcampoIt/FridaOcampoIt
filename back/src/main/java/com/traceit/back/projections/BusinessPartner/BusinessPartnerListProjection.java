@@ -16,11 +16,11 @@ public interface BusinessPartnerListProjection {
     String getrfc();
     Integer getcreadoporid();
     Integer getmodificadoporid();
-   // @CreationTimestamp
-    //Date getfechacreacion();
-    //@UpdateTimestamp
-    //Date getfechamodificacion();
-   Integer getcontrolId();
+    @CreationTimestamp
+    Date getfechacreacion();
+    @UpdateTimestamp
+    Date getfechamodificacion();
+   Integer getestatusid();
 
 
 }

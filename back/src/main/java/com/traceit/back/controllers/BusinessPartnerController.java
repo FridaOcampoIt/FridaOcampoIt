@@ -39,14 +39,13 @@ public class BusinessPartnerController {
     public JsonResponse createBusinessPartner(HttpServletRequest req){
         BusinessPartner BusinessPartner= new BusinessPartner();
 
-        BusinessPartner.setNombre("numero 1");
-        BusinessPartner.setRazonsocial("razon 1");
-        BusinessPartner.setRfc("987456513");
-        BusinessPartner.setCreadoporid(1);
-        BusinessPartner.setModificadoporid(1);
-        BusinessPartner.setControlId(1000000);
-       // BusinessPartner.setFechacreacion();
-        //BusinessPartner.setFechamodificacion();
+        BusinessPartner.setNombre("naaaaaaaaaa");
+        BusinessPartner.setRazonsocial("");
+        BusinessPartner.setRfc("ibeenhigh");
+        BusinessPartner.setCreadoporid(2);
+        BusinessPartner.setModificadoporid(3);
+        BusinessPartner.setEstatusid(1000002);
+
 
         BP.save(BusinessPartner);
         return new JsonResponse( null,"Socio de negocio creado satisfactoriamente",JsonResponse.STATUS_OK);
@@ -56,16 +55,25 @@ public class BusinessPartnerController {
     @RequestMapping(value="/update/{id}", method = RequestMethod.PUT)
     public JsonResponse updateBusinessPartner(HttpServletRequest req, BusinessPartner businessPartner ){
 
-        businessPartner.setRazonsocial("otro nombre");
-        businessPartner.setRfc("RFC NUEVOOO");
-        businessPartner.setNombre("LENOVOOOO");
-        businessPartner.setCreadoporid(55);
-        businessPartner.setModificadoporid(55);
+        businessPartner.setRazonsocial("otrosdf");
+        businessPartner.setRfc("khjk89756ty4");
+        businessPartner.setNombre("aloo");
+        businessPartner.setCreadoporid(56);
+        businessPartner.setModificadoporid(56);
+        businessPartner.setEstatusid(1000000);
 
         BP.save(businessPartner);
 
         return new JsonResponse(businessPartner, "Socio de negocio a sido modificaco", JsonResponse.STATUS_OK);
     }
+
+    @RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE)
+    public JsonResponse deleteBusinessPartnerId(@PathVariable("id") String id) {
+        BP.deleteById(id);
+        return new JsonResponse(null, "socio de negocio elimiado", JsonResponse.STATUS_OK);
+    }
+
+
 
 
 }
