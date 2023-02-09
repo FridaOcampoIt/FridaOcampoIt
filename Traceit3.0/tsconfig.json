@@ -1,0 +1,38 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": "./src",
+        "outDir": "./dist/out-tsc",
+        "sourceMap": true,
+        "declaration": false,
+        "downlevelIteration": true,
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "importHelpers": true,
+        "target": "ES2022",
+        "module": "ES2022",
+        "useDefineForClassFields": false,
+        "lib": [
+            "ES2022",
+            "dom"
+        ],
+        "paths": {
+            "@fuse/*": [ "@fuse/*" ],
+            "@app/*": ["app/*"],
+            "@traducciones-generales-en": ["@traceit/traducciones/i18n/en.ts"],
+            "@traducciones-generales-es": ["@traceit/traducciones/i18n/es.ts"],
+            "@environments/*": ["environments/*"],
+            "@main/*": ["app/main/*"],
+            "@modelos/*": ["app/main/modelos/*"],
+            "@servicios/*": ["app/main/servicios/*"],
+            "@models/*": ["@traceit/models/*"],
+            "@services/*": ["@traceit/services/*"],
+            "@utils/*": ["app/utils/*"],
+        }
+    },
+    "angularCompilerOptions": {
+        "enableI18nLegacyMessageIdFormat": false
+    }
+}
