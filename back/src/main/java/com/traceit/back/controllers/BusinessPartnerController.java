@@ -38,8 +38,12 @@ public class BusinessPartnerController {
 
 
     @RequestMapping(value="/create", method = RequestMethod.POST)
-    public JsonResponse createBusinessPartner(HttpServletRequest req,BusinessPartner businessPartner){
+    public JsonResponse createBusinessPartner(HttpServletRequest req,@RequestBody BusinessPartner businessPartner){
         businessPartner.setFechacreacion(new Date());
+        businessPartner.setFechamodificacion(new Date());
+        businessPartner.setCreadoporid(12);
+        businessPartner.setModificadoporid(12);
+        businessPartner.setEstatusid(1000000);
         businessPartner= BP.save(businessPartner);
 
         return new JsonResponse( businessPartner.getId(),"Socio de negocio creado satisfactoriamente",JsonResponse.STATUS_OK);
@@ -47,17 +51,14 @@ public class BusinessPartnerController {
         //https://inezpre5.wordpress.com/2018/05/01/tutorial-crud-spring-boot-aplicacion-con-bases-de-datos/
 
     @RequestMapping(value="/update/{id}", method = RequestMethod.PUT)
-    public JsonResponse updateBusinessPartner(HttpServletRequest req, BusinessPartner businessPartner ){
+    public JsonResponse updateBusinessPartner(HttpServletRequest req,@RequestBody BusinessPartner businessPartner ){
 
-        businessPartner.setRazonsocial("nombre actualizado");
-        businessPartner.setRfc("khjk89756ty4");
-        businessPartner.setNombre("aloo");
-        businessPartner.setCreadoporid(56);
+
         businessPartner.setModificadoporid(56);
         businessPartner.setEstatusid(1000000);
         businessPartner.setFechamodificacion(new Date());
 
-        BP.save(businessPartner);
+        businessPartner= BP.save(businessPartner);
 
         return new JsonResponse(businessPartner, "Socio de negocio a sido modificaco", JsonResponse.STATUS_OK);
     }
