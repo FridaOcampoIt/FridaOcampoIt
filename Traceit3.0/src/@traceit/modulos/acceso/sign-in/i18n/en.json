@@ -1,0 +1,12 @@
+{
+    "title": "Login",
+    "user": {
+        "label": "User",
+        "error": "Username is required"
+    },
+    "pass": {
+        "label": "Password",
+        "error": "Password is required"
+    },
+    "submit": "Login"
+}

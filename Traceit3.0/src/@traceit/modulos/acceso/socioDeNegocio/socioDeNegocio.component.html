@@ -1,0 +1,77 @@
+<div class="container">
+  <table class="table border">
+    <thead>
+      <tr>
+        
+        <th scope="col">id</th>
+        <th scope="col">nombre</th>
+        <th scope="col">razon social</th>
+        <th scope="col">rfc</th>
+        <th scope="col">crado por</th>
+        <th scope="col">moficicado por</th>
+        <th scope="col">creado por</th>
+        <th scope="col">fecha de creacion</th>
+        <th scope="col">fecha modificacion</th>
+        <th scope="col">estatus</th>
+        
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr *ngFor="let item of sociosdenegocios">
+        <td>{{item.id}}</td>
+        <td>{{item.nombre}}</td>
+        <td>{{item.razonsocial}}</td>
+        <td>{{item.rfc}}</td>
+        <td>{{item.creadoporid}}</td>
+        <td>{{item.modificadoporid}}</td>
+        <td>{{item.fechacreacion}}</td>
+        <td>{{item.fechamodificacion}}</td>
+        <td>{{item.estatusid}}</td>
+        <td>{{item.estatusid}} <button (click)="llenado(item.id)"> modificar</button> <button (click)="borrar(item.id)" >borrar</button></td>
+        
+      </tr>
+     
+    </tbody>
+  </table>
+  <br><br>
+  <button type="button" class="mat-button-toggle-button mat-focus-indicator m-3" (click)="getUsers()">
+    <span class="mat-button-toggle-label-content"> primary </span>
+  </button><br>
+  
+  <button type="button" class="mat-button-toggle-button mat-focus-indicator" (click)="otroboton()" >
+    <span class="mat-button-toggle-label-content"> secundary </span>
+  </button><br>
+  <button type="button" class="mat-button-toggle-button mat-focus-indicator" (click)="getone()" >
+    <span class="mat-button-toggle-label-content"> obtener solo uno </span>
+  </button><br>
+  
+  <button type="button" class="mat-button-toggle-button mat-focus-indicator" (click)="crearnuevo()" >
+    <span class="mat-button-toggle-label-content"> enviar </span>
+  </button> <br>
+  <button type="button" class="mat-button-toggle-button mat-focus-indicator" (click)="actualizar()" >
+    <span class="mat-button-toggle-label-content"> actualizar </span>
+  </button>
+
+
+<form action="" [formGroup]="formSocio" (ngSubmit)="onSubmit(formSocio.value)">
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">@</span>
+    <input type="text" class="form-control" placeholder="nombre" formControlName="nombre" aria-label="nombre" aria-describedby="basic-addon1">
+  </div>
+ 
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">@</span>
+    <input type="text" class="form-control" placeholder="razon" formControlName="razonSocial" aria-label="razon " aria-describedby="basic-addon1">
+  </div>
+ 
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">@</span>
+    <input type="text" class="form-control" placeholder="rfc" formControlName="RFC" aria-label="rfc" aria-describedby="basic-addon1">
+  </div>
+  <button class="button" type="submit">enviar</button>
+</form>
+ 
+
+</div>

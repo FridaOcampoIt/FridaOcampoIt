@@ -1,0 +1,12 @@
+{
+    "title": "Iniciar session",
+    "user": {
+        "label": "Usuario",
+        "error": "El nombre de usuario es obligatorio"
+    },
+    "pass": {
+        "label": "Contrasenia",
+        "error": "La contrasenia es obligatoria"
+    },
+    "submit": "Iniciar session"
+}
