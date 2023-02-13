@@ -33,6 +33,8 @@ DELIMITER //
             Activo,
             CmmSistema
         )
+	//una pequeña prueba
+	
         VALUES 
         (
             1000039,
