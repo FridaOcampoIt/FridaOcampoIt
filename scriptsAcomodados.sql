@@ -549,5 +549,4 @@ CREATE TABLE SociosDeNegocios(
 	PRIMARY KEY (soc_sociodenegocioid)
 )
 
-
     
