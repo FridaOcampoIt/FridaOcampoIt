@@ -542,11 +542,97 @@ CREATE TABLE SociosDeNegocios(
 	soc_razonsocial VARCHAR (50)NOT NULL,
 	soc_rfc VARCHAR (50) UNIQUE NOT NULL,
 	soc_usu_creadoporid INT NOT NULL,
-	soc_usu_modificadoporid INT NOT NULL,
+	soc_usu_modificadoporid INT,
 	soc_fechacreacion TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     soc_fechamodificacion TIMESTAMP WITHOUT TIME ZONE,
 	soc_cmm_estatusid integer NOT NULL,
 	PRIMARY KEY (soc_sociodenegocioid)
 )
 
+<<<<<<< Updated upstream
+=======
+-- CREACION DE TABLA COMPANIA PRA PRUEBAS
+CREATE TABLE companias(
+	com_companiaid INT NOT NULL,
+	com_nombre VARCHAR(100) NOT NULL,
+	com_razonsocial VARCHAR(100) NOT NULL,
+	com_rfc VARCHAR(50) NOT NULL,
+	com_descripcionen VARCHAR(100) NOT NULL,
+	com_descripciones VARCHAR(100) NOT NULL,
+	com_estatus VARCHAR(50) NOT NULL,
+	com_licencia VARCHAR(50) NOT NULL,
+	com_iniciocontrato VARCHAR(50) NOT NULL,
+	com_correocontrato VARCHAR(50) NOT NULL,
+	com_telefono VARCHAR(50) NOT NULL,
+	com_sitiourl VARCHAR(100) NOT NULL,
+	PRIMARY KEY (com_companiaid)
+)
+
+-- RELACION DE CEDIS A DIRRECIONES 
+-- TABLA DE PRUEBA PARA LA CONSULTA EN EL BACK
+CREATE TABLE direcciones(
+	dir_direccionid BIGSERIAL NOT NULL,
+	dir_nombre VARCHAR(50),
+	PRIMARY KEY(dir_direccionid)
+)
+INSERT INTO direcciones (dir_direccionid,dir_nombre)VALUES(1,'prueba de inserccion')
+INSERT INTO companias (
+	com_companiaid,
+	com_nombre,
+	com_razonsocial,
+	com_rfc,
+	com_descripcionen,
+	com_descripciones,
+	com_estatus,
+	com_licencia,
+	com_iniciocontrato,
+	com_correocontrato, 
+	com_telefono, 
+	com_sitiourl 
+)VALUES(
+	1,
+	'compania',
+	'razon social',
+	'rfcderogfg',
+	'descripcion aaaaa',
+	'descripotion bbb',
+	'1000000',
+	'licencia',
+	'inicio de contrato',
+	'correo del contrato es @',
+	'tel 3365255',
+	'sitio www.weajskd.com'
+	)
+
+
+CREATE TABLE cedis(
+	ced_cediid BIGSERIAL NOT NULL,
+	ced_nombre VARCHAR(50) NOT NULL,
+	ced_numeroserie VARCHAR (50)NOT NULL,
+	ced_usu_modificadoporid INT,
+	ced_usu_creadoporid INT NOT NULL,
+	ced_com_companiaid INT,
+	ced_cmm_estatusid integer NOT NULL,
+	ced_telefono INT,
+	ced_fechacreacion TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    ced_fechamodificacion TIMESTAMP WITHOUT TIME ZONE,
+    ced_dir_direcionid INT,
+	PRIMARY KEY (ced_cediid),
+	CONSTRAINT FK_USUARIOCREADORID_CED FOREIGN KEY (ced_usu_creadoporid) REFERENCES Usuarios (usu_usuarioid)
+			ON DELETE CASCADE
+			ON UPDATE RESTRICT,
+	CONSTRAINT FK_USUARIOMODIFICADOID_CED FOREIGN KEY (ced_usu_modificadoporid) REFERENCES Usuarios (usu_usuarioid)
+			ON DELETE CASCADE
+			ON UPDATE RESTRICT,
+	CONSTRAINT FK_COMPANIAID_CED FOREIGN KEY (ced_com_companiaid) REFERENCES companias (com_companiaid)
+			ON DELETE CASCADE
+			ON UPDATE RESTRICT,
+	CONSTRAINT FK_ESTATUSID_CED FOREIGN KEY (ced_cmm_estatusid) REFERENCES controlesmaestrosmultiples (cmm_controlid )
+			ON DELETE CASCADE
+			ON UPDATE RESTRICT,
+	CONSTRAINT FK_DIRECCIONID_CED FOREIGN KEY (ced_dir_direcionid) REFERENCES direcciones (dir_direccionid)
+			ON DELETE CASCADE
+			ON UPDATE RESTRICT
+)
+>>>>>>> Stashed changes
     
