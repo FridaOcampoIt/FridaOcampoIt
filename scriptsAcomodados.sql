@@ -572,7 +572,22 @@ CREATE TABLE companias(
 -- TABLA DE PRUEBA PARA LA CONSULTA EN EL BACK
 CREATE TABLE direcciones(
 	dir_direccionid BIGSERIAL NOT NULL,
-	dir_nombre VARCHAR(50),
+	dir_soc_sociodenegocioid INT NULL,
+	dir_com_companiaid INT NULL,
+	dir_usu_usuarioid INT NULL,
+	dir_paisid INT NOT NULL,
+	dir_estadoid INT NOT NULL,
+	dir_ciudad_provincia VARCHAR(500) NULL,
+	dir_direccion VARCHAR(500) NOT NULL,
+	dir_numeroexterior VARCHAR(10) NOT NULL,
+	dir_numerointerior VARCHAR(10) NULL,
+	dir_latitud DECIMAL NULL,
+	dir_logitud DECIMAL NULL,
+	dir_cmm_estatusid INT NOT NULL,
+	dir_usu_creadoporid INT,
+	dir_fechacreacion TIMESTAMP NOT NULL,
+	dir_usu_modificadoporid INT NULL,
+	dir_fechamodificacion TIMESTAMP NULL,
 	PRIMARY KEY(dir_direccionid)
 )
 INSERT INTO direcciones (dir_direccionid,dir_nombre)VALUES(1,'prueba de inserccion')
@@ -635,4 +650,42 @@ CREATE TABLE cedis(
 			ON UPDATE RESTRICT
 )
 >>>>>>> Stashed changes
-    
+
+    dir_direcionid
+    dir_soc_sociodenegocioid
+    dir_com_companiaid
+    dir_usu_usuarioid
+    dir_paisid
+    dir_estadoid
+    dir_ciudadprovincia
+    dir_direccion
+    dir_numeroexterior
+    dir_numerointerior
+    dir_latitud
+    dir_logitud
+    dir_cmm_estatus
+    dir_usu_creadoporid
+    dir_fechacreacion
+    dir_usu_modificadoporid
+    dir_fechamodificacion
+
+	CREATE TABLE direcciones(
+	dir_direcionid BIGSERIAL NOT NULL,
+	dir_soc_sociodenegocioid INT NULL,
+	dir_com_companiaid INT NULL,
+	dir_usu_usuarioid INT NULL,
+	dir_paisid INT NOT NULL,
+	dir_estadoid INT NOT NULL,
+	dir_ciudadprovincia VARCHAR(500) NULL,
+	dir_direccion VARCHAR(500) NOT NULL,
+	dir_numeroexterior VARCHAR(10) NOT NULL,
+	dir_numerointerior VARCHAR(10) NULL,
+	dir_latitud DECIMAL NULL,
+	dir_logitud DECIMAL NULL,
+	dir_cmm_estatus INT NOT NULL,
+	dir_usu_creadoporid INT,
+	dir_fechacreacion TIMESTAMP NOT NULL,
+	dir_usu_modificadoporid INT NULL,
+	dir_fechamodificacion TIMESTAMP NULL,
+	PRIMARY KEY(dir_direcionid)
+)
