@@ -564,6 +564,7 @@ CREATE TABLE companias(
 	com_correocontrato VARCHAR(50) NOT NULL,
 	com_telefono VARCHAR(50) NOT NULL,
 	com_sitiourl VARCHAR(100) NOT NULL,
+	com_usu_creadoporid NOT INT NULL
 	PRIMARY KEY (com_companiaid)
 )
 
@@ -585,6 +586,7 @@ CREATE TABLE direcciones(
 	dir_cmm_estatusid INT NOT NULL,
 	dir_usu_creadoporid INT,
 	dir_fechacreacion TIMESTAMP NOT NULL,
+	com_usu_creadoporid NOT INT NULL,
 	dir_usu_modificadoporid INT NULL,
 	dir_fechamodificacion TIMESTAMP NULL,
 	PRIMARY KEY(dir_direccionid)
@@ -602,7 +604,8 @@ INSERT INTO companias (
 	com_iniciocontrato,
 	com_correocontrato, 
 	com_telefono, 
-	com_sitiourl 
+	com_sitiourl,
+	com_usu_creadoporid
 )VALUES(
 	1,
 	'compania',
@@ -615,7 +618,8 @@ INSERT INTO companias (
 	'inicio de contrato',
 	'correo del contrato es @',
 	'tel 3365255',
-	'sitio www.weajskd.com'
+	'sitio www.weajskd.com',
+	1
 	)
 
 
@@ -688,3 +692,106 @@ CREATE TABLE cedis(
 	dir_fechamodificacion TIMESTAMP NULL,
 	PRIMARY KEY(dir_direcionid)
 )
+insert into cedis
+
+INSERT INTO groupmember (person_id, group_id)
+SELECT p.person_id, g.group_id
+FROM  (
+   VALUES
+     ('alice'::varchar, 'girls'::varchar)
+   , ('bob','boys')
+   , ('alice','coolkids')
+   , ('bob','coolkids')
+  ) x (username, group_name)
+JOIN   person p  USING (username)
+JOIN   "group" g USING (group_name);
+
+NSERT INTO GroupMember (person_id,group_id)
+SELECT person_id,group_id
+FROM Person P, Group G, (
+('alice','girls'),
+('bob','boys'),
+('alice','coolkids'),
+('bob','coolkids')
+) AS X
+WHERE P.username = X.1 AND G.group_name = X.2;
+
+insert into cedis (
+	ced_cediid ,
+	ced_nombre ,
+	ced_numeroserie ,
+	ced_usu_modificadoporid ,
+	ced_usu_creadoporid ,
+	ced_com_companiaid ,
+	ced_cmm_estatusid ,
+	ced_telefono ,
+	ced_fechacreacion ,
+    ced_fechamodificacion)
+	values
+	(
+		1,
+		'prueba cedis',
+		'A4V5D8REVDFGDV',
+		1,
+		1,
+		0,
+		1000011,
+		33350,
+		now(),
+		now()	
+	)
+insert into direcciones (
+	dir_direcionid ,
+	dir_soc_sociodenegocioid ,
+	dir_com_companiaid ,
+	dir_usu_usuarioid ,
+	dir_paisid ,
+	dir_estadoid ,
+	dir_ciudadprovincia ,
+	dir_direccion ,
+	dir_numeroexterior ,
+	dir_numerointerior ,
+	dir_latitud ,
+	dir_logitud ,
+	dir_cmm_estatus ,
+	dir_usu_creadoporid ,
+	dir_fechacreacion ,
+	dir_usu_modificadoporid ,
+	dir_fechamodificacion 
+)values(
+	1,
+	1,
+	1,
+	2,
+	3,
+	'chiapas',
+	'juan junipero cerra',
+	'cerro del tesoro',
+	156,
+	0,
+	17.1545,
+	5.26584,
+	1000012,
+	1,
+	now(),
+	1,
+	now()
+)
+dir_direcionid BIGSERIAL NOT NULL,
+	dir_soc_sociodenegocioid INT NULL,
+	dir_com_companiaid INT NULL,
+	dir_usu_usuarioid INT NULL,
+	dir_paisid INT NOT NULL,
+	dir_estadoid INT NOT NULL,
+	dir_ciudadprovincia VARCHAR(500) NULL,
+
+	dir_direccion VARCHAR(500) NOT NULL,
+	dir_numeroexterior VARCHAR(10) NOT NULL,
+	dir_numerointerior VARCHAR(10) NULL,
+	dir_latitud DECIMAL NULL,
+	dir_logitud DECIMAL NULL,
+	dir_cmm_estatus INT NOT NULL,
+	dir_usu_creadoporid INT,
+	dir_fechacreacion TIMESTAMP NOT NULL,
+	dir_usu_modificadoporid INT NULL,
+	dir_fechamodificacion TIMESTAMP NULL,
