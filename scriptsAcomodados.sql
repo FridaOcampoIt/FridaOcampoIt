@@ -549,8 +549,7 @@ CREATE TABLE SociosDeNegocios(
 	PRIMARY KEY (soc_sociodenegocioid)
 )
 
-<<<<<<< Updated upstream
-=======
+
 -- CREACION DE TABLA COMPANIA PRA PRUEBAS
 CREATE TABLE companias(
 	com_companiaid INT NOT NULL,
@@ -645,11 +644,11 @@ CREATE TABLE cedis(
 	CONSTRAINT FK_ESTATUSID_CED FOREIGN KEY (ced_cmm_estatusid) REFERENCES controlesmaestrosmultiples (cmm_controlid )
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT,
-	CONSTRAINT FK_DIRECCIONID_CED FOREIGN KEY (ced_dir_direcionid) REFERENCES direcciones (dir_direccionid)
+	CONSTRAINT FK_DIRECCIONID_CED FOREIGN KEY (ced_dir_direcionid) REFERENCES direcciones (dir_direcionid)
 			ON DELETE CASCADE
 			ON UPDATE RESTRICT
 )
->>>>>>> Stashed changes
+
 
     dir_direcionid
     dir_soc_sociodenegocioid
