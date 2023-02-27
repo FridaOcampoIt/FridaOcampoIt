@@ -1012,4 +1012,3 @@ SELECT
             INNER JOIN seg_001_usuario usu ON usu.PK_UsuarioId = cc.FK_UsuarioCreadorId	
             INNER JOIN rel_054_formulario_sector fs ON fs.FK_FormularioId  = cc.FK_FormularioId 
             WHERE cc.FK_FormularioId=15 ;
-
