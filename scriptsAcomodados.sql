@@ -571,7 +571,7 @@ CREATE TABLE companias(
 -- RELACION DE CEDIS A DIRRECIONES 
 -- TABLA DE PRUEBA PARA LA CONSULTA EN EL BACK
 CREATE TABLE direcciones(
-	dir_direccionid BIGSERIAL NOT NULL,
+	dir_direcionid BIGSERIAL NOT NULL,
 	dir_soc_sociodenegocioid INT NULL,
 	dir_com_companiaid INT NULL,
 	dir_usu_usuarioid INT NULL,
@@ -589,7 +589,7 @@ CREATE TABLE direcciones(
 	com_usu_creadoporid NOT INT NULL,
 	dir_usu_modificadoporid INT NULL,
 	dir_fechamodificacion TIMESTAMP NULL,
-	PRIMARY KEY(dir_direccionid)
+	PRIMARY KEY(dir_direcionid)
 )
 INSERT INTO direcciones (dir_direccionid,dir_nombre)VALUES(1,'prueba de inserccion')
 INSERT INTO companias (
@@ -671,51 +671,6 @@ CREATE TABLE cedis(
     dir_fechacreacion
     dir_usu_modificadoporid
     dir_fechamodificacion
-
-	CREATE TABLE direcciones(
-	dir_direcionid BIGSERIAL NOT NULL,
-	dir_soc_sociodenegocioid INT NULL,
-	dir_com_companiaid INT NULL,
-	dir_usu_usuarioid INT NULL,
-	dir_paisid INT NOT NULL,
-	dir_estadoid INT NOT NULL,
-	dir_ciudadprovincia VARCHAR(500) NULL,
-	dir_direccion VARCHAR(500) NOT NULL,
-	dir_numeroexterior VARCHAR(10) NOT NULL,
-	dir_numerointerior VARCHAR(10) NULL,
-	dir_latitud DECIMAL NULL,
-	dir_logitud DECIMAL NULL,
-	dir_cmm_estatus INT NOT NULL,
-	dir_usu_creadoporid INT,
-	dir_fechacreacion TIMESTAMP NOT NULL,
-	dir_usu_modificadoporid INT NULL,
-	dir_fechamodificacion TIMESTAMP NULL,
-	PRIMARY KEY(dir_direcionid)
-)
-insert into cedis
-
-INSERT INTO groupmember (person_id, group_id)
-SELECT p.person_id, g.group_id
-FROM  (
-   VALUES
-     ('alice'::varchar, 'girls'::varchar)
-   , ('bob','boys')
-   , ('alice','coolkids')
-   , ('bob','coolkids')
-  ) x (username, group_name)
-JOIN   person p  USING (username)
-JOIN   "group" g USING (group_name);
-
-NSERT INTO GroupMember (person_id,group_id)
-SELECT person_id,group_id
-FROM Person P, Group G, (
-('alice','girls'),
-('bob','boys'),
-('alice','coolkids'),
-('bob','coolkids')
-) AS X
-WHERE P.username = X.1 AND G.group_name = X.2;
-
 insert into cedis (
 	ced_cediid ,
 	ced_nombre ,
@@ -740,6 +695,27 @@ insert into cedis (
 		now(),
 		now()	
 	)
+
+	CREATE TABLE direcciones(
+	dir_direcionid BIGSERIAL NOT NULL,
+	dir_soc_sociodenegocioid INT NULL,
+	dir_com_companiaid INT NULL,
+	dir_usu_usuarioid INT NULL,
+	dir_paisid INT NOT NULL,
+	dir_estadoid INT NOT NULL,
+	dir_ciudadprovincia VARCHAR(500) NULL,
+	dir_direccion VARCHAR(500) NOT NULL,
+	dir_numeroexterior VARCHAR(10) NOT NULL,
+	dir_numerointerior VARCHAR(10) NULL,
+	dir_latitud DECIMAL NULL,
+	dir_logitud DECIMAL NULL,
+	dir_cmm_estatus INT NOT NULL,
+	dir_usu_creadoporid INT,
+	dir_fechacreacion TIMESTAMP NOT NULL,
+	dir_usu_modificadoporid INT NULL,
+	dir_fechamodificacion TIMESTAMP NULL,
+	PRIMARY KEY(dir_direcionid)
+)
 insert into direcciones (
 	dir_direcionid ,
 	dir_soc_sociodenegocioid ,
@@ -762,6 +738,7 @@ insert into direcciones (
 	1,
 	1,
 	1,
+	1,
 	2,
 	3,
 	'chiapas',
@@ -777,21 +754,3 @@ insert into direcciones (
 	1,
 	now()
 )
-dir_direcionid BIGSERIAL NOT NULL,
-	dir_soc_sociodenegocioid INT NULL,
-	dir_com_companiaid INT NULL,
-	dir_usu_usuarioid INT NULL,
-	dir_paisid INT NOT NULL,
-	dir_estadoid INT NOT NULL,
-	dir_ciudadprovincia VARCHAR(500) NULL,
-
-	dir_direccion VARCHAR(500) NOT NULL,
-	dir_numeroexterior VARCHAR(10) NOT NULL,
-	dir_numerointerior VARCHAR(10) NULL,
-	dir_latitud DECIMAL NULL,
-	dir_logitud DECIMAL NULL,
-	dir_cmm_estatus INT NOT NULL,
-	dir_usu_creadoporid INT,
-	dir_fechacreacion TIMESTAMP NOT NULL,
-	dir_usu_modificadoporid INT NULL,
-	dir_fechamodificacion TIMESTAMP NULL,
