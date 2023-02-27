@@ -629,7 +629,7 @@ CREATE TABLE cedis(
 	ced_numeroserie VARCHAR (50)NOT NULL,
 	ced_usu_modificadoporid INT,
 	ced_usu_creadoporid INT NOT NULL,
-	ced_com_companiaid INT,
+	ced_com_companiaid INT not nullyy,
 	ced_cmm_estatusid integer NOT NULL,
 	ced_telefono INT,
 	ced_fechacreacion TIMESTAMP WITHOUT TIME ZONE NOT NULL,
