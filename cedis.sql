@@ -1,31 +1,31 @@
 CREATE TABLE IF NOT EXISTS public.cedis(
 	ced_cediid BIGSERIAL NOT NULL,
 	ced_nombre VARCHAR(50) NOT NULL,
-	ced_numeroserie VARCHAR (50)NOT NULL,
+	ced_numeroserie VARCHAR (50) UNIQUE NOT NULL,
 	ced_usu_modificadoporid INT,
 	ced_usu_creadoporid INT NOT NULL,
 	ced_com_companiaid INT,
 	ced_cmm_estatusid integer NOT NULL,
-	ced_telefono INT,
+	ced_telefono VARCHAR(10)NULL,
 	ced_fechacreacion TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     ced_fechamodificacion TIMESTAMP WITHOUT TIME ZONE,
     ced_dir_direcionid INT,
 	PRIMARY KEY (ced_cediid),
 	CONSTRAINT FK_USUARIOCREADORID_CED FOREIGN KEY (ced_usu_creadoporid) REFERENCES Usuarios (usu_usuarioid)
-			ON DELETE CASCADE
-			ON UPDATE RESTRICT,
+			 ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
 	CONSTRAINT FK_USUARIOMODIFICADOID_CED FOREIGN KEY (ced_usu_modificadoporid) REFERENCES Usuarios (usu_usuarioid)
-			ON DELETE CASCADE
-			ON UPDATE RESTRICT,
+			 ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
 	CONSTRAINT FK_COMPANIAID_CED FOREIGN KEY (ced_com_companiaid) REFERENCES companias (com_companiaid)
-			ON DELETE CASCADE
-			ON UPDATE RESTRICT,
+			 ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
 	CONSTRAINT FK_ESTATUSID_CED FOREIGN KEY (ced_cmm_estatusid) REFERENCES controlesmaestrosmultiples (cmm_controlid )
-			ON DELETE CASCADE
-			ON UPDATE RESTRICT,
+			 ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
 	CONSTRAINT FK_DIRECCIONID_CED FOREIGN KEY (ced_dir_direcionid) REFERENCES direcciones (dir_direcionid)
-			ON DELETE CASCADE
-			ON UPDATE RESTRICT
+			 ON UPDATE NO ACTION
+        ON DELETE NO ACTION
 )
 -- ESTADO DE CEDIS
 insert into controlesmaestrosmultiples
@@ -37,7 +37,7 @@ values
 -- SE ASOCIA A COMPANIA
 CREATE TABLE IF NOT EXISTS public.companias
 (
-    com_companiaid SERIAL NOT NULL,
+    com_companiaid BIGSERIAL NOT NULL,
     com_nombre VARCHAR(100) NOT NULL,
     com_razonsocial VARCHAR(100) NOT NULL,
     com_rfc VARCHAR(50) NOT NULL,
