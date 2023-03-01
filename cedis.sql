@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS public.cedis(
 	ced_cediid BIGSERIAL NOT NULL,
 	ced_nombre VARCHAR(50) NOT NULL,
-	ced_numeroserie VARCHAR (50) UNIQUE NOT NULL,
+	ced_numeroserie INT NULL,
 	ced_usu_modificadoporid INT,
 	ced_usu_creadoporid INT NOT NULL,
 	ced_com_companiaid INT,
@@ -25,88 +25,64 @@ CREATE TABLE IF NOT EXISTS public.cedis(
         ON DELETE NO ACTION,
 	CONSTRAINT FK_DIRECCIONID_CED FOREIGN KEY (ced_dir_direcionid) REFERENCES direcciones (dir_direcionid)
 			 ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON DELETE NO ACTION,
+    UNIQUE(ced_numeroserie,ced_com_companiaid)
 )
 -- ESTADO DE CEDIS
 insert into controlesmaestrosmultiples
 	(cmm_controlid, cmm_control, cmm_valores, cmm_valoren, cmm_activo, cmm_sistema, cmm_usu_creadoporid, cmm_usu_modificadoporid, cmm_fechacreacion, cmm_fechamodificacion)
 values
-	(1000020, 'CMM_TIPO_LICENCIA', 'Reproceso', 'Rework', true, true, null, null, now(), null),
-	(1000021, 'CMM_TIPO_LICENCIA', 'N3', 'N3', true, true, null, null, now(), null),
-	(1000022, 'CMM_TIPO_LICENCIA', 'N4', 'N4', true, true, null, null, now(), null);
--- SE ASOCIA A COMPANIA
-CREATE TABLE IF NOT EXISTS public.companias
-(
-    com_companiaid BIGSERIAL NOT NULL,
-    com_nombre VARCHAR(100) NOT NULL,
-    com_razonsocial VARCHAR(100) NOT NULL,
-    com_rfc VARCHAR(50) NOT NULL,
-    com_descripcion VARCHAR(100) NOT NULL,
-    com_iniciocontrato TIMESTAMP NOT NULL,
-    com_numerocliente INT,
-    com_correocontacto VARCHAR(50) NOT NULL,
-    com_telefono VARCHAR(50) NOT NULL,
-    com_sitiourl VARCHAR(100) NOT NULL,
-    com_usu_creadoporid INT NOT NULL,
-    com_fechacreacion TIMESTAMP NOT NULL,
-    com_usu_modificadoporid INT,
-    com_fechamodificacion TIMESTAMP,
-    com_cmm_estatus INT NOT NULL,
-    com_cmm_licencia INT NOT NULL,
-    CONSTRAINT companias_pkey PRIMARY KEY (com_companiaid),
-    CONSTRAINT companias_com_rfc_key UNIQUE (com_rfc),
-    CONSTRAINT fk_com_cmm_estatus FOREIGN KEY (com_cmm_estatus)
-        REFERENCES controlesmaestrosmultiples (cmm_controlid) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT fk_com_cmm_licencia FOREIGN KEY (com_cmm_licencia)
-        REFERENCES controlesmaestrosmultiples (cmm_controlid) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT fk_com_usu_creadoporid  FOREIGN KEY (com_usu_creadoporid)
-        REFERENCES usuarios (usu_usuarioid) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT fk_com_usu_modificadoporid FOREIGN KEY (com_usu_modificadoporid)
-        REFERENCES usuarios (usu_usuarioid) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
-);
--- SE ASOCIA DIRECIONES
-CREATE TABLE IF NOT EXISTS public.direcciones
-(
-    dir_direcionid BIGSERIAL NOT NULL,
-    dir_soc_sociodenegocioid INT ,
-    dir_com_companiaid INT ,
-    dir_usu_usuarioid INT ,
-    dir_paisid INT  NOT NULL,
-    dir_estadoid INT  NOT NULL,
-    dir_ciudadprovincia VARCHAR(100),
-    dir_direccion VARCHAR(100) NOT NULL,
-    dir_numeroexterior VARCHAR(100) NOT NULL,
-    dir_numerointerior VARCHAR(100),
-    dir_latitud DECIMAL,
-    dir_logitud DECIMAL,
-    dir_cmm_estatus INT  NOT NULL,
-    dir_usu_creadoporid INT,
-    dir_fechacreacion TIMESTAMP NOT NULL,
-    dir_usu_modificadoporid INT,
-    dir_fechamodificacion TIMESTAMP,
-    CONSTRAINT direcciones_pkey PRIMARY KEY (dir_direcionid),
-    CONSTRAINT fk_dir_com_companiaid FOREIGN KEY (dir_com_companiaid)
-        REFERENCES companias (com_companiaid) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT fk_dir_cmm_estatus FOREIGN KEY (dir_cmm_estatus)
-        REFERENCES controlesmaestrosmultiples (cmm_controlid) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT fk_dir_usu_creadoporid FOREIGN KEY (dir_usu_creadoporid)
-        REFERENCES usuarios (usu_usuarioid) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT fk_dir_usu_modificadoporid FOREIGN KEY (dir_usu_modificadoporid)
-        REFERENCES usuarios (usu_usuarioid) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
-);
+	(1000030, 'CMM_ESTATUS_CEDIS', 'Activo', 'Active', true, true, null, null, now(), null),
+	(1000031, 'CMM_ESTATUS_CEDIS', 'Inactivo','Inactive', true, true, null, null, now(), null),
+	(1000032, 'CMM_ESTATUS_CEDIS', 'Borrado', 'Deleted', true, true, null, null, now(), null);
+-- cedis 
+INSERT INTO modulos 
+ (mod_nodoid, mod_nodopadre, mod_nombre, mod_icono, mod_tipo, mod_orden, mod_url, mod_sistema)
+VALUES
+ (10700, 10000, 'cedis', null, 'basic', 1, '/backoffice/cedis', true)
+
+-- ROL cedis
+ insert into rolesmodulos
+  (rlm_rol_rolid, rlm_mod_nodoid, rlm_crear, rlm_modificar, rlm_eliminar, rlm_usu_creadoporid, rlm_fechacreacion)
+ values
+  (1, 10700, true, true, true, null, now())
+
+
+--- PRUEBA INSERCION COMPANIA
+INSERT INTO companias (
+
+     com_companiaid,
+    com_nombre,
+    com_razonsocial,
+    com_rfc ,
+    com_descripcion ,
+    com_iniciocontrato ,
+    com_numerocliente ,
+    com_correocontacto ,
+    com_telefono ,
+    com_sitiourl ,
+    com_usu_creadoporid ,
+    com_fechacreacion ,
+    com_usu_modificadoporid ,
+    com_fechamodificacion ,
+    com_cmm_estatus ,
+    com_cmm_licencia 
+)
+VALUES(
+     1,
+    'compania',
+    'razonsocial',
+    'oefr991206',
+    'descripcn',
+    now(),
+    1,
+    'contrato@hotmail',
+    '3335022186',
+    'www.gmail.com',
+    1,
+    now(),
+    1,
+    now(),
+    1000000,
+    1000000
+)
