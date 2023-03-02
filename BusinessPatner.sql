@@ -1,3 +1,20 @@
+CREATE TABLE SociosDeNegocios(
+	soc_sociodenegocioid BIGSERIAL NOT NULL,
+	soc_nombre VARCHAR(50) NOT NULL,
+	soc_razonsocial VARCHAR (50)NOT NULL,
+	soc_rfc VARCHAR (50) UNIQUE NOT NULL,
+	soc_usu_creadoporid INT NOT NULL,
+	soc_usu_modificadoporid INT NOT NULL,
+	soc_fechacreacion TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    soc_fechamodificacion TIMESTAMP WITHOUT TIME ZONE,
+	soc_cmm_estatusid integer NOT NULL,
+	PRIMARY KEY (soc_sociodenegocioid),
+	CONSTRAINT FK_ESTATUSID_SOC FOREIGN KEY (soc_cmm_estatusid) REFERENCES controlesmaestrosmultiples (cmm_controlid )
+			 ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+);
+
+
 -- socio de negocios
 INSERT INTO modulos 
  (mod_nodoid, mod_nodopadre, mod_nombre, mod_icono, mod_tipo, mod_orden, mod_url, mod_sistema)
@@ -17,3 +34,5 @@ values
 	(1000040, 'CMM_ESTATUS_BusinesPatner', 'Activo', 'Active', true, true, null, null, now(), null),
 	(1000041, 'CMM_ESTATUS_BusinesPatner', 'Inactivo','Inactive', true, true, null, null, now(), null),
 	(1000042, 'CMM_ESTATUS_BusinesPatner', 'Borrado', 'Deleted', true, true, null, null, now(), null);
+
+	
